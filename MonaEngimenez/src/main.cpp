@@ -20,8 +20,7 @@ int main(void)
     /* Loop until the user closes the window */
     while (!window.ShouldClose())
     {
-        renderer.SetClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-        renderer.Clear(GL_COLOR_BUFFER_BIT);
+        renderer.Clear(0.5f, 0.5f, 0.5f, 1.0f);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window.GetWindow());

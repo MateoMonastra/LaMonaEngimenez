@@ -8,12 +8,8 @@ Renderer::~Renderer()
 {
 }
 
-void Renderer::Clear(int colorBuffer)
-{
-	glClear(colorBuffer);
-}
-
-void Renderer::SetClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
 	glClearColor(red, green, blue, alpha);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
