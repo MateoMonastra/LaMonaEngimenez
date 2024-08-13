@@ -18,6 +18,8 @@ public:
 	Window();
 	~Window();
 
+	GLFWwindow* GetWindow();
+	void SetCurrent();
 	int Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 	bool ShouldClose();
 };
