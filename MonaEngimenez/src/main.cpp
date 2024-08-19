@@ -22,6 +22,16 @@ int main(void)
     {
         renderer.Clear(0.5f, 0.5f, 0.5f, 1.0f);
 
+        glBegin(GL_TRIANGLES);
+
+        glColor3f(0.5, 0, 0);
+
+        glVertex2f(0.0f, 0.5f);
+        glVertex2f(-0.5f, -0.5f);
+        glVertex2f(0.5f, -0.5f);
+
+        glEnd();
+
         /* Swap front and back buffers */
         glfwSwapBuffers(window.GetWindow());
 
