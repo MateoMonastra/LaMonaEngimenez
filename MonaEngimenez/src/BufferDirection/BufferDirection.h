@@ -6,12 +6,12 @@ private:
 	int start;
 	int end;
 public:
-	BufferDirection();
-	~BufferDirection();
+	BufferDirection() {};
+	~BufferDirection() {};
 
 	int GetStart() { return start; }
 	int GetEnd() { return end; }
 
-	int SetStart(int newStart) { this->start = newStart; }
-	int SetEnd(int newEnd) { this->end = newEnd; }
+	void SetStart(int newStart) { this->start = newStart; }
+	void SetEnd(int newEnd) { this->end = newEnd; }
 };

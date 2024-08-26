@@ -1,6 +1,7 @@
 #include "Shape.h"
 #include "Renderer/Renderer.h"
 
+
 Shape::Shape(float vertices[])
 {
 	Renderer renderer;
@@ -10,12 +11,12 @@ Shape::Shape(float vertices[])
 		this->vertices[i] = vertices[i];
 	}
 
-	this->bufferPointer = renderer.AddVertices(this->vertices, SHAPE_VERTEX_COUNT);
+	this->bufferDirection = renderer.AddVertices(this->vertices, SHAPE_VERTEX_COUNT);
 }
 
 void Shape::Draw()
 {
 	Renderer renderer;
 
-	renderer.DrawArrays(bufferPointer);
+	renderer.DrawArrays(bufferDirection);
 }

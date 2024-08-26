@@ -1,7 +1,6 @@
-#include "Window/Window.h"
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
-
+#include "Window/Window.h"
 
 
 int main(void)

@@ -1,6 +1,6 @@
 #pragma once
-#include "Entity2D.h"
-#include "BufferPointer.h"
+#include "Entity/Entity2D/Entity2D.h"
+#include "BufferDirection/BufferDirection.h"
 
 
 	static const int SHAPE_VERTEX_COUNT = 9;
@@ -9,7 +9,7 @@
 	{
 	public:
 		float vertices[SHAPE_VERTEX_COUNT];
-		BufferPointer bufferPointer;
+		BufferDirection bufferDirection;
 
 		Shape(float vertices[]);
 
