@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Exporter.h"
 
-class Entity
+MONA_ENGIMENEZ class Entity
 {
 public:
-	virtual void Draw() = 0;
+	MONA_ENGIMENEZ virtual void Draw() = 0;
 };
 

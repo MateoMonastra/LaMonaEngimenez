@@ -1,24 +1,24 @@
 #include "Window.h"
 
-Window::Window()
+MONA_ENGIMENEZ Window::Window()
 {
 }
 
-Window::~Window()
+MONA_ENGIMENEZ Window::~Window()
 {
 }
 
-GLFWwindow* Window::GetWindow()
+MONA_ENGIMENEZ GLFWwindow* Window::GetWindow()
 {
     return window;
 }
 
-void Window::SetCurrent()
+MONA_ENGIMENEZ void Window::SetCurrent()
 {
     glfwMakeContextCurrent(window);
 }
 
-int Window::Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+MONA_ENGIMENEZ int Window::Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 {
     window = glfwCreateWindow(width, height, title, monitor, share);
     if (!window)
@@ -28,7 +28,7 @@ int Window::Create(int width, int height, const char* title, GLFWmonitor* monito
     }
 }
 
-bool Window::ShouldClose()
+MONA_ENGIMENEZ bool Window::ShouldClose()
 {
     return glfwWindowShouldClose(window);
 }

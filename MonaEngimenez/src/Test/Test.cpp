@@ -1,9 +1,18 @@
+#include "Test.h"
+
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
 #include "Window/Window.h"
 
+MONA_ENGIMENEZ Test::Test()
+{
+}
 
-int main(void)
+MONA_ENGIMENEZ Test::~Test()
+{
+}
+
+MONA_ENGIMENEZ int Test::TryTest()
 {
 	Window window;
 	Renderer renderer;
@@ -11,6 +20,7 @@ int main(void)
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
+
 
 	window.Create(640, 480, "Hello World", NULL, NULL);
 

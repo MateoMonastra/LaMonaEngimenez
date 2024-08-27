@@ -1,17 +1,18 @@
 #pragma once
 
-class BufferDirection
+#include "Exporter.h"
+MONA_ENGIMENEZ class BufferDirection
 {
 private:
 	int start;
 	int end;
 public:
-	BufferDirection() {};
-	~BufferDirection() {};
+	MONA_ENGIMENEZ BufferDirection() {};
+	MONA_ENGIMENEZ ~BufferDirection() {};
 
-	int GetStart() { return start; }
-	int GetEnd() { return end; }
+	MONA_ENGIMENEZ int GetStart() { return start; }
+	MONA_ENGIMENEZ int GetEnd() { return end; }
 
-	void SetStart(int newStart) { this->start = newStart; }
-	void SetEnd(int newEnd) { this->end = newEnd; }
+	MONA_ENGIMENEZ void SetStart(int newStart) { this->start = newStart; }
+	MONA_ENGIMENEZ void SetEnd(int newEnd) { this->end = newEnd; }
 };

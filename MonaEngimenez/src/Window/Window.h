@@ -1,26 +1,27 @@
 #pragma once
 
-#include <iostream>
+#include "Exporter.h"
 
 #include <GLFW/glfw3.h>
+
 
 using namespace std;
 
 
-class Window
+MONA_ENGIMENEZ class Window
 {
 private:
 
-	GLFWwindow* window;
+	GLFWwindow * window;
 
 public:
 
-	Window();
-	~Window();
+	MONA_ENGIMENEZ Window();
+	MONA_ENGIMENEZ ~Window();
 
-	GLFWwindow* GetWindow();
-	void SetCurrent();
-	int Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
-	bool ShouldClose();
+	MONA_ENGIMENEZ GLFWwindow* GetWindow();
+	MONA_ENGIMENEZ void SetCurrent();
+	MONA_ENGIMENEZ int Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+	MONA_ENGIMENEZ bool ShouldClose();
 };
 

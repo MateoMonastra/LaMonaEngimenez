@@ -1,19 +1,22 @@
 #pragma once
+#include "Exporter.h"
+
 #include "Entity/Entity2D/Entity2D.h"
 #include "BufferDirection/BufferDirection.h"
 
 
-	static const int SHAPE_VERTEX_COUNT = 9;
 
-	class Shape : Entity2D
-	{
-	public:
-		float vertices[SHAPE_VERTEX_COUNT];
-		BufferDirection bufferDirection;
+static const int SHAPE_VERTEX_COUNT = 9;
 
-		Shape(float vertices[]);
+MONA_ENGIMENEZ class Shape : Entity2D
+{
+public:
+	float vertices[SHAPE_VERTEX_COUNT];
+	BufferDirection bufferDirection;
 
-		void Draw();
-	};
+	MONA_ENGIMENEZ Shape(float vertices[]);
+
+	MONA_ENGIMENEZ void Draw();
+};
 
 

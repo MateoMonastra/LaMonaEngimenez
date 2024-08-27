@@ -1,8 +1,10 @@
 #pragma once
+#include "Exporter.h"
+
 #include "Entity/Entity.h"
 
 
-class Entity2D : Entity
+MONA_ENGIMENEZ class Entity2D : Entity
 {
 public:
 private:
