@@ -1,18 +1,18 @@
-#include "Test.h"
+#include "BaseGame.h"
 
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
 #include "Window/Window.h"
 
-Test::Test()
+BaseGame::BaseGame()
 {
 }
 
-Test::~Test()
+BaseGame::~BaseGame()
 {
 }
 
-int Test::TryTest()
+int BaseGame::TryTest()
 {
 	Window window;
 	Renderer renderer;

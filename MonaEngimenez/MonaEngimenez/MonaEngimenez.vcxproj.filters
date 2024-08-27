@@ -24,7 +24,7 @@
     <ClCompile Include="..\src\Entity\Entity2D\Shape\Shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Test\Test.cpp">
+    <ClCompile Include="..\src\Test\BaseGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\BufferDirection\BufferDirection.cpp">
@@ -50,14 +50,11 @@
     <ClInclude Include="..\src\BufferDirection\BufferDirection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Test\Test.h">
+    <ClInclude Include="..\src\Test\BaseGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Exporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
