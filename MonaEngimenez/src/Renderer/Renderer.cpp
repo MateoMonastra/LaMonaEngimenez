@@ -3,26 +3,26 @@
 int Renderer::vertexCount = 0;
 float Renderer::vertices[];
 
-MONA_ENGIMENEZ Renderer::Renderer()
+Renderer::Renderer()
 {
 }
 
-MONA_ENGIMENEZ Renderer::~Renderer()
+Renderer::~Renderer()
 {
 }
 
-MONA_ENGIMENEZ void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
 	glClearColor(red, green, blue, alpha);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-MONA_ENGIMENEZ void Renderer::SwapBuffers(Window window)
+void Renderer::SwapBuffers(Window window)
 {
 	glfwSwapBuffers(window.GetWindow());
 }
 
-MONA_ENGIMENEZ void Renderer::GenerateBuffer()
+void Renderer::GenerateBuffer()
 {
 	glewInit();
 
@@ -43,12 +43,12 @@ MONA_ENGIMENEZ void Renderer::GenerateBuffer()
 	delete[] verticesToBuffer;
 }
 
-MONA_ENGIMENEZ void Renderer::DrawArrays(BufferDirection pointer)
+void Renderer::DrawArrays(BufferDirection pointer)
 {
 	glDrawArrays(GL_TRIANGLES, pointer.GetStart(), pointer.GetEnd());
 }
 
-MONA_ENGIMENEZ BufferDirection Renderer::AddVertices(float verticesToAdd[], int count)
+BufferDirection Renderer::AddVertices(float verticesToAdd[], int count)
 {
 	for (int i = 0; i < count; i++)
 	{
@@ -56,7 +56,7 @@ MONA_ENGIMENEZ BufferDirection Renderer::AddVertices(float verticesToAdd[], int 
 	}
 
 	BufferDirection pointer;
-	
+
 	pointer.SetStart(vertexCount);
 	pointer.SetEnd(vertexCount + count);
 

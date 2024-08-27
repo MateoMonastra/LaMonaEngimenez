@@ -2,7 +2,7 @@
 #include "Renderer/Renderer.h"
 
 
-MONA_ENGIMENEZ Shape::Shape(float vertices[])
+Shape::Shape(float vertices[])
 {
 	Renderer renderer;
 
@@ -14,7 +14,7 @@ MONA_ENGIMENEZ Shape::Shape(float vertices[])
 	this->bufferDirection = renderer.AddVertices(this->vertices, SHAPE_VERTEX_COUNT);
 }
 
-MONA_ENGIMENEZ void Shape::Draw()
+void Shape::Draw()
 {
 	Renderer renderer;
 

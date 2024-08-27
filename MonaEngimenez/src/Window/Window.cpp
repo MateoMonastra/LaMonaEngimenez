@@ -1,34 +1,35 @@
 #include "Window.h"
 
-MONA_ENGIMENEZ Window::Window()
+Window::Window()
+{
+	window = nullptr;
+}
+
+Window::~Window()
 {
 }
 
-MONA_ENGIMENEZ Window::~Window()
+GLFWwindow* Window::GetWindow()
 {
+	return window;
 }
 
-MONA_ENGIMENEZ GLFWwindow* Window::GetWindow()
+void Window::SetCurrent()
 {
-    return window;
+	glfwMakeContextCurrent(window);
 }
 
-MONA_ENGIMENEZ void Window::SetCurrent()
+int Window::Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 {
-    glfwMakeContextCurrent(window);
+	window = glfwCreateWindow(width, height, title, monitor, share);
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
 }
 
-MONA_ENGIMENEZ int Window::Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
+bool Window::ShouldClose()
 {
-    window = glfwCreateWindow(width, height, title, monitor, share);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
-}
-
-MONA_ENGIMENEZ bool Window::ShouldClose()
-{
-    return glfwWindowShouldClose(window);
+	return glfwWindowShouldClose(window);
 }

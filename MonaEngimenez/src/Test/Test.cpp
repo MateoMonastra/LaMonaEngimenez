@@ -4,15 +4,15 @@
 #include "Entity/Entity2D/Shape/Shape.h"
 #include "Window/Window.h"
 
-MONA_ENGIMENEZ Test::Test()
+Test::Test()
 {
 }
 
-MONA_ENGIMENEZ Test::~Test()
+Test::~Test()
 {
 }
 
-MONA_ENGIMENEZ int Test::TryTest()
+int Test::TryTest()
 {
 	Window window;
 	Renderer renderer;
@@ -22,7 +22,7 @@ MONA_ENGIMENEZ int Test::TryTest()
 		return -1;
 
 
-	window.Create(640, 480, "Hello World", NULL, NULL);
+	window.Create(1024, 720, "Hello World", NULL, NULL);
 
 	window.SetCurrent();
 
