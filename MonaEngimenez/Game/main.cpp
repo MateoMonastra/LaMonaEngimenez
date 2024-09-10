@@ -5,5 +5,6 @@ int main()
 	BaseGame baseGame;
 
 	baseGame.TryTest();
+
 	return 1;
 }

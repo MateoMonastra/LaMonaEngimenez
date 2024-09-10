@@ -33,11 +33,14 @@ void Renderer::GenerateBuffer()
 		verticesToBuffer[i] = vertices[i];
 	}
 
+	//generated buffer id VBO
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 
+	//select created buffer
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
+	
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesToBuffer), verticesToBuffer, GL_STATIC_DRAW);
 
 	delete[] verticesToBuffer;

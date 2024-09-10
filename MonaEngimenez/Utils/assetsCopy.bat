@@ -1,10 +1,20 @@
 @echo off
 
-echo Copying MonaEngimenez.dll and MonaEngimenez.lib
+rem Definir las rutas
+set SourceDir1=%~dp0..\MonaEngimenez\bin\Debug\
+set SourceDir2=%~dp0..\lib\glew-2.1.0\dll\
+set TargetDir=%~dp0..\Game\bin\Debug\
 
-Set sourceDir="%~1MonaEngimenez\bin\Debug\"
-Set destDir="%~2Game\bin\Debug\"
+rem Crear el directorio de destino si no existe
+if not exist "%TargetDir%" (
+    mkdir "%TargetDir%"
+)
 
-xcopy /y /i %sourceDir%MonaEngimenez.dll %destDir%
+rem Copiar MonaEngimenez.dll
+copy "%SourceDir1%MonaEngimenez.dll" "%TargetDir%" /Y
 
-echo Files copied successfully
+rem Copiar glew32.dll
+copy "%SourceDir2%glew32.dll" "%TargetDir%" /Y
+
+echo Archivos copiados correctamente.
+pause
