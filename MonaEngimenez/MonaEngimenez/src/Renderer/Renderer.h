@@ -3,7 +3,8 @@
 
 #include <glew.h>
 #include "Window/Window.h"
-#include "BufferDirection/BufferDirection.h"
+
+#include <iostream>
 
 
 const int MAX_VERTEX_COUNT = 1024;
@@ -20,8 +21,10 @@ public:
 
 	MONA_ENGIMENEZ void Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 	MONA_ENGIMENEZ static void SwapBuffers(Window window);
-	MONA_ENGIMENEZ static void GenerateBuffer();
-	MONA_ENGIMENEZ static void DrawArrays(BufferDirection pointer);
-	MONA_ENGIMENEZ static BufferDirection AddVertices(float verticesToAdd[], int count);
+	MONA_ENGIMENEZ static void GenerateBuffer(float vertices[]);
+	MONA_ENGIMENEZ static int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+	MONA_ENGIMENEZ static unsigned int CompileShader(unsigned int type, const std::string& source);
+
+
 };
 

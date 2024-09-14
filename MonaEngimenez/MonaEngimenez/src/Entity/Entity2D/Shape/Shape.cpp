@@ -4,19 +4,15 @@
 
 Shape::Shape(float vertices[])
 {
-	Renderer renderer;
+	//Renderer renderer;
 
 	for (int i = 0; i < SHAPE_VERTEX_COUNT; i++)
 	{
 		this->vertices[i] = vertices[i];
 	}
-
-	this->bufferDirection = renderer.AddVertices(this->vertices, SHAPE_VERTEX_COUNT);
 }
 
 void Shape::Draw()
 {
-	Renderer renderer;
-
-	renderer.DrawArrays(bufferDirection);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }

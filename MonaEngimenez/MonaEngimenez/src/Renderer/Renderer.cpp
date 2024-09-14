@@ -5,6 +5,7 @@ float Renderer::vertices[];
 
 Renderer::Renderer()
 {
+	glewInit();
 }
 
 Renderer::~Renderer()
@@ -22,16 +23,14 @@ void Renderer::SwapBuffers(Window window)
 	glfwSwapBuffers(window.GetWindow());
 }
 
-void Renderer::GenerateBuffer()
+void Renderer::GenerateBuffer(float vertices[])
 {
-	glewInit();
-
-	float* verticesToBuffer = new float[vertexCount];
-
-	for (int i = 0; i < vertexCount; i++)
-	{
-		verticesToBuffer[i] = vertices[i];
-	}
+	//float* verticesToBuffer = new float[vertexCount];
+	//
+	//for (int i = 0; i < vertexCount; i++)
+	//{
+	//	verticesToBuffer[i] = vertices[i];
+	//}
 
 	//generated buffer id VBO
 	unsigned int VBO;
@@ -40,30 +39,27 @@ void Renderer::GenerateBuffer()
 	//select created buffer
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	
-	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesToBuffer), verticesToBuffer, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), vertices, GL_STATIC_DRAW);
 
-	delete[] verticesToBuffer;
+	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+
+	//delete[] verticesToBuffer;
 }
 
-void Renderer::DrawArrays(BufferDirection pointer)
+MONA_ENGIMENEZ int Renderer::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
-	glDrawArrays(GL_TRIANGLES, pointer.GetStart(), pointer.GetEnd());
+	unsigned int program = glCreateProgram();
+
+	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
 }
 
-BufferDirection Renderer::AddVertices(float verticesToAdd[], int count)
+MONA_ENGIMENEZ unsigned int Renderer::CompileShader(unsigned int type, const std::string& source)
 {
-	for (int i = 0; i < count; i++)
-	{
-		vertices[vertexCount + i] = verticesToAdd[i];
-	}
+	unsigned int id = glCreateShader(GL_VERTEX_SHADER);
 
-	BufferDirection pointer;
+	const char* src = source.c_str();
 
-	pointer.SetStart(vertexCount);
-	pointer.SetEnd(vertexCount + count);
-
-	vertexCount += count;
-
-	return pointer;
+	glShaderSource(id, 1, &src, nullptr);
 }

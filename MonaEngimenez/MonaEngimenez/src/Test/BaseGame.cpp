@@ -4,6 +4,9 @@
 #include "Entity/Entity2D/Shape/Shape.h"
 #include "Window/Window.h"
 
+#include <iostream>
+#include "glew.h"
+
 BaseGame::BaseGame()
 {
 }
@@ -17,40 +20,34 @@ int BaseGame::TryTest()
 	Window window;
 	Renderer renderer;
 
-	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
 
-
 	window.Create(1024, 720, "Hello World", NULL, NULL);
-
 	window.SetCurrent();
+
+	if (glewInit() != GLEW_OK)
+	{
+		std::cout << "glew error";
+	}
 
 	float positions[6]
 	{
 		-0.5f,-0.5f,
 		0.0f,0.5f,
 		0.5f,-0.5f
-
 	};
 
-	Shape triangle = Shape(positions);
+	renderer.GenerateBuffer(positions);
 
-	/* Loop until the user closes the window */
 	while (!window.ShouldClose())
 	{
-		renderer.Clear(0.5f, 0.5f, 0.5f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBegin(GL_TRIANGLES);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		triangle.Draw();
+		glfwSwapBuffers(window.GetWindow());
 
-		glEnd();
-
-		/* Swap front and back buffers */
-		renderer.SwapBuffers(window);
-
-		/* Poll for and process events */
 		glfwPollEvents();
 	}
 
