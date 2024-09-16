@@ -19,11 +19,12 @@ public:
 	MONA_ENGIMENEZ Renderer();
 	MONA_ENGIMENEZ ~Renderer();
 
-	MONA_ENGIMENEZ void Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+	MONA_ENGIMENEZ static void Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 	MONA_ENGIMENEZ static void SwapBuffers(Window window);
 	MONA_ENGIMENEZ static void GenerateBuffer(float vertices[]);
-	MONA_ENGIMENEZ static int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+	MONA_ENGIMENEZ static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	MONA_ENGIMENEZ static unsigned int CompileShader(unsigned int type, const std::string& source);
+	MONA_ENGIMENEZ static void SetShaders(unsigned int& shader);
 
 
 };
