@@ -2,10 +2,10 @@
 
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
-#include "Window/Window.h"
+
+
 
 #include <iostream>
-#include "glew.h"
 
 BaseGame::BaseGame()
 {
@@ -15,13 +15,12 @@ BaseGame::~BaseGame()
 {
 }
 
-int BaseGame::TryTest()
+MONA_ENGIMENEZ void BaseGame::InitGame(Window& window)
 {
-	Window window;
-	Renderer renderer;
-
 	if (!glfwInit())
-		return -1;
+	{
+		std::cout << "glf error";
+	}
 
 	window.Create(1024, 720, "Hello World", NULL, NULL);
 	window.SetCurrent();
@@ -30,6 +29,14 @@ int BaseGame::TryTest()
 	{
 		std::cout << "glew error";
 	}
+}
+
+int BaseGame::TryTest()
+{
+	Window window;
+	Renderer renderer;
+
+	InitGame(window);
 
 	float positions[6]
 	{
@@ -42,31 +49,17 @@ int BaseGame::TryTest()
 
 	unsigned int shader;
 
-	renderer.SetShaders(shader);
+	//renderer.SetShaders(shader);
 
-	//std::string vertexShader =
-	//	"#version 330 core\n"
-	//	"\n"
-	//	"layout(location = 0) in vec4 position"
-	//	"\n"
-	//	"void main()\n"
-	//	"{\n"
-	//	"	gl_Position = position;\n"
-	//	"}\n";
+	ShaderProgramSource source = renderer.ParseShader("src/Shaders/Basic.shader");
+	std::cout << "VERTEX" << std::endl;
+	std::cout << source.VertexSource << std::endl;
+	std::cout << "FRAGMENT" << std::endl;
+	std::cout << source.FragmentSource << std::endl;
 
-	//std::string fragmentShader =
-	//	"#version 330 core\n"
-	//	"\n"
-	//	"layout(location = 0) out vec4 color; \n"
-	//	"\n"
-	//	"void main()\n"
-	//	"{\n"
-	//	"	color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-	//	"}\n";
+	shader = renderer.CreateShader(source.VertexSource, source.FragmentSource);
 
-	//unsigned int shader = renderer.CreateShader(vertexShader, fragmentShader);
-
-	//glUseProgram(shader);
+	glUseProgram(shader);
 
 	while (!window.ShouldClose())
 	{
@@ -79,8 +72,9 @@ int BaseGame::TryTest()
 		glfwPollEvents();
 	}
 
-	glDeleteShader(shader);
+	glDeleteProgram(shader);
 
 	glfwTerminate();
+
 	return 0;
 }

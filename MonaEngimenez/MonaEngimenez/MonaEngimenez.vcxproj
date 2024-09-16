@@ -33,6 +33,9 @@
     <ClCompile Include="src\Test\BaseGame.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Shaders\Basic.shader" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

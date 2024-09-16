@@ -1,11 +1,17 @@
 #pragma once
 #include "Exporter.h"
-
 #include <glew.h>
+
 #include "Window/Window.h"
+
 
 #include <iostream>
 
+struct ShaderProgramSource
+{
+	std::string VertexSource;
+	std::string FragmentSource;
+};
 
 const int MAX_VERTEX_COUNT = 1024;
 
@@ -24,7 +30,7 @@ public:
 	MONA_ENGIMENEZ static void GenerateBuffer(float vertices[]);
 	MONA_ENGIMENEZ static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	MONA_ENGIMENEZ static unsigned int CompileShader(unsigned int type, const std::string& source);
-	MONA_ENGIMENEZ static void SetShaders(unsigned int& shader);
+	MONA_ENGIMENEZ static ShaderProgramSource ParseShader(const std::string& filepath);
 
 
 };
