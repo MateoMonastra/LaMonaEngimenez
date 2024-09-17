@@ -90,7 +90,7 @@ MONA_ENGIMENEZ unsigned int Renderer::CompileShader(unsigned int type, const std
 
 		std::cout << "Filed to comnpile "
 			<< (type == GL_VERTEX_SHADER ? "vertex" : "fragment") 
-			<< "shader!" << std::endl;
+			<< " shader!" << std::endl;
 
 		std::cout << message << std::endl;
 
@@ -115,12 +115,12 @@ ShaderProgramSource Renderer::ParseShader(const std::string& filepath)
 
 
 	// Mostrar la ruta completa
-	std::filesystem::path absolutePath = std::filesystem::absolute(filepath);
-	std::cout << "Ruta absoluta: " << absolutePath << std::endl;
+	/*std::filesystem::path absolutePath = std::filesystem::absolute(filepath);
+	std::cout << "Ruta absoluta: " << absolutePath << std::endl;*/
 
 	if (!stream.is_open())
 	{
-		std::cout << "Failed to open file: " << absolutePath << std::endl;
+		std::cout << "Failed to open file: " << filepath << std::endl;
 	}
 
 	std::string line;

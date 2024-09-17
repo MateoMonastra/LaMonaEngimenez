@@ -49,7 +49,7 @@ int BaseGame::TryTest()
 
 	renderer.GenerateBuffer(positions);
 
-	ShaderProgramSource source = renderer.ParseShader("../src/Shaders/Basic.shader");
+	ShaderProgramSource source = renderer.ParseShader("../MonaEngimenez/src/Shaders/Basic.shader");
 	std::cout << "VERTEX" << std::endl;
 	std::cout << source.VertexSource << std::endl;
 	std::cout << "FRAGMENT" << std::endl;

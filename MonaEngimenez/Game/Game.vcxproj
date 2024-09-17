@@ -92,8 +92,12 @@
       <AdditionalLibraryDirectories>$(SolutionDir)MonaEngimenez\bin\Debug</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)Utils/assetsCopy.bat"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>"$(SolutionDir)Utils/assetsCopy.bat"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
