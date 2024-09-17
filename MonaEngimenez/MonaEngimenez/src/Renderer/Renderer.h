@@ -1,9 +1,8 @@
 #pragma once
 #include "Exporter.h"
+
 #include <glew.h>
-
 #include "Window/Window.h"
-
 
 #include <iostream>
 
@@ -31,7 +30,5 @@ public:
 	MONA_ENGIMENEZ static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	MONA_ENGIMENEZ static unsigned int CompileShader(unsigned int type, const std::string& source);
 	MONA_ENGIMENEZ static ShaderProgramSource ParseShader(const std::string& filepath);
-
-
 };
 

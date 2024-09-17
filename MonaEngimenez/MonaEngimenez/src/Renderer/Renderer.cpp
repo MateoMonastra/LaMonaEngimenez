@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 
+#include <filesystem>
+
 int Renderer::vertexCount = 0;
 float Renderer::vertices[];
 
@@ -82,7 +84,7 @@ MONA_ENGIMENEZ unsigned int Renderer::CompileShader(unsigned int type, const std
 
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 
-		char* message = (char*)alloca(length * sizeof(char));
+		char* message = (char*)_malloca(length * sizeof(char));
 
 		glGetShaderInfoLog(id, length, &length, message);
 
@@ -100,7 +102,7 @@ MONA_ENGIMENEZ unsigned int Renderer::CompileShader(unsigned int type, const std
 	return id;
 }
 
-MONA_ENGIMENEZ ShaderProgramSource Renderer::ParseShader(const std::string& filepath)
+ShaderProgramSource Renderer::ParseShader(const std::string& filepath)
 {
 	enum class ShaderType
 	{
@@ -110,6 +112,16 @@ MONA_ENGIMENEZ ShaderProgramSource Renderer::ParseShader(const std::string& file
 	};
 
 	std::ifstream stream(filepath);
+
+
+	// Mostrar la ruta completa
+	std::filesystem::path absolutePath = std::filesystem::absolute(filepath);
+	std::cout << "Ruta absoluta: " << absolutePath << std::endl;
+
+	if (!stream.is_open())
+	{
+		std::cout << "Failed to open file: " << absolutePath << std::endl;
+	}
 
 	std::string line;
 
@@ -137,8 +149,4 @@ MONA_ENGIMENEZ ShaderProgramSource Renderer::ParseShader(const std::string& file
 	}
 
 	return { ss[0].str(), ss[1].str() };
-
-	//shader = CreateShader(vertexShader, fragmentShader);
-
-	//glUseProgram(shader);
 }

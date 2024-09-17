@@ -3,9 +3,11 @@
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
 
-
-
+#include "glew.h"
 #include <iostream>
+
+#include "Window/Window.h"
+
 
 BaseGame::BaseGame()
 {
@@ -15,7 +17,7 @@ BaseGame::~BaseGame()
 {
 }
 
-MONA_ENGIMENEZ void BaseGame::InitGame(Window& window)
+void InitGame(Window& window)
 {
 	if (!glfwInit())
 	{
@@ -47,17 +49,13 @@ int BaseGame::TryTest()
 
 	renderer.GenerateBuffer(positions);
 
-	unsigned int shader;
-
-	//renderer.SetShaders(shader);
-
-	ShaderProgramSource source = renderer.ParseShader("src/Shaders/Basic.shader");
+	ShaderProgramSource source = renderer.ParseShader("../src/Shaders/Basic.shader");
 	std::cout << "VERTEX" << std::endl;
 	std::cout << source.VertexSource << std::endl;
 	std::cout << "FRAGMENT" << std::endl;
 	std::cout << source.FragmentSource << std::endl;
 
-	shader = renderer.CreateShader(source.VertexSource, source.FragmentSource);
+	unsigned int shader = renderer.CreateShader(source.VertexSource, source.FragmentSource);
 
 	glUseProgram(shader);
 
@@ -72,7 +70,7 @@ int BaseGame::TryTest()
 		glfwPollEvents();
 	}
 
-	glDeleteProgram(shader);
+	glDeleteShader(shader);
 
 	glfwTerminate();
 
