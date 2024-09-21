@@ -3,9 +3,10 @@
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
 
+#include "glew.h"
 #include <iostream>
 
-
+#include "Window/Window.h"
 
 
 BaseGame::BaseGame()
@@ -18,11 +19,6 @@ BaseGame::~BaseGame()
 
 void InitGame(Window& window)
 {
-	if (glewInit() != GLEW_OK)
-	{
-		std::cout << "glew error";
-	}
-
 	if (!glfwInit())
 	{
 		std::cout << "glf error";
@@ -30,6 +26,11 @@ void InitGame(Window& window)
 
 	window.Create(1024, 720, "Hello World", NULL, NULL);
 	window.SetCurrent();
+
+	if (glewInit() != GLEW_OK)
+	{
+		std::cout << "glew error";
+	}
 }
 
 int BaseGame::TryTest()
@@ -58,17 +59,6 @@ int BaseGame::TryTest()
 
 	glUseProgram(shader);
 
-	Update(window);
-
-	glDeleteShader(shader);
-
-	glfwTerminate();
-
-	return 0;
-}
-
-MONA_ENGIMENEZ void BaseGame::Update(Window& window)
-{
 	while (!window.ShouldClose())
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -79,4 +69,10 @@ MONA_ENGIMENEZ void BaseGame::Update(Window& window)
 
 		glfwPollEvents();
 	}
+
+	glDeleteShader(shader);
+
+	glfwTerminate();
+
+	return 0;
 }

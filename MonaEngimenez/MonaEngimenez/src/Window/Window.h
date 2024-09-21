@@ -13,7 +13,7 @@ MONA_ENGIMENEZ class Window
 {
 private:
 
-	GLFWwindow* window;
+	GLFWwindow * window;
 
 public:
 
