@@ -6,8 +6,8 @@
 
 #include <filesystem>
 
-int Renderer::vertexCount = 0;
-float Renderer::vertices[];
+//int Renderer::vertexCount = 0;
+//float Renderer::vertices[];
 
 Renderer::Renderer()
 {
@@ -29,19 +29,42 @@ void Renderer::SwapBuffers(Window window)
 	glfwSwapBuffers(window.GetWindow());
 }
 
-void Renderer::GenerateBuffer(float vertices[])
+void Renderer::GenerateBuffer()
 {
+	float positions[]
+	{
+		-0.5f,-0.5f,
+		0.5f,-0.5f,
+		0.5f,0.5f,
+		-0.5f,0.5f
+	};
+
+	unsigned int indices[]
+	{
+		0,1,2,
+		2,3,0
+	};
+
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 
 	//select created buffer
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+
+	//index buffer
+	unsigned int ibo;
+
+	glGenBuffers(1, &ibo);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
 MONA_ENGIMENEZ unsigned int Renderer::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
@@ -112,11 +135,6 @@ ShaderProgramSource Renderer::ParseShader(const std::string& filepath)
 	};
 
 	std::ifstream stream(filepath);
-
-
-	// Mostrar la ruta completa
-	/*std::filesystem::path absolutePath = std::filesystem::absolute(filepath);
-	std::cout << "Ruta absoluta: " << absolutePath << std::endl;*/
 
 	if (!stream.is_open())
 	{

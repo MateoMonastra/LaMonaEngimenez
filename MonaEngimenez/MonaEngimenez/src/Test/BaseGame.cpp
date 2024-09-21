@@ -39,17 +39,12 @@ int BaseGame::TryTest()
 	Renderer renderer;
 
 	InitGame(window);
+	
 
-	float positions[6]
-	{
-		-0.5f,-0.5f,
-		0.0f,0.5f,
-		0.5f,-0.5f
-	};
-
-	renderer.GenerateBuffer(positions);
+	renderer.GenerateBuffer();
 
 	ShaderProgramSource source = renderer.ParseShader("../MonaEngimenez/src/Shaders/Basic.shader");
+	
 	std::cout << "VERTEX" << std::endl;
 	std::cout << source.VertexSource << std::endl;
 	std::cout << "FRAGMENT" << std::endl;
@@ -63,7 +58,7 @@ int BaseGame::TryTest()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 		glfwSwapBuffers(window.GetWindow());
 
