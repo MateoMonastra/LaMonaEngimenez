@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Debugger\Debugger.h" />
     <ClInclude Include="src\Entity\Entity.h" />
     <ClInclude Include="src\Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="src\Entity\Entity2D\Shape\Shape.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Debugger\Debugger.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Test\BaseGame.cpp" />
