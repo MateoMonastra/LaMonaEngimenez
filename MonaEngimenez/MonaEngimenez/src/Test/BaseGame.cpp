@@ -2,11 +2,14 @@
 
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
+#include "Debugger/Debugger.h"
 
 #include "glew.h"
 #include <iostream>
 
 #include "Window/Window.h"
+
+#include <gl/GL.h>
 
 
 BaseGame::BaseGame()
@@ -39,26 +42,41 @@ int BaseGame::TryTest()
 	Renderer renderer;
 
 	InitGame(window);
-	
 
-	renderer.GenerateBuffer();
+	glfwSwapInterval(1);
 
-	ShaderProgramSource source = renderer.ParseShader("../MonaEngimenez/src/Shaders/Basic.shader");
-	
-	std::cout << "VERTEX" << std::endl;
-	std::cout << source.VertexSource << std::endl;
-	std::cout << "FRAGMENT" << std::endl;
-	std::cout << source.FragmentSource << std::endl;
+	DebuggerCall(renderer.GenerateBuffer());
+
+	DebuggerCall(ShaderProgramSource source = renderer.ParseShader("../MonaEngimenez/src/Shaders/Basic.shader"));
 
 	unsigned int shader = renderer.CreateShader(source.VertexSource, source.FragmentSource);
 
-	glUseProgram(shader);
+	DebuggerCall(glUseProgram(shader));
+
+	DebuggerCall(int location = glGetUniformLocation(shader, "u_Color"));
+	ASSERT(location != -1);
+	DebuggerCall(glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f));
+
+	float r = 0.0f;
+	float increment = 0.05f;
 
 	while (!window.ShouldClose())
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		DebuggerCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
+		DebuggerCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+
+		if (r > 1.0f)
+		{
+			increment = -0.05f;
+		}
+		else if (r < 0.0f)
+		{
+			increment = 0.05f;
+		}
+
+		r += increment;
 
 		glfwSwapBuffers(window.GetWindow());
 

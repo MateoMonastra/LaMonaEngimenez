@@ -51,18 +51,18 @@ void Renderer::GenerateBuffer()
 	//select created buffer
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
 	//index buffer
-	unsigned int ibo;
+	unsigned int IBO;
 
-	glGenBuffers(1, &ibo);
+	glGenBuffers(1, &IBO);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
