@@ -4,14 +4,13 @@
 #include <string>
 #include <sstream>
 
-#include <filesystem>
+#include "Debugger/Debugger.h"
+#include "VertexBuffer/VertexBuffer.h"
+#include "IndexBuffer/IndexBuffer.h"
 
-//int Renderer::vertexCount = 0;
-//float Renderer::vertices[];
 
 Renderer::Renderer()
 {
-	glewInit();
 }
 
 Renderer::~Renderer()
@@ -29,42 +28,29 @@ void Renderer::SwapBuffers(Window window)
 	glfwSwapBuffers(window.GetWindow());
 }
 
-void Renderer::GenerateBuffer()
+void Renderer::GenerateBuffer(unsigned int& VAO, unsigned int& shader, int& location)
 {
-	float positions[]
-	{
-		-0.5f,-0.5f,
-		0.5f,-0.5f,
-		0.5f,0.5f,
-		-0.5f,0.5f
-	};
-
-	unsigned int indices[]
-	{
-		0,1,2,
-		2,3,0
-	};
-
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
-
-	//select created buffer
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-	glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+	DebuggerCall(glGenVertexArrays(1, &VAO));
+	DebuggerCall(glBindVertexArray(VAO));
 
 	glEnableVertexAttribArray(0);
-
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
-	//index buffer
-	unsigned int IBO;
 
-	glGenBuffers(1, &IBO);
+	DebuggerCall(ShaderProgramSource source = ParseShader("../MonaEngimenez/src/Shaders/Basic.shader"));
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	shader = CreateShader(source.VertexSource, source.FragmentSource);
 
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+	DebuggerCall(glUseProgram(shader));
+
+	DebuggerCall(location = glGetUniformLocation(shader, "u_Color"));
+	ASSERT(location != -1);
+	DebuggerCall(glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f));
+
+	DebuggerCall(glBindVertexArray(0));
+	DebuggerCall(glUseProgram(0));
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 MONA_ENGIMENEZ unsigned int Renderer::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)

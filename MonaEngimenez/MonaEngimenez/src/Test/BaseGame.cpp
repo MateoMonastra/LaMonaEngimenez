@@ -1,15 +1,16 @@
 #include "BaseGame.h"
 
-#include "Renderer/Renderer.h"
-#include "Entity/Entity2D/Shape/Shape.h"
-#include "Debugger/Debugger.h"
-
 #include "glew.h"
+
 #include <iostream>
 
 #include "Window/Window.h"
+#include "Renderer/Renderer.h"
+#include "Entity/Entity2D/Shape/Shape.h"
+#include "Debugger/Debugger.h"
+#include "VertexBuffer/VertexBuffer.h"
+#include "IndexBuffer/IndexBuffer.h"
 
-#include <gl/GL.h>
 
 
 BaseGame::BaseGame()
@@ -38,53 +39,78 @@ void InitGame(Window& window)
 
 int BaseGame::TryTest()
 {
-	Window window;
+
+	float positions[]
+	{
+		-0.5f,-0.5f,
+		0.5f,-0.5f,
+		0.5f,0.5f,
+		-0.5f,0.5f
+	};
+
+	unsigned int indices[]
+	{
+		0,1,2,
+		2,3,0
+	};
+
 	Renderer renderer;
+	Window window;
 
 	InitGame(window);
-
-	glfwSwapInterval(1);
-
-	DebuggerCall(renderer.GenerateBuffer());
-
-	DebuggerCall(ShaderProgramSource source = renderer.ParseShader("../MonaEngimenez/src/Shaders/Basic.shader"));
-
-	unsigned int shader = renderer.CreateShader(source.VertexSource, source.FragmentSource);
-
-	DebuggerCall(glUseProgram(shader));
-
-	DebuggerCall(int location = glGetUniformLocation(shader, "u_Color"));
-	ASSERT(location != -1);
-	DebuggerCall(glUniform4f(location, 0.2f, 0.3f, 0.8f, 1.0f));
-
-	float r = 0.0f;
-	float increment = 0.05f;
-
-	while (!window.ShouldClose())
 	{
-		DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
-		DebuggerCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
-		DebuggerCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+		glfwSwapInterval(1);
 
-		if (r > 1.0f)
+
+		unsigned int VAO;
+		unsigned int shader;
+		int location;
+
+		VertexBuffer vb(positions, 4 * 2 * sizeof(float));
+		IndexBuffer ib(indices, 6);
+
+		DebuggerCall(renderer.GenerateBuffer(VAO, shader, location));
+
+		float r = 0.0f;
+		float increment = 0.05f;
+
+		while (!window.ShouldClose())
 		{
-			increment = -0.05f;
+			DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
+
+			DebuggerCall(glUseProgram(shader));
+
+			DebuggerCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
+
+			DebuggerCall(glBindVertexArray(VAO));
+
+
+			ib.Bind();
+
+			DebuggerCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+
+			if (r > 1.0f)
+			{
+				increment = -0.05f;
+			}
+			else if (r < 0.0f)
+			{
+				increment = 0.05f;
+			}
+
+			r += increment;
+
+			glfwSwapBuffers(window.GetWindow());
+
+			glfwPollEvents();
 		}
-		else if (r < 0.0f)
-		{
-			increment = 0.05f;
-		}
 
-		r += increment;
-
-		glfwSwapBuffers(window.GetWindow());
-
-		glfwPollEvents();
+		glDeleteShader(shader);
 	}
-
-	glDeleteShader(shader);
-
 	glfwTerminate();
 
 	return 0;
