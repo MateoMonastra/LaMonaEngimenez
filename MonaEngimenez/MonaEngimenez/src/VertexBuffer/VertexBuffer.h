@@ -1,4 +1,5 @@
 #pragma once
+#include "Exporter.h"
 
 class VertexBuffer
 {

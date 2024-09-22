@@ -10,8 +10,8 @@
 #include "Debugger/Debugger.h"
 #include "VertexBuffer/VertexBuffer.h"
 #include "IndexBuffer/IndexBuffer.h"
-
-
+#include "VertexArray/VertexArray.h"
+#include "BufferLayout/BufferLayout.h"
 
 BaseGame::BaseGame()
 {
@@ -39,7 +39,6 @@ void InitGame(Window& window)
 
 int BaseGame::TryTest()
 {
-
 	float positions[]
 	{
 		-0.5f,-0.5f,
@@ -65,13 +64,22 @@ int BaseGame::TryTest()
 
 		glfwSwapInterval(1);
 
-
 		unsigned int VAO;
 		unsigned int shader;
 		int location;
 
+		VertexArray va;
 		VertexBuffer vb(positions, 4 * 2 * sizeof(float));
 		IndexBuffer ib(indices, 6);
+		BufferLayout layout;
+
+		layout.Push<float>(2);
+		va.AddBuffer(vb, layout);
+
+		//va.AddLayout(layout);
+		va.Bind();
+
+		
 
 		DebuggerCall(renderer.GenerateBuffer(VAO, shader, location));
 
@@ -85,9 +93,8 @@ int BaseGame::TryTest()
 			DebuggerCall(glUseProgram(shader));
 
 			DebuggerCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
-
-			DebuggerCall(glBindVertexArray(VAO));
-
+			
+			va.Bind();
 
 			ib.Bind();
 

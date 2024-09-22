@@ -33,11 +33,7 @@ void Renderer::GenerateBuffer(unsigned int& VAO, unsigned int& shader, int& loca
 	DebuggerCall(glGenVertexArrays(1, &VAO));
 	DebuggerCall(glBindVertexArray(VAO));
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
-
-
-	DebuggerCall(ShaderProgramSource source = ParseShader("../MonaEngimenez/src/Shaders/Basic.shader"));
+	ShaderProgramSource source = ParseShader("../MonaEngimenez/src/Shaders/Basic.shader");
 
 	shader = CreateShader(source.VertexSource, source.FragmentSource);
 
