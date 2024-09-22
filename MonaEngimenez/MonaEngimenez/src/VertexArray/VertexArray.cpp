@@ -5,8 +5,6 @@
 VertexArray::VertexArray()
 {
 	DebuggerCall(glGenVertexArrays(1, &m_RendererID));
-	//DebuggerCall(glBindVertexArray(m_RendererID));
-
 }
 
 VertexArray::~VertexArray()
