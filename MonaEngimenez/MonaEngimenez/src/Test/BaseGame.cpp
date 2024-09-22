@@ -19,12 +19,20 @@
 #include "Texture/Texture.h"
 
 
+glm::vec2 bottomLeft = { 100.0f, 100.0f };
+glm::vec2 bottomRight = { 300.0f, 100.0f };
+glm::vec2 topRight = { 300.0f, 300.0f };
+glm::vec2 topLeft = { 100.0f, 300.0f };
+
+const float screenWidth = 1024.0f;
+const float screenHeight = 720.0f;
+
 float positions[]
 {
-	-0.5f,-0.5f, 0.0f, 0.0f,
-	0.5f,-0.5f, 1.0f, 0.0f,
-	0.5f,0.5f, 1.0f, 1.0f,
-	-0.5f,0.5f, 0.0f, 1.0f
+	bottomLeft.x,bottomLeft.y, 0.0f, 0.0f,
+	bottomRight.x,bottomRight.y, 1.0f, 0.0f,
+	topRight.x,topRight.y, 1.0f, 1.0f,
+	topLeft.x,topLeft.y, 0.0f, 1.0f
 };
 
 unsigned int indices[]
@@ -48,7 +56,7 @@ void InitGame(Window& window)
 		std::cout << "glf error";
 	}
 
-	window.Create(1024, 720, "Hello World", NULL, NULL);
+	window.Create(screenWidth, screenHeight, "Hello World", NULL, NULL);
 	window.SetCurrent();
 
 	if (glewInit() != GLEW_OK)
@@ -102,7 +110,7 @@ int BaseGame::TryTest()
 	layout.Push<float>(2);
 	va.AddBuffer(vb, layout);
 
-	glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);
+	glm::mat4 proj = glm::ortho(0.0f, 1024.0f, 0.0f, 720.0f, -1.0f, 1.0f);
 
 	Shader shader("../MonaEngimenez/src/Shaders/Basic.shader");
 	shader.Bind();
