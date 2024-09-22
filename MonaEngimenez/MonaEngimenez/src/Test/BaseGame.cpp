@@ -1,6 +1,8 @@
 #include "BaseGame.h"
 
 #include <glew.h>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
 
 #include <iostream>
 
@@ -100,9 +102,12 @@ int BaseGame::TryTest()
 	layout.Push<float>(2);
 	va.AddBuffer(vb, layout);
 
+	glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);
+
 	Shader shader("../MonaEngimenez/src/Shaders/Basic.shader");
 	shader.Bind();
 	shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+	shader.SetUniformMath4f("u_MVP", proj);
 
 	Texture texture("../Assets/Milhouse.png");
 	texture.Bind();
