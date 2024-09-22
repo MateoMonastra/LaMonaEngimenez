@@ -2,10 +2,14 @@
 #include "Exporter.h"
 
 #include <glew.h>
-#include "Window/Window.h"
-
 
 #include <iostream>
+
+#include "Window/Window.h"
+#include "VertexArray/VertexArray.h"
+#include "IndexBuffer/IndexBuffer.h"
+#include "Shader/Shader.h"
+
 
 
 const int MAX_VERTEX_COUNT = 1024;
@@ -22,5 +26,6 @@ public:
 
 	MONA_ENGIMENEZ static void Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 	MONA_ENGIMENEZ static void SwapBuffers(Window window);
+	MONA_ENGIMENEZ void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
 };
 

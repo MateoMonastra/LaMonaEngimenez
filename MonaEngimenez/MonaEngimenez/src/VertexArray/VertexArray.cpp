@@ -33,12 +33,12 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const BufferLayout& layout)
 	}
 }
 
-void VertexArray::Bind()
+void VertexArray::Bind() const
 {
 	DebuggerCall(glBindVertexArray(m_RendererID));
 }
 
-void VertexArray::Unbind()
+void VertexArray::Unbind() const
 {
 	DebuggerCall(glBindVertexArray(0));
 }
