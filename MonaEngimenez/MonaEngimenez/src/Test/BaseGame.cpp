@@ -15,24 +15,8 @@
 #include "Shader/Shader.h"
 #include "Window/Window.h"
 #include "Entity/Entity2D/Shape/Triangle/Triangle.h"
+#include "Transform/Transform.h"
 
-
-
-//float positions[]
-//{
-//	-0.75f,-0.75f,
-//	-0.25f,-0.75f,
-//	-0.25f,0.75f,
-//	-0.75f,0.75f
-//};
-//
-//float positions2[]
-//{
-//	0.25f,-0.75f,
-//	0.75f,-0.75f,
-//	0.75f,0.75f,
-//	0.25f,0.75f
-//};
 
 unsigned int indices[]
 {
@@ -70,6 +54,8 @@ void InitGame(Window& window)
 		std::cout << "glew error";
 	}
 
+	Transform::Init();
+
 	SetVersion3();
 	glfwSwapInterval(1);
 }
@@ -102,7 +88,10 @@ int BaseGame::TryTest()
 	BufferLayout layout;
 	layout.Push<float>(2); //2 becouse there are 2 floats for each vertex
 
-	Triangle triangle1(layout, 0.5f, 0.5f);
+	
+
+	Triangle triangle1(layout, 300.0f, 300.0f);
+	triangle1.Move(100.0f, 100.0f);
 
 	ib.Unbind();
 

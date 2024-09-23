@@ -13,6 +13,6 @@ public:
 	Triangle(BufferLayout layout, float width, float height);
 	~Triangle();
 
-	void Move();
+	void Move(float x, float y);
 };
 

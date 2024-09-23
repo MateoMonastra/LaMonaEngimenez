@@ -4,6 +4,7 @@
 
 Shape::Shape()
 {
+	model = glm::mat4(1.0f);
 }
 
 void Shape::Draw(IndexBuffer ib)
