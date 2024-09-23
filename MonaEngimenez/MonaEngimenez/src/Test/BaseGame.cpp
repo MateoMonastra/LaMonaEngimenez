@@ -3,9 +3,11 @@
 #include <glew.h>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
+#include <imgui.h>
+#include <Implementations/imgui_impl_glfw.h>
+#include <Implementations/imgui_impl_opengl3.h>
 
 #include <iostream>
-
 
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Shape/Shape.h"
@@ -134,19 +136,42 @@ int BaseGame::TryTest()
 	ib.Unbind();
 
 
+	auto context = ImGui::CreateContext();
+	ImGui::SetCurrentContext(context);
+
+	const char* glsl_version = "#version 130";
+	ImGui_ImplGlfw_InitForOpenGL(window.GetWindow(), true);
+	ImGui_ImplOpenGL3_Init(glsl_version);
+
+	
+
+	ImGui::StyleColorsDark();
+
+
 	while (!window.ShouldClose())
 	{
-		DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
+		renderer.Clear(0.2f, 0.3f, 0.8f, 1.0f);
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
 
 		shader.Bind();
 		shader.SetUniform4f("u_Color", FlashingColor(), 0.3f, 0.5f, 1.0f);
 
 		renderer.Draw(va, ib, shader);
 
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 		glfwSwapBuffers(window.GetWindow());
 
 		glfwPollEvents();
 	}
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 
 	glfwTerminate();
 

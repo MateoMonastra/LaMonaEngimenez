@@ -16,13 +16,13 @@ Renderer::~Renderer()
 
 void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
-	glClearColor(red, green, blue, alpha);
-	glClear(GL_COLOR_BUFFER_BIT);
+	DebuggerCall(glClearColor(red, green, blue, alpha));
+	DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
 }
 
 void Renderer::SwapBuffers(Window window)
 {
-	glfwSwapBuffers(window.GetWindow());
+	DebuggerCall(glfwSwapBuffers(window.GetWindow()));
 }
 
 MONA_ENGIMENEZ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const
