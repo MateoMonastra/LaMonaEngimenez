@@ -2,15 +2,24 @@
 #include "Exporter.h"
 
 #include "Entity/Entity2D/Entity2D.h"
+#include "VertexBuffer/VertexBuffer.h"
+#include "VertexArray/VertexArray.h"
+#include "Shader/Shader.h"
 
 
 MONA_ENGIMENEZ class Shape : public Entity2D
 {
+protected:
+
+	VertexArray va;
+	VertexBuffer vb;
+	Shader shader;
+
+
 public:
 
-	MONA_ENGIMENEZ Shape(Renderer* renderer, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation);
-
-	MONA_ENGIMENEZ void Draw();
+	Shape();
+	void Draw(IndexBuffer ib);
 };
 
 

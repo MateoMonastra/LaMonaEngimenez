@@ -19,15 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\lib\imgui\imconfig.h" />
-    <ClInclude Include="..\lib\imgui\imgui.h" />
-    <ClInclude Include="..\lib\imgui\imgui_internal.h" />
-    <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_glfw.h" />
-    <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_opengl3.h" />
-    <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="..\lib\imgui\imstb_rectpack.h" />
-    <ClInclude Include="..\lib\imgui\imstb_textedit.h" />
-    <ClInclude Include="..\lib\imgui\imstb_truetype.h" />
     <ClInclude Include="src\BufferLayout\BufferLayout.h" />
     <ClInclude Include="src\Debugger\Debugger.h" />
     <ClInclude Include="src\Entity\Entity.h" />
@@ -38,32 +29,19 @@
     <ClInclude Include="src\IndexBuffer\IndexBuffer.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
-    <ClInclude Include="src\stb_image\stb_image.h" />
     <ClInclude Include="src\Test\BaseGame.h" />
-    <ClInclude Include="src\Texture\Texture.h" />
     <ClInclude Include="src\VertexArray\VertexArray.h" />
     <ClInclude Include="src\VertexBuffer\VertexBuffer.h" />
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\imgui\imgui.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_demo.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_draw.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_tables.cpp" />
-    <ClCompile Include="..\lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\lib\imgui\Implementations\imgui_impl_glfw.cpp" />
-    <ClCompile Include="..\lib\imgui\Implementations\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Debugger\Debugger.cpp" />
-    <ClCompile Include="src\Entity\Entity.cpp" />
-    <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Triangle\Triangle.cpp" />
     <ClCompile Include="src\IndexBuffer\IndexBuffer.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
-    <ClCompile Include="src\stb_image\stb_image.cpp" />
     <ClCompile Include="src\Test\BaseGame.cpp" />
-    <ClCompile Include="src\Texture\Texture.cpp" />
     <ClCompile Include="src\VertexArray\VertexArray.cpp" />
     <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
@@ -135,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);MONA_ENGIMENEZ_EXPORTS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\glfw-3.4.bin.WIN32\include;$(SolutionDir)MonaEngimenez\src\;$(SolutionDir)lib\glew-2.1.0\include\GL\;$(SolutionDir)lib\glew-2.1.0\dll\;$(SolutionDir)lib\glm\;$(SolutionDir)lib\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\glfw-3.4.bin.WIN32\include;$(SolutionDir)MonaEngimenez\src\;$(SolutionDir)lib\glew-2.1.0\include\GL\;$(SolutionDir)lib\glew-2.1.0\dll\;$(SolutionDir)lib\glm\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

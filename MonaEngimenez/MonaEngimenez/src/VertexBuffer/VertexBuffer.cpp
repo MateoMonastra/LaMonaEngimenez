@@ -4,16 +4,20 @@
 
 #include <glew.h>
 
-VertexBuffer::VertexBuffer(const void* data, unsigned int size)
+VertexBuffer::VertexBuffer()
 {
-	DebuggerCall(glGenBuffers(1, &m_RendererID));
-	DebuggerCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
-	DebuggerCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 }
 
 VertexBuffer::~VertexBuffer()
 {
 	DebuggerCall(glDeleteBuffers(1, &m_RendererID));
+}
+
+void VertexBuffer::SetVertexBuffer(const void* data, unsigned int size)
+{
+	DebuggerCall(glGenBuffers(1, &m_RendererID));
+	DebuggerCall(glBindBuffer(GL_ARRAY_BUFFER, m_RendererID));
+	DebuggerCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 }
 
 void VertexBuffer::Bind() const

@@ -16,12 +16,6 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{3c05b590-fc13-4997-8ce6-dd2a2a45b9ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Vendor">
-      <UniqueIdentifier>{c4b351e7-3589-4341-a07f-8854f3ddb456}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Vendor\imgui">
-      <UniqueIdentifier>{acda264d-d97f-4617-ac6b-15addb40f839}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Entity\Entity.h">
@@ -63,39 +57,6 @@
     <ClInclude Include="src\Shader\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\stb_image\stb_image.h">
-      <Filter>Header Files\Vendor</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Texture\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\imconfig.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\imgui.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\imgui_internal.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\imstb_rectpack.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\imstb_textedit.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\imstb_truetype.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_glfw.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_opengl3.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_opengl3_loader.h">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="src\Entity\Entity2D\Shape\Triangle\Triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -126,39 +87,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Shader\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stb_image\stb_image.cpp">
-      <Filter>Header Files\Vendor</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_demo.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_draw.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_tables.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\imgui_widgets.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\Implementations\imgui_impl_glfw.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\imgui\Implementations\imgui_impl_opengl3.cpp">
-      <Filter>Header Files\Vendor\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entity\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity\Entity2D\Shape\Triangle\Triangle.cpp">

@@ -14,15 +14,20 @@ MONA_ENGIMENEZ class Window
 private:
 
 	GLFWwindow* window;
+	
+	float width;
+	float height;
 
 public:
 
-	MONA_ENGIMENEZ Window();
-	MONA_ENGIMENEZ ~Window();
+	Window();
+	~Window();
 
-	MONA_ENGIMENEZ GLFWwindow* GetWindow();
-	MONA_ENGIMENEZ void SetCurrent();
-	MONA_ENGIMENEZ int Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
-	MONA_ENGIMENEZ bool ShouldClose();
+	GLFWwindow* GetWindow();
+	void SetCurrent();
+	int Create(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+	bool ShouldClose();
+	float GetWidth();
+	float GetHeight();
 };
 
