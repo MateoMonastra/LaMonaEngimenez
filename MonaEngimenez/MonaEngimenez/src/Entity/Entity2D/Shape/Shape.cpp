@@ -1,18 +1,17 @@
 #include "Shape.h"
 #include "Renderer/Renderer.h"
 
+#include <glm.hpp>
 
-Shape::Shape(float vertices[])
+
+Shape::Shape(Renderer* renderer, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation)
+	: Entity2D(renderer, position, scale, rotation)
 {
-	//Renderer renderer;
-
-	for (int i = 0; i < SHAPE_VERTEX_COUNT; i++)
-	{
-		this->vertices[i] = vertices[i];
-	}
+	
 }
 
 void Shape::Draw()
 {
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
 }

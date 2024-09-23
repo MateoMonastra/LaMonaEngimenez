@@ -96,6 +96,9 @@
     <ClInclude Include="..\lib\imgui\Implementations\imgui_impl_opengl3_loader.h">
       <Filter>Header Files\Vendor\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entity\Entity2D\Shape\Triangle\Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp">
@@ -151,6 +154,15 @@
     </ClCompile>
     <ClCompile Include="..\lib\imgui\Implementations\imgui_impl_opengl3.cpp">
       <Filter>Header Files\Vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Shape\Triangle\Triangle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

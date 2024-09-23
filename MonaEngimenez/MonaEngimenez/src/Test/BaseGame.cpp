@@ -19,6 +19,7 @@
 #include "Shader/Shader.h"
 #include "Window/Window.h"
 #include "Texture/Texture.h"
+#include "Entity/Entity2D/Shape/Triangle/Triangle.h"
 
 
 
@@ -130,6 +131,10 @@ int BaseGame::TryTest()
 	texture.Bind();
 	shader.SetUniform1i("u_Texture", 0);
 
+	
+	Triangle* triangle = new Triangle(&renderer, glm::vec3(0), glm::vec3(1));
+
+
 	va.Unbind();
 	shader.Unbind();
 	vb.Unbind();
@@ -142,8 +147,6 @@ int BaseGame::TryTest()
 	const char* glsl_version = "#version 130";
 	ImGui_ImplGlfw_InitForOpenGL(window.GetWindow(), true);
 	ImGui_ImplOpenGL3_Init(glsl_version);
-
-	
 
 	ImGui::StyleColorsDark();
 
@@ -159,6 +162,8 @@ int BaseGame::TryTest()
 		shader.Bind();
 		shader.SetUniform4f("u_Color", FlashingColor(), 0.3f, 0.5f, 1.0f);
 
+		triangle->Draw();
+
 		renderer.Draw(va, ib, shader);
 
 		ImGui::Render();
@@ -172,6 +177,8 @@ int BaseGame::TryTest()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
+
+	delete triangle;
 
 	glfwTerminate();
 
