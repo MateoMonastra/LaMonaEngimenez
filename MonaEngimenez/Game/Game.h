@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BaseGame.h"
-#include <Entity/Entity2D/Shape/Triangle/Triangle.h>
 #include <Entity/Entity2D/Shape/Square/Square.h>
 
 
@@ -9,9 +8,7 @@ class Game : public BaseGame
 {
 private:
 
-	Triangle* triangle1;
-	Triangle* triangle2;
-	//Square* square;
+	Square* square;
 
 public:
 
