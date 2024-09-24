@@ -5,7 +5,6 @@
 #include "glm.hpp"
 
 
-
 static float FlashingColor()
 {
 	static float increment = 0.005f;
@@ -27,6 +26,7 @@ Game::Game(float width, float height)
 
 Game::~Game()
 {
+	Deinit();
 }
 
 void Game::Init()

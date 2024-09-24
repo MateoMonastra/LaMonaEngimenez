@@ -14,10 +14,10 @@ public:
 
 	BaseGame();
 	BaseGame(float width, float height);
-	~BaseGame();
+	virtual ~BaseGame();
 
 	void GameLoop();
-	virtual void Init();
-	virtual void Update();
-	virtual void Deinit();
+	virtual void Init() = 0;
+	virtual void Update() = 0;
+	inline virtual void Deinit() {};
 };

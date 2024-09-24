@@ -15,7 +15,7 @@ private:
 public:
 
 	Game(float width, float height);
-	~Game();
+	~Game() override;
 
 	void Init() override;
 	void Update() override;

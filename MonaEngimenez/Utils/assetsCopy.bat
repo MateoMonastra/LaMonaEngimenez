@@ -3,7 +3,7 @@
 rem Definir las rutas
 set SourceDir1=%~dp0..\MonaEngimenez\bin\Debug\
 set SourceDir2=%~dp0..\lib\glew-2.1.0\dll\
-set TargetDir=%~dp0..\Game\bin\Debug\
+set TargetDir=%~dp0..\bin\
 
 rem Crear el directorio de destino si no existe
 if not exist "%TargetDir%" (

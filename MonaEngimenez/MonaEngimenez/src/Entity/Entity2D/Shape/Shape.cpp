@@ -26,7 +26,6 @@ Shape::Shape()
 
 Shape::~Shape()
 {
-	delete[] ib;
 }
 
 void Shape::Draw()

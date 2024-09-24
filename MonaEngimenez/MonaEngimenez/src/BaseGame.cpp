@@ -40,32 +40,17 @@ BaseGame::BaseGame(float width, float height)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	glfwSwapInterval(1);
-
-	Init();
 }
 
 BaseGame::BaseGame()
 {
-
+	//Deinit();
 }
 
 BaseGame::~BaseGame()
 {
-	Deinit();
+	delete window; 
 	glfwTerminate();
-	delete window;
-}
-
-void BaseGame::Init()
-{
-}
-
-void BaseGame::Update()
-{
-}
-
-void BaseGame::Deinit()
-{
 }
 
 void BaseGame::GameLoop()
