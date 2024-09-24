@@ -7,7 +7,7 @@
 void Shape::Bind(glm::mat4 mvp)
 {
 	shader.Bind();
-	shader.SetUniform4f("u_Color", 1.0f, 0.3f, 0.5f, 1.0f);
+	shader.SetUniform4f("u_Color", color.x, color.y, color.z, color.w);
 	shader.SetUniformMath4f("u_MVP", mvp);
 	shader.Unbind();
 }
@@ -18,6 +18,7 @@ Shape::Shape()
 	traslation = glm::vec3(0);
 	rotation = 0;
 	scale = glm::vec3(1.0f);
+	color = glm::vec4(1.0f, 0.3f, 0.5f, 1.0f);
 }
 
 Shape::~Shape()
@@ -60,4 +61,9 @@ void Shape::Scale(glm::vec3 scale)
 void Shape::SetScale(glm::vec3 scale)
 {
 	this->scale = scale;
+}
+
+void Shape::SetColor(glm::vec4 color)
+{
+	this->color = color;
 }

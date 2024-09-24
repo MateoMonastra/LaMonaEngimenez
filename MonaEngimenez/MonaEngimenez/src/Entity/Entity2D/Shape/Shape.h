@@ -18,6 +18,7 @@ protected:
 	VertexBuffer vb;
 	Shader shader;
 	IndexBuffer* ib;
+	glm::vec4 color;
 
 	float width;
 	float height;
@@ -36,6 +37,7 @@ public:
 	void SetRotation(float angle);
 	void Scale(glm::vec3 scale);
 	void SetScale(glm::vec3 scale);
+	void SetColor(glm::vec4 color);
 };
 
 

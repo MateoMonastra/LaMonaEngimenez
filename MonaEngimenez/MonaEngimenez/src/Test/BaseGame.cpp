@@ -64,16 +64,12 @@ static void InitGame(Window& window, float width, float height)
 
 static float FlashingColor()
 {
-	static float increment = 0.05f;
+	static float increment = 0.005f;
 	static float color = 0.0f;
 
-	if (color > 1.0f)
+	if (color > 1.0f || color < 0.0f)
 	{
-		increment = -0.05f;
-	}
-	else if (color < 0.0f)
-	{
-		increment = 0.05f;
+		increment = -increment;
 	}
 
 	return color += increment;
@@ -95,16 +91,18 @@ int BaseGame::TryTest()
 	Square square2(layout, 300.0f, 300.0f);
 	square2.SetTranslation(screenWidth / 4.0f, screenHeight / 2.0f);
 
-
 	while (!window.ShouldClose())
 	{
 		DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
 
 		//triangle1.Rotate(0.001f);
 		triangle1.Translate(0.1f, 0.1f);
+		triangle1.SetColor(glm::vec4(FlashingColor(), 0.7f, 0.2f, 1.0f));
 		//triangle1.Scale(glm::vec3(1.0f, 1.0f, 0.0f));
 
 		square1.Rotate(0.001f);
+		square1.Scale(glm::vec3(0.1f, -0.2f, 0.0f));
+		square1.SetColor(glm::vec4(FlashingColor(), 0.0f, FlashingColor(), 1.0f));
 
 		triangle1.Draw();
 		square1.Draw();
