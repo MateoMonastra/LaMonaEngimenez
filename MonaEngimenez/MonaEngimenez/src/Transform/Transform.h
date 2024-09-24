@@ -13,7 +13,7 @@ private:
 public:
 	static void Init();
 	static glm::mat4 Translate(glm::mat4& model, glm::vec3 translation);
-	static void Rotate(glm::mat4& model, float angle, glm::vec3 axis);
-	static void Scale(glm::mat4& model, glm::vec3 scale);
+	static glm::mat4 Rotate(glm::mat4& model, float angle, float width, float height);
+	static glm::mat4 Scale(glm::mat4& model, glm::vec3 scale);
 };
 

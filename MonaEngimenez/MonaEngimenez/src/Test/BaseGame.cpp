@@ -82,22 +82,21 @@ int BaseGame::TryTest()
 	Window window;
 	InitGame(window);
 
-
 	IndexBuffer ib(indices, 3);//6 becouse there are 6 indices for 2 triangles
-
 	BufferLayout layout;
 	layout.Push<float>(2); //2 becouse there are 2 floats for each vertex
 
-	
-
 	Triangle triangle1(layout, 300.0f, 300.0f);
-	triangle1.Move(100.0f, 100.0f);
 
 	ib.Unbind();
 
 	while (!window.ShouldClose())
 	{
 		DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
+
+		triangle1.Rotate(0.1f);
+		triangle1.Move(0.1f, 0.1f);
+		//triangle1.Scale(glm::vec3(1.0f, 1.0f, 0.0f));
 
 		triangle1.Draw(ib);
 

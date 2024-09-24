@@ -20,11 +20,19 @@ protected:
 	VertexBuffer vb;
 	Shader shader;
 
+	float width;
+	float height;
+
+	void Bind(glm::mat4 mvp);
 
 public:
 
 	Shape();
 	void Draw(IndexBuffer ib);
+
+	void Move(float x, float y);
+	void Rotate(float angle);
+	void Scale(glm::vec3 scale);
 };
 
 

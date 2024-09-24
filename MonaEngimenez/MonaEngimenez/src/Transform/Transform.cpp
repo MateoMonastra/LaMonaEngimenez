@@ -15,10 +15,15 @@ glm::mat4 Transform::Translate(glm::mat4& model, glm::vec3 translation)
 	return proj * view * model;
 }
 
-void Transform::Rotate(glm::mat4& model, float angle, glm::vec3 axis)
+glm::mat4 Transform::Rotate(glm::mat4& model, float angle, float width, float height)
 {
+	model = glm::rotate(model, angle, glm::vec3(0, 0, 1));
+
+	return proj * view * model;
 }
 
-void Transform::Scale(glm::mat4& model, glm::vec3 scale)
+glm::mat4 Transform::Scale(glm::mat4& model, glm::vec3 scale)
 {
+	model = glm::scale(model, scale);
+	return proj * view * model;
 }
