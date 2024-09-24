@@ -9,8 +9,9 @@ class Game : public BaseGame
 {
 private:
 
-	Triangle* triangle;
-	Square* square;
+	Triangle* triangle1;
+	Triangle* triangle2;
+	//Square* square;
 
 public:
 

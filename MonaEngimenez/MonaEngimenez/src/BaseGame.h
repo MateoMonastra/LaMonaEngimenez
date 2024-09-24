@@ -9,6 +9,10 @@ class MONA_ENGIMENEZ BaseGame
 protected:
 
 	Window* window;
+	float screenWidth;
+	float screenHeight;
+	float screenCenterX;
+	float screenCenterY;
 
 public:
 

@@ -40,6 +40,8 @@ public:
 	void Scale(glm::vec3 scale);
 	void SetScale(glm::vec3 scale);
 	void SetColor(glm::vec4 color);
+	float GetWidth() { return width; }
+	float GetHeight() { return height; }
 };
 
 

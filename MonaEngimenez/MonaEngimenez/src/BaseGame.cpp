@@ -10,8 +10,6 @@
 
 #include "Transform/Transform.h"
 
-static float screenWidth;
-static float screenHeight;
 
 BaseGame::BaseGame(float width, float height)
 {
@@ -24,6 +22,9 @@ BaseGame::BaseGame(float width, float height)
 
 	screenWidth = width;
 	screenHeight = height;
+
+	screenCenterX = screenWidth / 2.0f;
+	screenCenterY = screenHeight / 2.0f;
 
 	window->Create(screenWidth, height, "Hello World", NULL, NULL);
 	window->SetCurrent();
