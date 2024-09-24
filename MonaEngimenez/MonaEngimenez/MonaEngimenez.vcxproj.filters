@@ -63,6 +63,9 @@
     <ClInclude Include="src\Transform\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Entity\Entity2D\Shape\Square\Square.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Transform\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Shape\Square\Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

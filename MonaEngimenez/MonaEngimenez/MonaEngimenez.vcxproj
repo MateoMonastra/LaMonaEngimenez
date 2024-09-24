@@ -24,6 +24,7 @@
     <ClInclude Include="src\Entity\Entity.h" />
     <ClInclude Include="src\Entity\Entity2D\Entity2D.h" />
     <ClInclude Include="src\Entity\Entity2D\Shape\Shape.h" />
+    <ClInclude Include="src\Entity\Entity2D\Shape\Square\Square.h" />
     <ClInclude Include="src\Entity\Entity2D\Shape\Triangle\Triangle.h" />
     <ClInclude Include="src\Exporter.h" />
     <ClInclude Include="src\IndexBuffer\IndexBuffer.h" />
@@ -38,6 +39,7 @@
   <ItemGroup>
     <ClCompile Include="src\Debugger\Debugger.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
+    <ClCompile Include="src\Entity\Entity2D\Shape\Square\Square.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Triangle\Triangle.cpp" />
     <ClCompile Include="src\IndexBuffer\IndexBuffer.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />

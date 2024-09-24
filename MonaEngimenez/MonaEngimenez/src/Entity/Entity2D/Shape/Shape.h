@@ -1,12 +1,10 @@
 #pragma once
 #include "Exporter.h"
 
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-
 #include "Entity/Entity2D/Entity2D.h"
 #include "VertexBuffer/VertexBuffer.h"
 #include "VertexArray/VertexArray.h"
+#include "IndexBuffer/IndexBuffer.h"
 #include "Shader/Shader.h"
 
 
@@ -19,6 +17,7 @@ protected:
 	VertexArray va;
 	VertexBuffer vb;
 	Shader shader;
+	IndexBuffer* ib;
 
 	float width;
 	float height;
@@ -28,11 +27,15 @@ protected:
 public:
 
 	Shape();
-	void Draw(IndexBuffer ib);
+	~Shape();
+	void Draw();
 
-	void Move(float x, float y);
+	void Translate(float x, float y);
+	void SetTranslation(float x, float y);
 	void Rotate(float angle);
+	void SetRotation(float angle);
 	void Scale(glm::vec3 scale);
+	void SetScale(glm::vec3 scale);
 };
 
 

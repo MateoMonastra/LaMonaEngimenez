@@ -9,21 +9,32 @@ void Transform::Init()
 	view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 }
 
-glm::mat4 Transform::Translate(glm::mat4& model, glm::vec3 translation)
+//glm::mat4 Transform::Translate(glm::mat4& model, glm::vec3 translation)
+//{
+//	model = glm::translate(model, translation);
+//	return proj * view * model;
+//}
+//
+//glm::mat4 Transform::Rotate(glm::mat4& model, float angle, float width, float height)
+//{
+//	model = glm::rotate(model, angle, glm::vec3(0, 0, 1));
+//
+//	return proj * view * model;
+//}
+//
+//glm::mat4 Transform::Scale(glm::mat4& model, glm::vec3 scale)
+//{
+//	model = glm::scale(model, scale);
+//	return proj * view * model;
+//}
+
+glm::mat4 Transform::TRStoMVP(glm::vec3 translation, float rotation, glm::vec3 scale)
 {
+	glm::mat4 model = glm::mat4(1.0f);
+
 	model = glm::translate(model, translation);
-	return proj * view * model;
-}
-
-glm::mat4 Transform::Rotate(glm::mat4& model, float angle, float width, float height)
-{
-	model = glm::rotate(model, angle, glm::vec3(0, 0, 1));
-
-	return proj * view * model;
-}
-
-glm::mat4 Transform::Scale(glm::mat4& model, glm::vec3 scale)
-{
+	model = glm::rotate(model, rotation, glm::vec3(0, 0, 1));
 	model = glm::scale(model, scale);
+
 	return proj * view * model;
 }

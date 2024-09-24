@@ -1,21 +1,22 @@
-#include "Triangle.h"
+#include "Square.h"
 
-
-Triangle::Triangle(BufferLayout layout, float width, float height)
+Square::Square(BufferLayout layout, float width, float height)
 {
 	float positions[]
 	{
 		-0.5f,-0.5f,
 		0.5f,-0.5f,
-		0.0f,0.5f,
+		0.5f,0.5f,
+		-0.5f,0.5f,
 	};
 
 	unsigned int indices[]
 	{
 		0,1,2,
+		2,3,0
 	};
 
-	ib = new IndexBuffer(indices, 3);
+	ib = new IndexBuffer(indices, 6);
 
 	this->width = width;
 	this->height = height;
@@ -32,7 +33,7 @@ Triangle::Triangle(BufferLayout layout, float width, float height)
 	ib->Unbind();
 }
 
-Triangle::~Triangle()
+Square::~Square()
 {
 	shader.Unbind();
 }

@@ -15,14 +15,13 @@
 #include "Shader/Shader.h"
 #include "Window/Window.h"
 #include "Entity/Entity2D/Shape/Triangle/Triangle.h"
+#include "Entity/Entity2D/Shape/Square/Square.h"
 #include "Transform/Transform.h"
 
 
-unsigned int indices[]
-{
-	0,1,2,
-	//2,3,0
-};
+static float screenWidth;
+static float screenHeight;
+
 
 BaseGame::BaseGame()
 {
@@ -39,14 +38,17 @@ void SetVersion3()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 }
 
-void InitGame(Window& window)
+static void InitGame(Window& window, float width, float height)
 {
 	if (!glfwInit())
 	{
 		std::cout << "glf error";
 	}
 
-	window.Create(1024, 720, "Hello World", NULL, NULL);
+	screenWidth = width;
+	screenHeight = height;
+
+	window.Create(screenWidth, height, "Hello World", NULL, NULL);
 	window.SetCurrent();
 
 	if (glewInit() != GLEW_OK)
@@ -80,25 +82,32 @@ static float FlashingColor()
 int BaseGame::TryTest()
 {
 	Window window;
-	InitGame(window);
+	InitGame(window, 1024, 720);
 
-	IndexBuffer ib(indices, 3);//6 becouse there are 6 indices for 2 triangles
 	BufferLayout layout;
 	layout.Push<float>(2); //2 becouse there are 2 floats for each vertex
 
 	Triangle triangle1(layout, 300.0f, 300.0f);
 
-	ib.Unbind();
+	Square square1(layout, 300.0f, 300.0f);
+	square1.SetTranslation(screenWidth / 2.0f, screenHeight / 2.0f);
+
+	Square square2(layout, 300.0f, 300.0f);
+	square2.SetTranslation(screenWidth / 4.0f, screenHeight / 2.0f);
+
 
 	while (!window.ShouldClose())
 	{
 		DebuggerCall(glClear(GL_COLOR_BUFFER_BIT));
 
-		triangle1.Rotate(0.1f);
-		triangle1.Move(0.1f, 0.1f);
+		//triangle1.Rotate(0.001f);
+		triangle1.Translate(0.1f, 0.1f);
 		//triangle1.Scale(glm::vec3(1.0f, 1.0f, 0.0f));
 
-		triangle1.Draw(ib);
+		square1.Rotate(0.001f);
+
+		triangle1.Draw();
+		square1.Draw();
 
 		glfwSwapBuffers(window.GetWindow());
 

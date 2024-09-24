@@ -15,27 +15,49 @@ void Shape::Bind(glm::mat4 mvp)
 Shape::Shape()
 {
 	model = glm::mat4(1.0f);
+	traslation = glm::vec3(0);
+	rotation = 0;
+	scale = glm::vec3(1.0f);
 }
 
-void Shape::Draw(IndexBuffer ib)
+Shape::~Shape()
 {
-	Renderer::Draw(va, ib, shader);
+	delete[] ib;
 }
 
-void Shape::Move(float x, float y)
+void Shape::Draw()
 {
-	glm::mat4 mvp = Transform::Translate(model, glm::vec3(x, y, 0));
+	glm::mat4 mvp = Transform::TRStoMVP(traslation, rotation, scale);
 	Bind(mvp);
+	Renderer::Draw(va, *ib, shader);
+}
+
+void Shape::Translate(float x, float y)
+{
+	traslation += glm::vec3(x, y, 0);
+}
+
+void Shape::SetTranslation(float x, float y)
+{
+	traslation = glm::vec3(x, y, 0);
 }
 
 void Shape::Rotate(float angle)
 {
-	glm::mat4 mvp = Transform::Rotate(model, angle, width, height);
-	Bind(mvp);
+	rotation += angle;
+}
+
+void Shape::SetRotation(float angle)
+{
+	rotation = angle;
 }
 
 void Shape::Scale(glm::vec3 scale)
 {
-	glm::mat4 mvp = Transform::Scale(model, scale);
-	Bind(mvp);
+	this->scale += scale;
+}
+
+void Shape::SetScale(glm::vec3 scale)
+{
+	this->scale = scale;
 }
