@@ -14,10 +14,13 @@ void Shape::Bind(glm::mat4 mvp)
 
 Shape::Shape()
 {
+	layout.Push<float>(2);
+
 	model = glm::mat4(1.0f);
 	traslation = glm::vec3(0);
 	rotation = 0;
 	scale = glm::vec3(1.0f);
+
 	color = glm::vec4(1.0f, 0.3f, 0.5f, 1.0f);
 }
 

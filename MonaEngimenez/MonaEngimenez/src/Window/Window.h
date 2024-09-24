@@ -9,7 +9,7 @@
 using namespace std;
 
 
-MONA_ENGIMENEZ class Window
+class MONA_ENGIMENEZ Window
 {
 private:
 

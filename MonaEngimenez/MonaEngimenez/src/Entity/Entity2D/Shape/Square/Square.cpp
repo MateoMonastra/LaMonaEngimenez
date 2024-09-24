@@ -1,6 +1,6 @@
 #include "Square.h"
 
-Square::Square(BufferLayout layout, float width, float height)
+Square::Square(float width, float height)
 {
 	float positions[]
 	{

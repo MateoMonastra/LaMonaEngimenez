@@ -1,7 +1,7 @@
 #include "Triangle.h"
 
 
-Triangle::Triangle(BufferLayout layout, float width, float height)
+Triangle::Triangle(float width, float height)
 {
 	float positions[]
 	{

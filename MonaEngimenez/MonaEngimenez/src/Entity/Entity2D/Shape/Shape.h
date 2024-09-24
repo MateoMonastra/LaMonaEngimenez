@@ -6,9 +6,10 @@
 #include "VertexArray/VertexArray.h"
 #include "IndexBuffer/IndexBuffer.h"
 #include "Shader/Shader.h"
+#include "BufferLayout/BufferLayout.h"
 
 
-MONA_ENGIMENEZ class Shape : public Entity2D
+class MONA_ENGIMENEZ Shape : public Entity2D
 {
 protected:
 
@@ -18,6 +19,7 @@ protected:
 	VertexBuffer vb;
 	Shader shader;
 	IndexBuffer* ib;
+	BufferLayout layout;
 	glm::vec4 color;
 
 	float width;

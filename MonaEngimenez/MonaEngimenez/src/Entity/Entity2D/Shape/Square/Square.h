@@ -6,11 +6,11 @@
 
 
 
-class Square : public Shape
+class MONA_ENGIMENEZ Square : public Shape
 {
 public:
 
-	Square(BufferLayout layout, float width, float height);
+	Square(float width, float height);
 	~Square();
 };
 

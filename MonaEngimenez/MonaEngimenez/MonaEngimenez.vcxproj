@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseGame.h" />
     <ClInclude Include="src\BufferLayout\BufferLayout.h" />
     <ClInclude Include="src\Debugger\Debugger.h" />
     <ClInclude Include="src\Entity\Entity.h" />
@@ -30,13 +31,13 @@
     <ClInclude Include="src\IndexBuffer\IndexBuffer.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
-    <ClInclude Include="src\Test\BaseGame.h" />
     <ClInclude Include="src\Transform\Transform.h" />
     <ClInclude Include="src\VertexArray\VertexArray.h" />
     <ClInclude Include="src\VertexBuffer\VertexBuffer.h" />
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseGame.cpp" />
     <ClCompile Include="src\Debugger\Debugger.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Square\Square.cpp" />
@@ -44,7 +45,6 @@
     <ClCompile Include="src\IndexBuffer\IndexBuffer.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
-    <ClCompile Include="src\Test\BaseGame.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\VertexArray\VertexArray.cpp" />
     <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp" />
@@ -106,8 +106,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)MonaEngimenez\bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Game\bin\Debug\</IntDir>
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)obj\</IntDir>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)lib\glfw-3.4.bin.WIN32\include;$(SolutionDir)src\;$(SolutionDir)lib\glew-2.1.0\include\GL\;$(SolutionDir)lib\glew-2.1.0\dll\;%(AdditionalIncludeDirectories)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)$(SolutionDir)lib\glfw-3.4.bin.WIN32\lib;$(SolutionDir)lib\glew-2.1.0\lib\;%(AdditionalLibraryDirectories)</LibraryPath>
   </PropertyGroup>
@@ -115,7 +115,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);MONA_ENGIMENEZ_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MONA_ENGIMENEZ_EXPORTS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)lib\glfw-3.4.bin.WIN32\include;$(SolutionDir)MonaEngimenez\src\;$(SolutionDir)lib\glew-2.1.0\include\GL\;$(SolutionDir)lib\glew-2.1.0\dll\;$(SolutionDir)lib\glm\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>

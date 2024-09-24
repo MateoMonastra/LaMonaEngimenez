@@ -1,10 +1,13 @@
-#include "Test/BaseGame.h"
+#include "Game.h"
+
 
 int main()
 {
-	BaseGame baseGame;
+	Game* game = new Game(1024.0f, 720.0f);
 
-	baseGame.TryTest();
+	game->GameLoop();
+
+	delete game;
 
 	return 1;
 }
