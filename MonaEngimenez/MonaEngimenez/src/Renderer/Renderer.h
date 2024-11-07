@@ -9,6 +9,7 @@
 #include "VertexArray/VertexArray.h"
 #include "IndexBuffer/IndexBuffer.h"
 #include "Shader/Shader.h"
+#include "VertexBuffer/VertexBuffer.h"
 
 
 

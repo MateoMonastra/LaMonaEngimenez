@@ -45,7 +45,6 @@ BaseGame::BaseGame(float width, float height)
 
 BaseGame::BaseGame()
 {
-	//Deinit();
 }
 
 BaseGame::~BaseGame()

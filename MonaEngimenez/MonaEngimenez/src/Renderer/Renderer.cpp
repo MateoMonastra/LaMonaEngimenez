@@ -1,8 +1,8 @@
 #include "Renderer.h"
 
 #include "Debugger/Debugger.h"
-#include "VertexBuffer/VertexBuffer.h"
-#include "IndexBuffer/IndexBuffer.h"
+//#include "VertexBuffer/VertexBuffer.h"
+//#include "IndexBuffer/IndexBuffer.h"
 
 float Renderer::width = 0;
 float Renderer::height = 0;

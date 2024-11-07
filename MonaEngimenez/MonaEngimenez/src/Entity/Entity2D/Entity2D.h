@@ -8,27 +8,35 @@
 #include "VertexBuffer/VertexBuffer.h"
 #include "VertexArray/VertexArray.h"
 #include "Shader/Shader.h"
+#include "IndexBuffer/IndexBuffer.h"
+#include "BufferLayout/BufferLayout.h"
+#include "Transform/Transform.h"
 
 
-MONA_ENGIMENEZ class Entity2D : public Entity
+
+class MONA_ENGIMENEZ Entity2D : public Entity
 {
 protected:
-
-	glm::mat4 model;
-
 	VertexArray va;
 	VertexBuffer vb;
 	Shader shader;
+	IndexBuffer* ib;
+	BufferLayout layout;
+
+	glm::mat4 model;
 	
 	glm::vec3 traslation;
 	float rotation;
 	glm::vec3 scale;
 
-	float width;
-	float height;
-
-
 public:
+
+	void Translate(float x, float y);
+	void SetTranslation(float x, float y);
+	void Rotate(float angle);
+	void SetRotation(float angle);
+	void Scale(glm::vec3 scale);
+	void SetScale(glm::vec3 scale);
 
 	virtual void Draw() = 0;
 };

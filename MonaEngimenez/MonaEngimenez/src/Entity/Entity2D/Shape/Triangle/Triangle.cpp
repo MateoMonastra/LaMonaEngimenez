@@ -22,7 +22,7 @@ Triangle::Triangle(float width, float height)
 
 	SetScale(glm::vec3(width, height, 0.0f));
 
-	shader.SetShader("../MonaEngimenez/src/Shaders/Basic.shader");
+	shader.SetShader("../Resources/Basic.shader");
 
 	vb.SetVertexBuffer(positions, 4 * 2 * sizeof(float));
 	va.AddBuffer(vb, layout);

@@ -16,6 +16,9 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{3c05b590-fc13-4997-8ce6-dd2a2a45b9ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Vendor">
+      <UniqueIdentifier>{69237b6c-0b0e-48be-be72-d4ae0900c97d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Entity\Entity.h">
@@ -66,6 +69,12 @@
     <ClInclude Include="src\BaseGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Resources\vendor\stb_image.h">
+      <Filter>Resource Files\Vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp">
@@ -104,9 +113,18 @@
     <ClCompile Include="src\BaseGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>Resource Files\Vendor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\Shaders\Basic.shader">
+    <None Include="..\Resources\Basic.shader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "Shape.h"
 
 #include "Renderer/Renderer.h"
-#include "Transform/Transform.h"
+
 
 
 void Shape::Bind(glm::mat4 mvp)
@@ -33,36 +33,6 @@ void Shape::Draw()
 	glm::mat4 mvp = Transform::TRStoMVP(traslation, rotation, scale);
 	Bind(mvp);
 	Renderer::Draw(va, *ib, shader);
-}
-
-void Shape::Translate(float x, float y)
-{
-	traslation += glm::vec3(x, y, 0);
-}
-
-void Shape::SetTranslation(float x, float y)
-{
-	traslation = glm::vec3(x, y, 0);
-}
-
-void Shape::Rotate(float angle)
-{
-	rotation += angle;
-}
-
-void Shape::SetRotation(float angle)
-{
-	rotation = angle;
-}
-
-void Shape::Scale(glm::vec3 scale)
-{
-	this->scale += scale;
-}
-
-void Shape::SetScale(glm::vec3 scale)
-{
-	this->scale = scale;
 }
 
 void Shape::SetColor(glm::vec4 color)
