@@ -52,8 +52,9 @@ void Game::Update()
 	//square->Rotate(0.001f);
 	//square->Scale(glm::vec3(0.1f, -0.2f, 0.0f));
 	//square->SetColor(glm::vec4(FlashingColor(), 0.0f, FlashingColor(), 1.0f));
+	//texture->SetAlpha(0.5f);
 
-	texture->Draw();
+	texture->Draw(0.1f);
 	//square->Draw();
 }  
 

@@ -80,8 +80,19 @@ void Texture::Unbind() const
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
+void Texture::Draw(float alpha)
+{
+	SetAlpha(alpha);
+	Renderer::Draw(va, *ib, shader);
+}
+
 void Texture::Draw()
 {
-	//Bind();
-	Renderer::Draw(va, *ib, shader);
+	Draw(1.0f);
+}
+
+void Texture::SetAlpha(float alpha)
+{
+	m_Alpha = alpha;
+	shader.SetUniform1f("u_Alpha", m_Alpha);
 }
