@@ -23,11 +23,16 @@ protected:
 	IndexBuffer* ib;
 	BufferLayout layout;
 
-	glm::mat4 model;
+	int scaleFactorX = 1;
+	int scaleFactorY = 1;
+
+	glm::mat4 mvp;
 	
 	glm::vec3 traslation;
 	float rotation;
 	glm::vec3 scale;
+
+	void UpdateMVP();
 
 public:
 

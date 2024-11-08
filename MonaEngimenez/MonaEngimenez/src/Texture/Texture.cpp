@@ -4,7 +4,7 @@
 
 #include "vendor/stb_image.h"
 
-Texture::Texture(const std::string& path)
+Texture::Texture(const std::string& path, int framesX, int framesY)
 	: m_RendererID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
 {
@@ -22,22 +22,26 @@ Texture::Texture(const std::string& path)
 		2,3,0
 	};
 
+	frameCountX = framesX;
+	frameCountY = framesY;
+
+	SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
+	SetRotation(0.0f);
+	SetTranslation(0.0f, 0.0f);
+
 	DebuggerCall(glEnable(GL_BLEND));
 	DebuggerCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
+	shader.SetShader("../Resources/Basic.shader");
+	
 	layout.Push<float>(2);
 	layout.Push<float>(2);
 
 	ib = new IndexBuffer(indices, 6);
 
-	SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-
-	shader.SetShader("../Resources/Basic.shader");
-
 	vb.SetVertexBuffer(positions, 4 * 4 * sizeof(float));
 	va.AddBuffer(vb, layout);
 
-	
 	stbi_set_flip_vertically_on_load(1);
 	m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BPP, 4);
 
@@ -46,8 +50,11 @@ Texture::Texture(const std::string& path)
 
 	DebuggerCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	DebuggerCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	
 	DebuggerCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	DebuggerCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+	
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 	DebuggerCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer));
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
@@ -58,6 +65,9 @@ Texture::Texture(const std::string& path)
 	Bind();
 
 	shader.SetUniform1i("u_Texture", 0);
+
+	scaleFactorX = m_Width / frameCountX;
+	scaleFactorY = m_Height / frameCountY;
 
 	vb.Unbind();
 	va.Unbind();
@@ -83,12 +93,13 @@ void Texture::Unbind() const
 void Texture::Draw(float alpha)
 {
 	SetAlpha(alpha);
+	shader.SetUniformMath4f("u_MVP", mvp);
 	Renderer::Draw(va, *ib, shader);
 }
 
 void Texture::Draw()
 {
-	Draw(1.0f);
+	Draw(m_Alpha);
 }
 
 void Texture::SetAlpha(float alpha)

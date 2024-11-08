@@ -16,7 +16,7 @@ Shape::Shape()
 {
 	layout.Push<float>(2);
 
-	model = glm::mat4(1.0f);
+	mvp = glm::mat4(1.0f);
 	traslation = glm::vec3(0);
 	rotation = 0;
 	scale = glm::vec3(1.0f);
