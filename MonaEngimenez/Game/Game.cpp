@@ -31,18 +31,13 @@ Game::~Game()
 
 void Game::Init()
 {  
-   texture = new Texture("../Assets/Player.png", 3, 1);
-
-   //texture->SetTranslation(texture->GetWidth() / 2.0f, (screenHeight - texture->GetHeight() / 2.0f));
-   //texture->SetScale(glm::vec3(0.5f, 0.5f, 0.0f));
-   
+   texture = new Sprite("../Assets/Player.png");
 }  
 
 void Game::Update()  
 {  
 	texture->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-	texture->SetTranslation(texture->GetWidth() / (6.0f), (screenHeight - texture->GetHeight() / 2.0f));
-	//texture->SetTranslation(0, 0);
+	texture->SetTranslation(texture->GetWidth() / 2.0f, texture->GetHeight() / 2.0f);
 	texture->Draw(1.0f);
 }  
 

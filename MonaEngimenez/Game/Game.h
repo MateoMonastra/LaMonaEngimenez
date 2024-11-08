@@ -3,14 +3,14 @@
 #include "BaseGame.h"
 #include <Entity/Entity2D/Shape/Triangle/Triangle.h>
 #include <Entity/Entity2D/Shape/Square/Square.h>
-#include "Texture/Texture.h"
+#include "Sprite/Sprite.h"
 
 
 class Game : public BaseGame
 {
 private:
 
-	Texture* texture;
+	Sprite* texture;
 
 
 public:

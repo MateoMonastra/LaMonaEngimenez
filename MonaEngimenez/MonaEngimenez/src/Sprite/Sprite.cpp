@@ -1,10 +1,10 @@
-#include "Texture.h"
+#include "Sprite.h"
 
 #include "Debugger/Debugger.h"
 
 #include "vendor/stb_image.h"
 
-Texture::Texture(const std::string& path, int framesX, int framesY)
+Sprite::Sprite(const std::string& path)
 	: m_RendererID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
 {
@@ -21,9 +21,6 @@ Texture::Texture(const std::string& path, int framesX, int framesY)
 		0,1,2,
 		2,3,0
 	};
-
-	frameCountX = framesX;
-	frameCountY = framesY;
 
 	SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
 	SetRotation(0.0f);
@@ -66,43 +63,43 @@ Texture::Texture(const std::string& path, int framesX, int framesY)
 
 	shader.SetUniform1i("u_Texture", 0);
 
-	scaleFactorX = m_Width / frameCountX;
-	scaleFactorY = m_Height / frameCountY;
+	scaleFactorX = m_Width;
+	scaleFactorY = m_Height;
 
 	vb.Unbind();
 	va.Unbind();
 	ib->Unbind();
 }
 
-Texture::~Texture()
+Sprite::~Sprite()
 {
 	DebuggerCall(glDeleteTextures(1, &m_RendererID));
 }
 
-void Texture::Bind(unsigned int slot) const
+void Sprite::Bind(unsigned int slot) const
 {
 	DebuggerCall(glActiveTexture(GL_TEXTURE0 + slot));
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 }
 
-void Texture::Unbind() const
+void Sprite::Unbind() const
 {
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-void Texture::Draw(float alpha)
+void Sprite::Draw(float alpha)
 {
 	SetAlpha(alpha);
 	shader.SetUniformMath4f("u_MVP", mvp);
 	Renderer::Draw(va, *ib, shader);
 }
 
-void Texture::Draw()
+void Sprite::Draw()
 {
 	Draw(m_Alpha);
 }
 
-void Texture::SetAlpha(float alpha)
+void Sprite::SetAlpha(float alpha)
 {
 	m_Alpha = alpha;
 	shader.SetUniform1f("u_Alpha", m_Alpha);

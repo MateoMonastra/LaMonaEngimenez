@@ -32,7 +32,7 @@
     <ClInclude Include="src\IndexBuffer\IndexBuffer.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
-    <ClInclude Include="src\Texture\Texture.h" />
+    <ClInclude Include="src\Sprite\Sprite.h" />
     <ClInclude Include="src\Transform\Transform.h" />
     <ClInclude Include="src\VertexArray\VertexArray.h" />
     <ClInclude Include="src\VertexBuffer\VertexBuffer.h" />
@@ -48,7 +48,7 @@
     <ClCompile Include="src\IndexBuffer\IndexBuffer.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
-    <ClCompile Include="src\Texture\Texture.cpp" />
+    <ClCompile Include="src\Sprite\Sprite.cpp" />
     <ClCompile Include="src\Transform\Transform.cpp" />
     <ClCompile Include="src\VertexArray\VertexArray.cpp" />
     <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp" />

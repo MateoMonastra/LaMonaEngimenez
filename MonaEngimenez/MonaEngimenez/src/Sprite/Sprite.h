@@ -3,7 +3,7 @@
 #include "Renderer/Renderer.h"
 #include "Entity/Entity2D/Entity2D.h"
 
-class MONA_ENGIMENEZ Texture : public Entity2D
+class MONA_ENGIMENEZ Sprite : public Entity2D
 {
 private:
 	unsigned int m_RendererID;
@@ -11,12 +11,10 @@ private:
 	unsigned char* m_LocalBuffer;
 	int m_Width, m_Height, m_BPP;
 	float m_Alpha;
-	int frameCountX;
-	int frameCountY;
 
 public:
-	Texture(const std::string& path, int framesX, int framesY);
-	~Texture();
+	Sprite(const std::string& path);
+	~Sprite();
 
 	void Bind(unsigned int slot = 0) const;
 	void Unbind() const;
