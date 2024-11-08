@@ -113,14 +113,14 @@
     <ClCompile Include="src\BaseGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stb_image.cpp">
-      <Filter>Resource Files\Vendor</Filter>
-    </ClCompile>
     <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Sprite\Sprite.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Resources\vendor\stb_image.cpp">
+      <Filter>Resource Files\Vendor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

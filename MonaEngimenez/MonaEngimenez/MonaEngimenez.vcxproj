@@ -39,6 +39,7 @@
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Resources\vendor\stb_image.cpp" />
     <ClCompile Include="src\BaseGame.cpp" />
     <ClCompile Include="src\Debugger\Debugger.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />
@@ -53,7 +54,6 @@
     <ClCompile Include="src\VertexArray\VertexArray.cpp" />
     <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
-    <ClCompile Include="stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\Basic.shader" />
