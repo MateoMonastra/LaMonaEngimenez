@@ -4,13 +4,15 @@
 #include <Entity/Entity2D/Shape/Triangle/Triangle.h>
 #include <Entity/Entity2D/Shape/Square/Square.h>
 #include "Sprite/Sprite.h"
+#include "Animation/Animation.h"
 
 
 class Game : public BaseGame
 {
 private:
 
-	Sprite* texture;
+	Sprite* sprite;
+	Animation* animation;
 
 
 public:

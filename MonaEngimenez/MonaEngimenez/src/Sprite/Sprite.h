@@ -24,4 +24,8 @@ public:
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
 	inline void SetAlpha(float alpha);
+	inline VertexBuffer GetVertexBuffer();
+	inline IndexBuffer GetIndexBuffer();
+	inline VertexArray GetVertexArray();
+	inline Shader GetShader();
 };

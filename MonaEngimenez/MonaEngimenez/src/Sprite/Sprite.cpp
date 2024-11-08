@@ -104,3 +104,23 @@ void Sprite::SetAlpha(float alpha)
 	m_Alpha = alpha;
 	shader.SetUniform1f("u_Alpha", m_Alpha);
 }
+
+inline VertexBuffer Sprite::GetVertexBuffer()
+{
+	return vb;
+}
+
+inline IndexBuffer Sprite::GetIndexBuffer()
+{
+	return *ib;
+}
+
+inline VertexArray Sprite::GetVertexArray()
+{
+	return va;
+}
+
+inline Shader Sprite::GetShader()
+{
+	return shader;
+}

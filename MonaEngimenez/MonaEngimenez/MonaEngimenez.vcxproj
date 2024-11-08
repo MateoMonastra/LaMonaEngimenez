@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Resources\vendor\stb_image.h" />
+    <ClInclude Include="src\Animation\Animation.h" />
     <ClInclude Include="src\BaseGame.h" />
     <ClInclude Include="src\BufferLayout\BufferLayout.h" />
     <ClInclude Include="src\Debugger\Debugger.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="src\Entity\Entity2D\Shape\Square\Square.h" />
     <ClInclude Include="src\Entity\Entity2D\Shape\Triangle\Triangle.h" />
     <ClInclude Include="src\Exporter.h" />
+    <ClInclude Include="src\Frame\Frame.h" />
     <ClInclude Include="src\IndexBuffer\IndexBuffer.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
@@ -40,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Resources\vendor\stb_image.cpp" />
+    <ClCompile Include="src\Animation\Animation.cpp" />
     <ClCompile Include="src\BaseGame.cpp" />
     <ClCompile Include="src\Debugger\Debugger.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />

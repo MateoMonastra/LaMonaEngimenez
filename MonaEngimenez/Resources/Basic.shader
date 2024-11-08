@@ -11,7 +11,6 @@ uniform mat4 u_MVP;
 
 void main()
 {
-	//gl_Position = position;
     gl_Position = u_MVP * position;
 	v_TexCoord = texCoord;
 };
@@ -23,13 +22,13 @@ layout(location = 0) out vec4 color;
 
 in vec2 v_TexCoord;
 
-uniform vec4 u_Color;         // Color uniforme (puedes usarlo si quieres un color base)
-uniform sampler2D u_Texture;   // Textura
-uniform float u_Alpha;         // Valor de alpha para el parpadeo
+uniform vec4 u_Color;         
+uniform sampler2D u_Texture;  
+uniform float u_Alpha;        
 
 void main()
 {
-    vec4 texColor = texture(u_Texture, v_TexCoord);    // Obtiene el color de la textura
-    texColor.a *= u_Alpha;                             // Multiplica el alpha de la textura por u_Alpha
-    color = texColor;                                  // Asigna el color final con el alpha modificado
+    vec4 texColor = texture(u_Texture, v_TexCoord);                        
+    texColor.a *= u_Alpha;                         
+    color = texColor;                             
 };

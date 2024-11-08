@@ -31,17 +31,21 @@ Game::~Game()
 
 void Game::Init()
 {  
-   texture = new Sprite("../Assets/Player.png");
+   sprite = new Sprite("../Assets/Player.png");
+   animation = new Animation(sprite, glm::ivec2(3, 1), 0);
 }  
 
 void Game::Update()  
 {  
-	texture->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-	texture->SetTranslation(texture->GetWidth() / 2.0f, texture->GetHeight() / 2.0f);
-	texture->Draw(1.0f);
+	sprite->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
+	sprite->SetTranslation(sprite->GetWidth() / 2.0f, sprite->GetHeight() / 2.0f);
+	//sprite->Draw(1.0f);
+
+	animation->DrawAnimation(1);
 }  
 
 void Game::Deinit()  
 {  
-	delete texture;
+	delete sprite;
+	delete animation;
 }
