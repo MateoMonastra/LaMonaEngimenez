@@ -13,6 +13,8 @@ Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 sc
 	m_ScaleFactor = scaleFactor / frameCount;
 
 	SetFrames(spriteSize, row);
+
+	m_Timer = new Timer(0.3f);
 }
 
 Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor)
@@ -95,5 +97,6 @@ glm::vec2 Animation::GetScaleFactor()
 
 void Animation::Unload()
 {
+	delete m_Timer;
 	delete[] m_Frames;
 }

@@ -4,12 +4,14 @@
 
 #include "Exporter.h"
 #include "Frame/Frame.h"
+#include "Timer/Timer.h"
 
 class MONA_ENGIMENEZ Animation
 {
 private:
 
 	Frame* m_Frames;
+	Timer* m_Timer;
 	glm::vec2 m_FrameSize;
 	glm::ivec2 m_FrameCount;
 	glm::ivec2 m_ScaleFactor;
@@ -21,6 +23,7 @@ public:
 	Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor);
 	~Animation();
 
+	void Update();
 	void SetFrames(glm::ivec2 spriteSize, int row);
 	void GetFrame(float positions[]);
 	float GetFrameWidth();
