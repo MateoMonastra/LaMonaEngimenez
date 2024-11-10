@@ -45,5 +45,8 @@ public:
 	float ToRadians(float degrees);
 	void SetScaleFactor(int FrameCountX, int FrameCountY);
 
+	glm::vec3 GetScale() { return scale; }
+	glm::vec3 GetTranslation() { return traslation; }
+
 	virtual void Draw() = 0;
 };

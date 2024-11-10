@@ -23,6 +23,7 @@
     <ClInclude Include="src\Animation\Animation.h" />
     <ClInclude Include="src\BaseGame.h" />
     <ClInclude Include="src\BufferLayout\BufferLayout.h" />
+    <ClInclude Include="src\CollisionManager\CollisionManager.h" />
     <ClInclude Include="src\Debugger\Debugger.h" />
     <ClInclude Include="src\Entity\Entity.h" />
     <ClInclude Include="src\Entity\Entity2D\Entity2D.h" />
@@ -45,6 +46,7 @@
     <ClCompile Include="..\Resources\vendor\stb_image.cpp" />
     <ClCompile Include="src\Animation\Animation.cpp" />
     <ClCompile Include="src\BaseGame.cpp" />
+    <ClCompile Include="src\CollisionManager\CollisionManager.cpp" />
     <ClCompile Include="src\Debugger\Debugger.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Entity2D.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp" />
