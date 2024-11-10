@@ -81,6 +81,9 @@
     <ClInclude Include="src\Frame\Frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\InputManager\InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entity\Entity2D\Shape\Shape.cpp">
@@ -129,6 +132,9 @@
       <Filter>Resource Files\Vendor</Filter>
     </ClCompile>
     <ClCompile Include="src\Animation\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputManager\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

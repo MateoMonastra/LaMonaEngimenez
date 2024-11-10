@@ -32,6 +32,7 @@
     <ClInclude Include="src\Exporter.h" />
     <ClInclude Include="src\Frame\Frame.h" />
     <ClInclude Include="src\IndexBuffer\IndexBuffer.h" />
+    <ClInclude Include="src\InputManager\InputManager.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Sprite\Sprite.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="src\Entity\Entity2D\Shape\Square\Square.cpp" />
     <ClCompile Include="src\Entity\Entity2D\Shape\Triangle\Triangle.cpp" />
     <ClCompile Include="src\IndexBuffer\IndexBuffer.cpp" />
+    <ClCompile Include="src\InputManager\InputManager.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
