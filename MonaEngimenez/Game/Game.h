@@ -12,7 +12,8 @@ class Game : public BaseGame
 private:
 
 	Sprite* sprite;
-	Animation* animation;
+	//Animation* animation;
+	Triangle* triangle;
 
 
 public:

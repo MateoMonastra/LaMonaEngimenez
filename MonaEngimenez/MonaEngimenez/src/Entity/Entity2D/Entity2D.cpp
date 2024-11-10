@@ -19,13 +19,13 @@ void Entity2D::SetTranslation(float x, float y)
 
 void Entity2D::Rotate(float angle)
 {
-	rotation += angle;
+	rotation += ToRadians(angle);
 	UpdateMVP();
 }
 
 void Entity2D::SetRotation(float angle)
 {
-	rotation = angle;
+	rotation = ToRadians(angle);
 	UpdateMVP();
 }
 
@@ -41,4 +41,15 @@ void Entity2D::SetScale(glm::vec3 scale)
 	//this->scale = scale;
 	this->scale = glm::vec3(scale.x * scaleFactorX, scale.y * scaleFactorY, 0.0f);
 	UpdateMVP();
+}
+
+float Entity2D::ToRadians(float degrees)
+{
+	return degrees * 3.14159f / 180.0f;
+}
+
+void Entity2D::SetScaleFactor(int FrameCountX, int FrameCountY)
+{
+	scaleFactorX /= FrameCountX;
+	scaleFactorY /= FrameCountY;
 }

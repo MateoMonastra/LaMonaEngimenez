@@ -8,19 +8,13 @@ Sprite::Sprite(const std::string& path)
 	: m_RendererID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
 {
-	float positions[]
-	{
-		-0.5f,-0.5f, 0.0f, 0.0f,
-		0.5f,-0.5f, 1.0f, 0.0f,
-		0.5f,0.5f, 1.0f, 1.0f,
-		-0.5f,0.5f, 0.0f, 1.0f
-	};
-
 	unsigned int indices[]
 	{
 		0,1,2,
 		2,3,0
 	};
+
+	SetFullTexture();
 
 	SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
 	SetRotation(0.0f);
@@ -29,7 +23,7 @@ Sprite::Sprite(const std::string& path)
 	DebuggerCall(glEnable(GL_BLEND));
 	DebuggerCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-	shader.SetShader("../Resources/Basic.shader");
+	shader.SetShader("../Resources/Texture.shader");
 	
 	layout.Push<float>(2);
 	layout.Push<float>(2);
@@ -71,9 +65,29 @@ Sprite::Sprite(const std::string& path)
 	ib->Unbind();
 }
 
+Sprite::Sprite(const std::string& path, glm::ivec2 frameCount)
+{
+	Sprite(path, frameCount, 0);
+}
+
+Sprite::Sprite(const std::string& path, glm::ivec2 frameCount, int row)
+	: Sprite(path)
+{
+	isAnimated = true;
+	animation = new Animation(frameCount, glm::ivec2(m_Width, m_Height), glm::ivec2(scaleFactorX, scaleFactorY), row);
+	scaleFactorX = m_Width / frameCount.x;
+	scaleFactorY = m_Height / frameCount.y;
+}
+
 Sprite::~Sprite()
 {
 	DebuggerCall(glDeleteTextures(1, &m_RendererID));
+
+	if (isAnimated)
+	{
+		animation->Unload();
+		delete animation;
+	}
 }
 
 void Sprite::Bind(unsigned int slot) const
@@ -89,6 +103,8 @@ void Sprite::Unbind() const
 
 void Sprite::Draw(float alpha)
 {
+	animation->GetFrame(positions);
+	UpdateVertexBuffer();
 	SetAlpha(alpha);
 	shader.SetUniformMath4f("u_MVP", mvp);
 	Renderer::Draw(va, *ib, shader);
@@ -97,6 +113,32 @@ void Sprite::Draw(float alpha)
 void Sprite::Draw()
 {
 	Draw(m_Alpha);
+}
+
+void Sprite::UpdateVertexBuffer()
+{
+	vb.Bind();
+	va.Bind();
+
+	va.AddBuffer(vb, layout);
+
+	glBufferData(GL_ARRAY_BUFFER, 4 *4 * sizeof(float), positions, GL_DYNAMIC_DRAW);
+}
+
+void Sprite::SetFullTexture()
+{
+	float fullSizedPositions[]
+	{
+		-0.5f,-0.5f, 0.0f, 0.0f,
+		0.5f,-0.5f, 1.0f, 0.0f,
+		0.5f,0.5f, 1.0f, 1.0f,
+		-0.5f,0.5f, 0.0f, 1.0f
+	};
+
+	for (int i = 0; i < 16; i++)
+	{
+		positions[i] = fullSizedPositions[i];
+	}
 }
 
 void Sprite::SetAlpha(float alpha)

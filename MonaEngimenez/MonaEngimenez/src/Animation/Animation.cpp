@@ -1,37 +1,38 @@
 #include "Animation.h"
 
-Animation::Animation(Sprite* sprite, glm::ivec2 frameCount, int row)
+Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor, int row)
 {
-	this->sprite = sprite;
 	m_FrameCount = frameCount;
 	m_CurrentFrame = 0;
 
-	m_FrameSize = glm::vec2(sprite->GetWidth() / frameCount.x, sprite->GetHeight() / frameCount.y);
+	m_FrameSize = glm::vec2(spriteSize.x / frameCount.x, spriteSize.y / frameCount.y);
 
 	m_Frames = new Frame[m_FrameCount.x];
 
-	SetFrames(row);
+	//sprite->SetScaleFactor(frameCount.x, frameCount.y);
+	m_ScaleFactor = scaleFactor / frameCount;
+
+	SetFrames(spriteSize, row);
 }
 
-Animation::Animation(Sprite* sprite, glm::ivec2 m_FrameCount)
+Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor)
 {
-	Animation(sprite, m_FrameCount, 0);
+	Animation(frameCount, spriteSize, scaleFactor, 0); //chequear si es row 0 o row 1
 }
 
 Animation::~Animation()
 {
-	delete[] m_Frames;
 }
 
-void Animation::SetFrames(int row)
+void Animation::SetFrames(glm::ivec2 spriteSize, int row)
 {
 	for (int i = 0; i < m_FrameCount.x; i++)
 	{
-		float u = (i * m_FrameSize.x) / sprite->GetWidth();
-		float v = (row * m_FrameSize.y) / sprite->GetHeight();
+		float u = (i * m_FrameSize.x) / spriteSize.x;
+		float v = (row * m_FrameSize.y) / spriteSize.y;
 
-		float u_end = u + m_FrameSize.x / sprite->GetWidth();
-		float v_end = v + m_FrameSize.y / sprite->GetHeight();
+		float u_end = u + m_FrameSize.x / spriteSize.x;
+		float v_end = v + m_FrameSize.y / spriteSize.y;
 
 		m_Frames[i].uv[0] = { u, v };
 		m_Frames[i].uv[1] = { u_end, v };
@@ -40,24 +41,59 @@ void Animation::SetFrames(int row)
 	}
 }
 
-void Animation::DrawAnimation(int frameIndex)
+void Animation::GetFrame(float positions[])
 {
+	float frameIndex = 1;
+
 	if (m_CurrentFrame >= 0 && m_CurrentFrame < m_FrameCount.x)
 	{
 		m_CurrentFrame = frameIndex;
 
-		const Frame& frame = m_Frames[m_CurrentFrame];
+		//const Frame& frame = m_Frames[m_CurrentFrame];
 
-		float positions[] = 
+		/*float positions[] =
 		{
-			-0.5f, -0.5f,     frame.uv[0].u, frame.uv[0].v,
-			 0.5f, -0.5f,     frame.uv[1].u, frame.uv[1].v,
-			 0.5f,  0.5f,     frame.uv[2].u, frame.uv[2].v,
-			-0.5f,  0.5f,     frame.uv[3].u, frame.uv[3].v
-		};
+			-0.5f, -0.5f,     m_Frames[m_CurrentFrame].uv[0].u, m_Frames[m_CurrentFrame].uv[0].v,
+			 0.5f, -0.5f,     m_Frames[m_CurrentFrame].uv[1].u, m_Frames[m_CurrentFrame].uv[1].v,
+			 0.5f,  0.5f,     m_Frames[m_CurrentFrame].uv[2].u, m_Frames[m_CurrentFrame].uv[2].v,
+			-0.5f,  0.5f,     m_Frames[m_CurrentFrame].uv[3].u, m_Frames[m_CurrentFrame].uv[3].v
+		};*/
 
-		sprite->GetVertexBuffer().SetVertexBuffer(positions, sizeof(positions));
+		positions[2] = m_Frames[m_CurrentFrame].uv[0].u;
+		positions[3] = m_Frames[m_CurrentFrame].uv[0].v;
+		positions[6] = m_Frames[m_CurrentFrame].uv[1].u;
+		positions[7] = m_Frames[m_CurrentFrame].uv[1].v;
+		positions[10] = m_Frames[m_CurrentFrame].uv[2].u;
+		positions[11] = m_Frames[m_CurrentFrame].uv[2].v;
+		positions[14] = m_Frames[m_CurrentFrame].uv[3].u;
+		positions[15] = m_Frames[m_CurrentFrame].uv[3].v;
+		//sprite->UpdateVertexBuffer(positions);
 
-		sprite->Draw(1.0f);
+		//sprite->Draw(1.0f);
 	}
+}
+
+float Animation::GetFrameWidth()
+{
+	return m_FrameSize.x;
+}
+
+float Animation::GetFrameHeight()
+{
+	return m_FrameSize.y;
+}
+
+glm::vec2 Animation::GetFrameSize()
+{
+	return m_FrameSize;
+}
+
+glm::vec2 Animation::GetScaleFactor()
+{
+	return m_ScaleFactor;
+}
+
+void Animation::Unload()
+{
+	delete[] m_Frames;
 }

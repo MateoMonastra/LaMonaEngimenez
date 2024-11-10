@@ -42,6 +42,8 @@ public:
 	void SetRotation(float angle);
 	void Scale(glm::vec3 scale);
 	void SetScale(glm::vec3 scale);
+	float ToRadians(float degrees);
+	void SetScaleFactor(int FrameCountX, int FrameCountY);
 
 	virtual void Draw() = 0;
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Exporter.h"
+
 struct MONA_ENGIMENEZ UV
 {
 	float u;

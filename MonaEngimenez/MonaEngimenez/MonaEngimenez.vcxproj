@@ -59,7 +59,8 @@
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Basic.shader" />
+    <None Include="..\Resources\Shape.shader" />
+    <None Include="..\Resources\Texture.shader" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
