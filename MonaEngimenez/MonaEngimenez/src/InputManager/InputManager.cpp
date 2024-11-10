@@ -6,10 +6,11 @@
 		this->window = window;
 	}
 
-	bool InputManager::getKey(KeyCode key, Action keyAction)
+	bool InputManager::GetKey(KeyCode key, Action keyAction)
 	{
 		if (window == nullptr)
 		{
+			throw std::runtime_error("Window is nullptr");
 			return false;
 		}
 
@@ -17,23 +18,28 @@
 
 		switch (keyAction)
 		{
-		case InputManager::Pressed:
-			state = glfwGetKey(window, key);
-			return state == Action::Pressed;
-			break;
-
-		case InputManager::Reapeated:
-			state = glfwGetKey(window, key);
-			return state == Action::Reapeated;
-			break;
-
-		case InputManager::Released:
-			state = glfwGetKey(window, key);
-			return state == Action::Released;
-			break;
-		default:
-			return false;
-			break;
+			case Pressed:
+			{
+				state = glfwGetKey(window, key);
+				return state == Action::Pressed;
+				break;
+			}
+			case Reapeated:
+			{
+				state = glfwGetKey(window, key);
+				return state == Action::Reapeated;
+				break;
+			}
+			case Released:
+			{
+				state = glfwGetKey(window, key);
+				return state == Action::Released;
+				break;
+			}	
+			default:
+			{
+				return false;
+				break;
+			}
 		}
-		return false;
 	}

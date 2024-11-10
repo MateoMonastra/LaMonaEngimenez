@@ -31,6 +31,7 @@ protected:
 	glm::vec3 traslation;
 	float rotation;
 	glm::vec3 scale;
+	float speed = 100.0f;
 
 	void UpdateMVP();
 
@@ -44,6 +45,7 @@ public:
 	void SetScale(glm::vec3 scale);
 	float ToRadians(float degrees);
 	void SetScaleFactor(int FrameCountX, int FrameCountY);
+	void Move(glm::vec2 direction);
 
 	glm::vec3 GetScale() { return scale; }
 	glm::vec3 GetTranslation() { return traslation; }

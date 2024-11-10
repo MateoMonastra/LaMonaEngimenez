@@ -12,7 +12,6 @@ class Game : public BaseGame
 private:
 
 	Sprite* sprite;
-	//Animation* animation;
 	Triangle* triangle;
 
 
@@ -24,4 +23,6 @@ public:
 	void Init() override;
 	void Update() override;
 	void Deinit() override;
+
+	void GetInput();
 };

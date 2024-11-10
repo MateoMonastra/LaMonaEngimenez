@@ -59,13 +59,10 @@ void Animation::SetFrames(glm::ivec2 spriteSize, int row)
 
 void Animation::GetFrame(float positions[])
 {
-	//float frameIndex = 1;
 	Update();
 
 	if (m_CurrentFrame >= 0 && m_CurrentFrame < m_FrameCount.x)
 	{
-		//m_CurrentFrame = frameIndex;
-
 		positions[2] = m_Frames[m_CurrentFrame].uv[0].u;
 		positions[3] = m_Frames[m_CurrentFrame].uv[0].v;
 		positions[6] = m_Frames[m_CurrentFrame].uv[1].u;

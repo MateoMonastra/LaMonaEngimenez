@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Exporter.h"
+#include "glew.h"
+#include "InputManager/InputManager.h"
 
 class Window;
 
@@ -9,6 +11,7 @@ class MONA_ENGIMENEZ BaseGame
 protected:
 
 	Window* window;
+	InputManager* inputManager;
 	float screenWidth;
 	float screenHeight;
 	float screenCenterX;

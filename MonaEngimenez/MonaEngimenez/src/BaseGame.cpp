@@ -1,19 +1,18 @@
 #include "BaseGame.h"
 
 #include <glew.h>
-
 #include <iostream>
 
 #include "Debugger/Debugger.h"
-
 #include "Window/Window.h"
-
 #include "Transform/Transform.h"
+#include "Timer/Timer.h"
 
 
 BaseGame::BaseGame(float width, float height)
 {
 	window = new Window();
+	inputManager = new InputManager(window->GetWindow());
 
 	if (!glfwInit())
 	{
@@ -35,6 +34,7 @@ BaseGame::BaseGame(float width, float height)
 	}
 
 	Transform::Init();
+	DeltaTime::Init();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -50,6 +50,7 @@ BaseGame::BaseGame()
 BaseGame::~BaseGame()
 {
 	delete window; 
+	delete inputManager;
 	glfwTerminate();
 }
 
@@ -64,5 +65,7 @@ void BaseGame::GameLoop()
 		glfwSwapBuffers(window->GetWindow());
 
 		glfwPollEvents();
+
+		DeltaTime::Update();
 	}
 }

@@ -1,5 +1,7 @@
 #include "Entity2D.h"
 
+#include "Timer/Timer.h"
+
 void Entity2D::UpdateMVP()
 {
 	mvp = Transform::TRStoMVP(traslation, rotation, scale);
@@ -38,7 +40,6 @@ void Entity2D::Scale(glm::vec3 scale)
 
 void Entity2D::SetScale(glm::vec3 scale)
 {
-	//this->scale = scale;
 	this->scale = glm::vec3(scale.x * scaleFactorX, scale.y * scaleFactorY, 0.0f);
 	UpdateMVP();
 }
@@ -52,4 +53,9 @@ void Entity2D::SetScaleFactor(int FrameCountX, int FrameCountY)
 {
 	scaleFactorX /= FrameCountX;
 	scaleFactorY /= FrameCountY;
+}
+
+void Entity2D::Move(glm::vec2 direction)
+{
+	Translate(direction.x * speed * DeltaTime::GetDeltaTime(), direction.y * speed * DeltaTime::GetDeltaTime());
 }

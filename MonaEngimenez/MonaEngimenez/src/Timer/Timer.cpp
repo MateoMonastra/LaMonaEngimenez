@@ -1,5 +1,8 @@
 #include "Timer.h"
 
+std::chrono::time_point<std::chrono::high_resolution_clock> DeltaTime::lastFrameTime;
+float DeltaTime::deltaTime = 0.0f;
+
 Timer::Timer(float duration)
 {
 	m_Duration = duration;
@@ -27,4 +30,26 @@ bool Timer::HasElapsed()
 float Timer::TimeRemaining()
 {
 	return 0.0f;
+}
+
+void DeltaTime::Init()
+{
+	deltaTime = 0.0f;
+	lastFrameTime = std::chrono::steady_clock::now();
+}
+
+void DeltaTime::Update()
+{
+	auto currentFrameTime = std::chrono::high_resolution_clock::now();
+
+	std::chrono::duration<float> elapsed = currentFrameTime - lastFrameTime;
+
+	deltaTime = elapsed.count();
+
+	lastFrameTime = currentFrameTime;
+}
+
+float DeltaTime::GetDeltaTime()
+{
+	return deltaTime;
 }
