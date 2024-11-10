@@ -10,7 +10,7 @@
 	{
 		if (window == nullptr)
 		{
-			return;
+			return false;
 		}
 
 		int state;

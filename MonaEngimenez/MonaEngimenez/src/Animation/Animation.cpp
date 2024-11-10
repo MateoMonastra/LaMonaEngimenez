@@ -9,7 +9,6 @@ Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 sc
 
 	m_Frames = new Frame[m_FrameCount.x];
 
-	//sprite->SetScaleFactor(frameCount.x, frameCount.y);
 	m_ScaleFactor = scaleFactor / frameCount;
 
 	SetFrames(spriteSize, row);
@@ -24,6 +23,21 @@ Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 sc
 
 Animation::~Animation()
 {
+}
+
+void Animation::Update()
+{
+	if (m_Timer->HasElapsed())
+	{
+		m_CurrentFrame += 1;
+
+		m_Timer->Reset();
+
+		if (m_CurrentFrame + 1 > m_FrameCount.x)
+		{
+			m_CurrentFrame = 0;
+		}
+	}
 }
 
 void Animation::SetFrames(glm::ivec2 spriteSize, int row)
@@ -45,21 +59,12 @@ void Animation::SetFrames(glm::ivec2 spriteSize, int row)
 
 void Animation::GetFrame(float positions[])
 {
-	float frameIndex = 1;
+	//float frameIndex = 1;
+	Update();
 
 	if (m_CurrentFrame >= 0 && m_CurrentFrame < m_FrameCount.x)
 	{
-		m_CurrentFrame = frameIndex;
-
-		//const Frame& frame = m_Frames[m_CurrentFrame];
-
-		/*float positions[] =
-		{
-			-0.5f, -0.5f,     m_Frames[m_CurrentFrame].uv[0].u, m_Frames[m_CurrentFrame].uv[0].v,
-			 0.5f, -0.5f,     m_Frames[m_CurrentFrame].uv[1].u, m_Frames[m_CurrentFrame].uv[1].v,
-			 0.5f,  0.5f,     m_Frames[m_CurrentFrame].uv[2].u, m_Frames[m_CurrentFrame].uv[2].v,
-			-0.5f,  0.5f,     m_Frames[m_CurrentFrame].uv[3].u, m_Frames[m_CurrentFrame].uv[3].v
-		};*/
+		//m_CurrentFrame = frameIndex;
 
 		positions[2] = m_Frames[m_CurrentFrame].uv[0].u;
 		positions[3] = m_Frames[m_CurrentFrame].uv[0].v;
@@ -69,9 +74,6 @@ void Animation::GetFrame(float positions[])
 		positions[11] = m_Frames[m_CurrentFrame].uv[2].v;
 		positions[14] = m_Frames[m_CurrentFrame].uv[3].u;
 		positions[15] = m_Frames[m_CurrentFrame].uv[3].v;
-		//sprite->UpdateVertexBuffer(positions);
-
-		//sprite->Draw(1.0f);
 	}
 }
 
