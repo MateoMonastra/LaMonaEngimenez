@@ -28,8 +28,8 @@ void Game::Init()
    //burst->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
    //burst->SetTranslation(500.0f, 500.0f);
 
-   //milhouse->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-   //milhouse->SetTranslation(milhouse->GetWidth() / 2.0f, milhouse->GetHeight() / 2.0f);
+   milhouse->SetScale(glm::vec3(0.1f, 0.1f, 0.0f));
+   milhouse->SetTranslation(milhouse->GetWidth() / 2.0f, milhouse->GetHeight() / 2.0f);
 }  
 
 void Game::Update()  

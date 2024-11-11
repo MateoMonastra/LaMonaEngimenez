@@ -25,7 +25,7 @@ Sprite::Sprite(const std::string& path)
 
 
 	shader.SetShader("../Resources/Texture.shader");
-	std::cout << "Shader u_Texture set to: " << id << std::endl;
+	//std::cout << "Shader u_Texture set to: " << id << std::endl;
 	
 	layout.Push<float>(2);
 	layout.Push<float>(2);
@@ -80,6 +80,7 @@ void Sprite::Draw(float alpha)
 	UpdateVertexBuffer();
 	SetAlpha(alpha);
 	shader.SetUniformMath4f("u_MVP", mvp);
+	Renderer::BindTexture(m_RendererID, id);
 	Renderer::Draw(va, *ib, shader);
 }
 
@@ -105,8 +106,8 @@ void Sprite::UpdateVertexBuffer()
 
 	glBufferData(GL_ARRAY_BUFFER, 4 *4 * sizeof(float), positions, GL_DYNAMIC_DRAW);
 
-	//vb.Unbind();
-	//va.Unbind();
+	vb.Unbind();
+	va.Unbind();
 }
 
 void Sprite::SetFullTexture()
