@@ -21,8 +21,6 @@ public:
 	Sprite(const std::string& path, glm::ivec2 frameCount, int row);
 	~Sprite();
 
-	void Bind(unsigned int slot = 0) const;
-	void Unbind() const;
 	void Draw(float alpha);
 	void Draw() override;
 	void UpdateVertexBuffer();
@@ -30,8 +28,4 @@ public:
 
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
-	inline VertexBuffer GetVertexBuffer();
-	inline IndexBuffer GetIndexBuffer();
-	inline VertexArray GetVertexArray();
-	inline Shader GetShader();
 };
