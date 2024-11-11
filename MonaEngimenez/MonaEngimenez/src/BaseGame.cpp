@@ -7,6 +7,7 @@
 #include "Window/Window.h"
 #include "Transform/Transform.h"
 #include "Timer/Timer.h"
+#include "Renderer/Renderer.h"
 
 
 BaseGame::BaseGame(float width, float height)
@@ -38,6 +39,8 @@ BaseGame::BaseGame(float width, float height)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+
+	Renderer::EnableBlending();
 
 	glfwSwapInterval(1);
 

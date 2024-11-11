@@ -14,6 +14,9 @@ private:
 	int m_Width, m_Height, m_BPP;
 	float positions[16];
 	bool isAnimated = false;
+	unsigned int id;
+
+	static unsigned int instanceCount;
 
 public:
 	Sprite(const std::string& path);
@@ -23,6 +26,7 @@ public:
 
 	void Draw(float alpha);
 	void Draw() override;
+	void Animate();
 	void UpdateVertexBuffer();
 	void SetFullTexture();
 

@@ -27,10 +27,8 @@ int Shader::GetUniformLocation(const std::string& name)
 		return m_UniformLocationCache[name];
 	}
 
-	//DebuggerCall(int location = glGetUniformLocation(m_RendererID, name.c_str()));
-
 	int location = glGetUniformLocation(m_RendererID, name.c_str());
-	DebuggerCall(location); // Solo verifica `location`
+	DebuggerCall(location);
 
 	if (location == -1)
 	{
@@ -164,7 +162,6 @@ void Shader::Unbind() const
 
 void Shader::SetUniform1i(const std::string& name, int value)
 {
-	//DebuggerCall(glUniform1i(GetUniformLocation(name), value));
 	int location = GetUniformLocation(name);
 	glUniform1i(location, value);
 }

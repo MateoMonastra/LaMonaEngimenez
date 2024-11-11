@@ -11,8 +11,11 @@ class Game : public BaseGame
 {
 private:
 
-	Sprite* sprite;
-	Triangle* triangle;
+	Sprite* dynoBoy;
+	//Sprite* burst;
+	Sprite* milhouse;
+
+	bool isMoving = false;
 
 
 public:
@@ -25,4 +28,5 @@ public:
 	void Deinit() override;
 
 	void GetInput();
+	void Draw();
 };

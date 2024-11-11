@@ -11,7 +11,7 @@ Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 sc
 
 	m_ScaleFactor = scaleFactor / frameCount;
 
-	SetFrames(spriteSize, row);
+	LoadFrames(spriteSize, row);
 
 	m_Timer = new Timer(0.3f);
 }
@@ -40,7 +40,7 @@ void Animation::Update()
 	}
 }
 
-void Animation::SetFrames(glm::ivec2 spriteSize, int row)
+void Animation::LoadFrames(glm::ivec2 spriteSize, int row)
 {
 	for (int i = 0; i < m_FrameCount.x; i++)
 	{
@@ -59,7 +59,7 @@ void Animation::SetFrames(glm::ivec2 spriteSize, int row)
 
 void Animation::GetFrame(float positions[])
 {
-	Update();
+	//Update();
 
 	if (m_CurrentFrame >= 0 && m_CurrentFrame < m_FrameCount.x)
 	{
@@ -72,6 +72,11 @@ void Animation::GetFrame(float positions[])
 		positions[14] = m_Frames[m_CurrentFrame].uv[3].u;
 		positions[15] = m_Frames[m_CurrentFrame].uv[3].v;
 	}
+}
+
+void Animation::SetCurrentFrame(int frame)
+{
+	m_CurrentFrame = frame;
 }
 
 float Animation::GetFrameWidth()

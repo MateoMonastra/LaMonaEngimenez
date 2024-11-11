@@ -2,6 +2,8 @@
 
 #include "Debugger/Debugger.h"
 
+unsigned int Sprite::instanceCount = 1;
+
 Sprite::Sprite(const std::string& path)
 	: m_RendererID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
@@ -12,6 +14,9 @@ Sprite::Sprite(const std::string& path)
 		2,3,0
 	};
 
+	id = instanceCount++;
+	m_RendererID = id;
+
 	SetFullTexture();
 
 	SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
@@ -20,6 +25,7 @@ Sprite::Sprite(const std::string& path)
 
 
 	shader.SetShader("../Resources/Texture.shader");
+	std::cout << "Shader u_Texture set to: " << id << std::endl;
 	
 	layout.Push<float>(2);
 	layout.Push<float>(2);
@@ -29,9 +35,10 @@ Sprite::Sprite(const std::string& path)
 	vb.SetVertexBuffer(positions, 4 * 4 * sizeof(float));
 	va.AddBuffer(vb, layout);
 
-	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer);
 
-	shader.SetUniform1i("u_Texture", 0);
+	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer, id);
+
+	shader.SetUniform1i("u_Texture", id);
 
 	scaleFactorX = m_Width;
 	scaleFactorY = m_Height;
@@ -68,6 +75,7 @@ Sprite::~Sprite()
 
 void Sprite::Draw(float alpha)
 {
+	animation->SetCurrentFrame(0);
 	animation->GetFrame(positions);
 	UpdateVertexBuffer();
 	SetAlpha(alpha);
@@ -80,6 +88,15 @@ void Sprite::Draw()
 	Draw(m_Alpha);
 }
 
+void Sprite::Animate()
+{
+	animation->Update();
+	animation->GetFrame(positions);
+	UpdateVertexBuffer();
+	shader.SetUniformMath4f("u_MVP", mvp);
+	Renderer::Draw(va, *ib, shader);
+}
+
 void Sprite::UpdateVertexBuffer()
 {
 	vb.Bind();
@@ -87,6 +104,9 @@ void Sprite::UpdateVertexBuffer()
 	va.AddBuffer(vb, layout);
 
 	glBufferData(GL_ARRAY_BUFFER, 4 *4 * sizeof(float), positions, GL_DYNAMIC_DRAW);
+
+	//vb.Unbind();
+	//va.Unbind();
 }
 
 void Sprite::SetFullTexture()

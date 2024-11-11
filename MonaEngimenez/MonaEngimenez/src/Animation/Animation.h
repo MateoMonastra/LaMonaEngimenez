@@ -24,8 +24,9 @@ public:
 	~Animation();
 
 	void Update();
-	void SetFrames(glm::ivec2 spriteSize, int row);
+	void LoadFrames(glm::ivec2 spriteSize, int row);
 	void GetFrame(float positions[]);
+	void SetCurrentFrame(int frame);
 	float GetFrameWidth();
 	float GetFrameHeight();
 	glm::vec2 GetFrameSize();
