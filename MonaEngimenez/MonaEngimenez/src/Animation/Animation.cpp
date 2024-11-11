@@ -18,7 +18,7 @@ Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 sc
 
 Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor)
 {
-	Animation(frameCount, spriteSize, scaleFactor, 0); //chequear si es row 0 o row 1
+	Animation(frameCount, spriteSize, scaleFactor, 0);
 }
 
 Animation::~Animation()

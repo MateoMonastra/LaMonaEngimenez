@@ -141,12 +141,6 @@ void Sprite::SetFullTexture()
 	}
 }
 
-void Sprite::SetAlpha(float alpha)
-{
-	m_Alpha = alpha;
-	shader.SetUniform1f("u_Alpha", m_Alpha);
-}
-
 inline VertexBuffer Sprite::GetVertexBuffer()
 {
 	return vb;

@@ -5,19 +5,6 @@
 #include "glm.hpp"
 
 
-static float FlashingColor()
-{
-	static float increment = 0.005f;
-	static float color = 0.0f;
-
-	if (color > 1.0f || color < 0.0f)
-	{
-		increment = -increment;
-	}
-
-	return color += increment;
-}
-
 Game::Game(float width, float height)
 	: BaseGame(width, height)
 {
@@ -46,7 +33,7 @@ void Game::Update()
 	
 	GetInput();
 
-	sprite->Draw(1.0f);
+	sprite->Draw();
 }  
 
 void Game::Deinit()  
@@ -60,6 +47,7 @@ void Game::GetInput()
 	glm::vec2 velocity{0.0f, 0.0f};
 	float rotation = 0.0f;
 	glm::vec2 scale{ 0.0f, 0.0f };
+	float alpha = 0.0f;
 
 	if (inputManager->GetKey(w, Pressed))
 	{
@@ -95,7 +83,16 @@ void Game::GetInput()
 		scale.x = -1.0f * DeltaTime::GetDeltaTime();
 		scale.y = -1.0f * DeltaTime::GetDeltaTime();
 	}
+	if (inputManager->GetKey(r, Pressed))
+	{
+		alpha = 1.0f * DeltaTime::GetDeltaTime();
+	}
+	if (inputManager->GetKey(t, Pressed))
+	{
+		alpha = -1.0f * DeltaTime::GetDeltaTime();
+	}
 
 	sprite->UpdateTransform(velocity, rotation, scale);
+	sprite->UpdateAlpha(alpha);
 }
 

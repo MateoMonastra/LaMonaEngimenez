@@ -12,11 +12,8 @@ private:
 	std::string m_FilePath;
 	unsigned char* m_LocalBuffer;
 	int m_Width, m_Height, m_BPP;
-	float m_Alpha;
 	float positions[16];
 	bool isAnimated = false;
-
-	void CreateAnimations();
 
 public:
 	Sprite(const std::string& path);
@@ -33,7 +30,6 @@ public:
 
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
-	inline void SetAlpha(float alpha);
 	inline VertexBuffer GetVertexBuffer();
 	inline IndexBuffer GetIndexBuffer();
 	inline VertexArray GetVertexArray();
