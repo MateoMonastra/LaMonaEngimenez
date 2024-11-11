@@ -12,7 +12,6 @@
 BaseGame::BaseGame(float width, float height)
 {
 	window = new Window();
-	inputManager = new InputManager(window->GetWindow());
 
 	if (!glfwInit())
 	{
@@ -41,6 +40,8 @@ BaseGame::BaseGame(float width, float height)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	glfwSwapInterval(1);
+
+	inputManager = new InputManager(window->GetWindow());
 }
 
 BaseGame::BaseGame()

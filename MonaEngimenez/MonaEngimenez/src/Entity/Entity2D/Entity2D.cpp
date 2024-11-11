@@ -55,7 +55,13 @@ void Entity2D::SetScaleFactor(int FrameCountX, int FrameCountY)
 	scaleFactorY /= FrameCountY;
 }
 
-void Entity2D::Move(glm::vec2 direction)
+void Entity2D::UpdateTransform(glm::vec2 direction, float rotation, glm::vec2 scale)
 {
-	Translate(direction.x * speed * DeltaTime::GetDeltaTime(), direction.y * speed * DeltaTime::GetDeltaTime());
+	traslation += glm::vec3(direction.x, direction.y, 0.0f) * translationSpeed;
+	this->rotation += ToRadians(rotation) * rotationSpeed;
+
+	this->scale.x += scale.x * scaleFactorX * scaleSpeed;;
+	this->scale.y += scale.y * scaleFactorY * scaleSpeed;;
+
+	UpdateMVP();
 }

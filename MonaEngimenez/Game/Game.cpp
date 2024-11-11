@@ -57,43 +57,45 @@ void Game::Deinit()
 
 void Game::GetInput()
 {
-	glm::ivec2 direction(0, 0);
-	
-	if (inputManager->GetKey(w, Pressed) || inputManager->GetKey(w, Released))
+	glm::vec2 velocity{0.0f, 0.0f};
+	float rotation = 0.0f;
+	glm::vec2 scale{ 0.0f, 0.0f };
+
+	if (inputManager->GetKey(w, Pressed))
 	{
-		direction.y = 1;
+		velocity.y = 1.0f * DeltaTime::GetDeltaTime();
 	}
-	if (inputManager->GetKey(s, Pressed) || inputManager->GetKey(s, Released))
+	if (inputManager->GetKey(s, Pressed))
 	{
-		direction.y = -1;
+		velocity.y = -1.0f * DeltaTime::GetDeltaTime();
 	}
-	if (inputManager->GetKey(d, Pressed) || inputManager->GetKey(d, Released))
+	if (inputManager->GetKey(d, Pressed))
 	{
-		direction.x = 1;
+		velocity.x = 1.0f * DeltaTime::GetDeltaTime();
 	}
-	if (inputManager->GetKey(a, Pressed) || inputManager->GetKey(a, Released))
+	if (inputManager->GetKey(a, Pressed))
 	{
-		direction.x = -1;
+		velocity.x = -1.0f * DeltaTime::GetDeltaTime();
+	}
+	if (inputManager->GetKey(q, Pressed))
+	{
+		rotation = 1.0f * DeltaTime::GetDeltaTime();
+	}
+	if (inputManager->GetKey(e, Pressed))
+	{
+		rotation = -1.0f * DeltaTime::GetDeltaTime();
+	}
+	if (inputManager->GetKey(add, Pressed))
+	{
+		scale.x = 1.0f * DeltaTime::GetDeltaTime();
+		scale.y = 1.0f * DeltaTime::GetDeltaTime();
+	}
+	if (inputManager->GetKey(subtract, Pressed))
+	{
+		scale.x = -1.0f * DeltaTime::GetDeltaTime();
+		scale.y = -1.0f * DeltaTime::GetDeltaTime();
 	}
 
-	sprite->Move(direction);
-
-	if (inputManager->GetKey(q, Pressed) || inputManager->GetKey(q, Released))
-	{
-		sprite->Rotate(-0.1f);
-	}
-	if (inputManager->GetKey(e, Pressed) || inputManager->GetKey(e, Released))
-	{
-		sprite->Rotate(0.1f);
-	}
-
-	if (inputManager->GetKey(add, Pressed) || inputManager->GetKey(add, Released))
-	{
-		sprite->Scale(glm::vec3(0.1f, 0.1f, 0.0f));
-	}
-	if (inputManager->GetKey(subtract, Pressed) || inputManager->GetKey(subtract, Released))
-	{
-		sprite->Scale(glm::vec3(-0.1f, -0.1f, 0.0f));
-	}
+	sprite->UpdateTransform(velocity, rotation, scale);
 }
 
