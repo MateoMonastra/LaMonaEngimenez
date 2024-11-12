@@ -19,13 +19,13 @@ Game::~Game()
 void Game::Init()
 {
 	milhouse = new Sprite("../Assets/Milhouse.png");
-	dynoBoy = new Sprite("../Assets/Burst.png");
+	dynoBoy = new Sprite("../Assets/Player.png");
 	//triangle = new Triangle(400.0f,400.0f);
 	//burst = new Sprite("../Assets/Burst.png", glm::ivec2(3, 1), 0);
 
-	dynoBoy->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
+	dynoBoy->SetScale(glm::vec3(0.3f, 0.6f, 0.0f));
 	dynoBoy->SetTranslation(500.0f, 500.0f);
-	dynoBoyAnimation = new Animation(0, 0, 20, 5, 960, 768, 180, 175);
+	dynoBoyAnimation = new Animation(0, 0, 3, 5, 495, 131, 165, 131);
 	dynoBoy->SetAnimation(dynoBoyAnimation);
 
 	//burst->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
