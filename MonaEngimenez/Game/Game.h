@@ -1,24 +1,24 @@
 #pragma once
 
 #include "BaseGame.h"
-#include <Entity/Entity2D/Shape/Triangle/Triangle.h>
-#include <Entity/Entity2D/Shape/Square/Square.h>
 #include "Sprite/Sprite.h"
 #include "Animation/Animation.h"
 #include "Timer/Time.h"
+#include "CollisionManager/CollisionManager.h"
 
 
 class Game : public BaseGame
 {
 private:
 
-	Sprite* dynoBoy;
-	Triangle* triangle;
-	Sprite* milhouse;
-	Animation* dynoBoyAnimation;
-
-	bool isMoving = false;
-
+	Sprite* knuckles;
+	Sprite* rock;
+	Animation* knucklesIdleAnimation;
+	Animation* knucklesRunningRightAnimation;
+	Animation* knucklesSpinAttackAnimation;
+	Animation* knucklesPushAnimation;
+	Animation* rockIdle;
+	
 
 public:
 
@@ -30,5 +30,6 @@ public:
 	void Deinit() override;
 
 	void GetInput();
+	void KnucklesColition();
 	void Draw();
 };

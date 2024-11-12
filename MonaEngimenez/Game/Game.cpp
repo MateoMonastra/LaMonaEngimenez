@@ -18,36 +18,43 @@ Game::~Game()
 
 void Game::Init()
 {
-	milhouse = new Sprite("../Assets/Milhouse.png");
-	dynoBoy = new Sprite("../Assets/Player.png");
-	//triangle = new Triangle(400.0f,400.0f);
-	//burst = new Sprite("../Assets/Burst.png", glm::ivec2(3, 1), 0);
+	knuckles = new Sprite("../Assets/Knuckles_Sprite_Sheet.png");
+	rock = new Sprite("../Assets/Rock.png");
 
-	dynoBoy->SetScale(glm::vec3(0.3f, 0.6f, 0.0f));
-	dynoBoy->SetTranslation(500.0f, 500.0f);
-	dynoBoyAnimation = new Animation(0, 0, 3, 5, 495, 131, 165, 131);
-	dynoBoy->SetAnimation(dynoBoyAnimation);
+	knuckles->SetScale(glm::vec3(0.3f, 0.3f, 0.0f));
+	knuckles->SetRotation(180.0f);
+	knuckles->SetTranslation(500.0f, 500.0f);
 
-	//burst->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-	//burst->SetTranslation(500.0f, 500.0f);
+	knucklesIdleAnimation = new Animation(0, 473, 1, 3, 646, 473, 36, -40);
+	knucklesRunningRightAnimation = new Animation(377, 473 - 46, 2, 3, 646, 473, 40, -40);
+	knucklesSpinAttackAnimation = new Animation(0, 473 - 128, 6, 3, 646, 473, 32, -33);
+	knucklesPushAnimation = new Animation(429, 473 - 97, 4, 3, 646, 473, 33, -34);
 
-	milhouse->SetScale(glm::vec3(0.1f, 0.1f, 0.0f));
-	milhouse->SetTranslation(milhouse->GetWidth() / 2.0f, milhouse->GetHeight() / 2.0f);
+	knuckles->SetAnimation(knucklesIdleAnimation);
+
+	rock->SetScale(glm::vec3(0.8f, 0.8f, 0.0f));
+	rock->SetRotation(180.0f);
+	rock->SetTranslation(200.0f, 200.0f);
+	rockIdle = new Animation(65, 244 -24, 1, 2, 207, 244, 67, -68);
+
+	rock->SetAnimation(rockIdle);
 }
-
 void Game::Update()
 {
 	GetInput();
-
+	KnucklesColition();
 	Draw();
 }
 
 void Game::Deinit()
 {
-	delete dynoBoy;
-	delete dynoBoyAnimation;
-	delete milhouse;
-	//delete triangle;
+	delete knuckles;
+	delete knucklesIdleAnimation;
+	delete knucklesRunningRightAnimation;
+	delete knucklesSpinAttackAnimation;
+	delete knucklesPushAnimation;
+	delete rockIdle;
+	delete rock;
 }
 
 void Game::GetInput()
@@ -55,70 +62,53 @@ void Game::GetInput()
 	glm::vec2 velocity{ 0.0f, 0.0f };
 	float rotation = 0.0f;
 	glm::vec2 scale{ 0.0f, 0.0f };
-	float alpha = 0.0f;
-	isMoving = false;
 
 	if (inputManager->GetKey(w, Pressed))
 	{
-		velocity.y = 1.0f * Time::getDeltaTime();
-		isMoving = true;
-	}
-	if (inputManager->GetKey(s, Pressed))
-	{
-		velocity.y = -1.0f * Time::getDeltaTime();
-		isMoving = true;
-	}
-	if (inputManager->GetKey(d, Pressed))
-	{
-		velocity.x = 1.0f * Time::getDeltaTime();
-		isMoving = true;
-	}
-	if (inputManager->GetKey(a, Pressed))
-	{
-		velocity.x = -1.0f * Time::getDeltaTime();
-		isMoving = true;
-	}
-	if (inputManager->GetKey(q, Pressed))
-	{
-		rotation = 1.0f * Time::getDeltaTime();
-		isMoving = true;
-	}
-	if (inputManager->GetKey(e, Pressed))
-	{
-		rotation = -1.0f * Time::getDeltaTime();
-		isMoving = true;
-	}
-	if (inputManager->GetKey(add, Pressed))
-	{
-		scale.x = 1.0f * Time::getDeltaTime();
-		scale.y = 1.0f * Time::getDeltaTime();
-	}
-	if (inputManager->GetKey(subtract, Pressed))
-	{
-		scale.x = -1.0f * Time::getDeltaTime();
-		scale.y = -1.0f * Time::getDeltaTime();
-	}
-	if (inputManager->GetKey(r, Pressed))
-	{
-		alpha = 1.0f * Time::getDeltaTime();
-	}
-	if (inputManager->GetKey(t, Pressed))
-	{
-		alpha = -1.0f * Time::getDeltaTime();
+		velocity.y = 2.0f * Time::getDeltaTime();
+		knuckles->ChangeAnimation(knucklesRunningRightAnimation);
 	}
 
-	dynoBoy->UpdateTransform(velocity, rotation, scale);
-	dynoBoy->UpdateAlpha(alpha);
+	if (inputManager->GetKey(a, Pressed))
+	{
+		velocity.x = -2.0f * Time::getDeltaTime();
+		knuckles->ChangeAnimation(knucklesRunningRightAnimation);
+	}
+	else if (inputManager->GetKey(d, Pressed))
+	{
+		velocity.x = 2.0f * Time::getDeltaTime();
+		knuckles->ChangeAnimation(knucklesRunningRightAnimation);
+	}
+	else if (inputManager->GetKey(s, Pressed))
+	{
+		velocity.y = -2.0f * Time::getDeltaTime();
+		knuckles->ChangeAnimation(knucklesRunningRightAnimation);
+	}
+	else if (inputManager->GetKey(p, Pressed))
+	{
+		knuckles->ChangeAnimation(knucklesSpinAttackAnimation);
+	}
+	else
+	{
+		knuckles->ChangeAnimation(knucklesIdleAnimation);
+	}
+
+	knuckles->UpdateTransform(velocity, rotation, scale);
+}
+
+void Game::KnucklesColition()
+{
+	if (CollisionManager::CheckCollisionRecRec(knuckles,rock))
+	{
+		
+		knuckles->SetAnimation(knucklesPushAnimation);
+	}
 }
 
 void Game::Draw()
 {
-	//burst->Animate();
-	milhouse->Draw();
-	//triangle->Draw();
-
-
-	dynoBoy->Animate();
-
+	knuckles->Animate();
+	rock->Animate();
 }
+
 
