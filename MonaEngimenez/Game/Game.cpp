@@ -20,10 +20,11 @@ void Game::Init()
 {
 	knuckles = new Sprite("../Assets/Knuckles_Sprite_Sheet.png");
 	rock = new Sprite("../Assets/Rock.png");
+	GreenHill = new Sprite("../Assets/GreenHill.png");
 
 	knuckles->SetScale(glm::vec3(0.3f, 0.3f, 0.0f));
 	knuckles->SetRotation(180.0f);
-	knuckles->SetTranslation(500.0f, 500.0f);
+	knuckles->SetTranslation(500.0f, 200.0f);
 
 	knucklesIdleAnimation = new Animation(0, 473, 1, 3, 646, 473, 36, -40);
 	knucklesRunningRightAnimation = new Animation(377, 473 - 46, 2, 3, 646, 473, 40, -40);
@@ -38,6 +39,9 @@ void Game::Init()
 	rockIdle = new Animation(65, 244 -24, 1, 2, 207, 244, 67, -68);
 
 	rock->SetAnimation(rockIdle);
+
+	GreenHill->SetScale(glm::vec3(4.0f, 5.0f, 0.0f));
+	GreenHill->SetTranslation(500.0f, 350.0f);
 }
 void Game::Update()
 {
@@ -49,6 +53,7 @@ void Game::Update()
 void Game::Deinit()
 {
 	delete knuckles;
+	delete GreenHill;
 	delete knucklesIdleAnimation;
 	delete knucklesRunningRightAnimation;
 	delete knucklesSpinAttackAnimation;
@@ -107,6 +112,7 @@ void Game::KnucklesColition()
 
 void Game::Draw()
 {
+	GreenHill->Draw();
 	knuckles->Animate();
 	rock->Animate();
 }

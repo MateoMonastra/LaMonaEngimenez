@@ -13,6 +13,7 @@ private:
 
 	Sprite* knuckles;
 	Sprite* rock;
+	Sprite* GreenHill;
 	Animation* knucklesIdleAnimation;
 	Animation* knucklesRunningRightAnimation;
 	Animation* knucklesSpinAttackAnimation;
