@@ -16,16 +16,17 @@ private:
 
 public:
 	Sprite(const std::string& path);
-	Sprite(const std::string& path, glm::ivec2 frameCount);
-	Sprite(const std::string& path, glm::ivec2 frameCount, int row);
+	Sprite();
 	~Sprite();
 
 	void Draw(float alpha);
 	void Draw() override;
 	void Animate();
+	void ChangeAnimation(Animation* animation);
+	void SetAnimation(Animation* animation);
 	void UpdateVertexBuffer();
 	void SetFullTexture();
 
-	inline int GetWidth() const { return m_Width; }
-	inline int GetHeight() const { return m_Height; }
+	int GetWidth() const { return m_Width; }
+	int GetHeight() const { return m_Height; }
 };

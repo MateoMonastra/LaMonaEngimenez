@@ -5,6 +5,7 @@
 #include <Entity/Entity2D/Shape/Square/Square.h>
 #include "Sprite/Sprite.h"
 #include "Animation/Animation.h"
+#include "Timer/Time.h"
 
 
 class Game : public BaseGame
@@ -14,6 +15,7 @@ private:
 	Sprite* dynoBoy;
 	Triangle* triangle;
 	Sprite* milhouse;
+	Animation* dynoBoyAnimation;
 
 	bool isMoving = false;
 

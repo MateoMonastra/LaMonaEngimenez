@@ -1,106 +1,115 @@
 #include "Animation.h"
 
-Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor, int row)
+#include <iostream>
+
+#include "Timer/Time.h"
+
+int AnimationIDCounter = 0;
+
+Animation::Animation(int initialX, int initialY, int maxFrames, float maxAnimationTime, int spriteWidth,
+    int spriteHeight, int frameWidth,
+    int frameHeight)
 {
-	m_FrameCount = frameCount;
-	m_CurrentFrame = 0;
-
-	m_FrameSize = glm::vec2(spriteSize.x / frameCount.x, spriteSize.y / frameCount.y);
-
-	m_Frames = new Frame[m_FrameCount.x];
-
-	m_ScaleFactor = scaleFactor / frameCount;
-
-	LoadFrames(spriteSize, row);
-
-	m_Timer = new Timer(0.3f);
+    AnimationIDCounter++;
+    this->initialX = initialX;
+    this->initialY = initialY;
+    this->maxFramesInAnimation = maxFrames;
+    this->maxAnimationTime = maxAnimationTime;
+    this->spriteHeight = spriteHeight;
+    this->spriteWidth = spriteWidth;
+    this->frameHeight = frameHeight;
+    this->frameWidth = frameWidth;
+    id = AnimationIDCounter;
+    addFrames();
+    currentTime = 0;
+    currentFrame = totalFrames.front();
 }
 
-Animation::Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor)
+
+
+Animation::Animation()
 {
-	Animation(frameCount, spriteSize, scaleFactor, 0);
+    while (!totalFrames.empty())
+    {
+        Frame* aux = totalFrames.back();
+        totalFrames.pop_back();
+        delete aux;
+    }
+    maxFramesInAnimation = 0;
 }
 
-Animation::~Animation()
+bool Animation::hasFrames()
 {
+    return maxFramesInAnimation > 0;
 }
 
-void Animation::Update()
+void Animation::addFrames()
 {
-	if (m_Timer->HasElapsed())
-	{
-		m_CurrentFrame += 1;
+    float spriteWidthF = spriteWidth;
+    float spriteHeightF = spriteHeight;
+    for (int i = 0; i < maxFramesInAnimation; ++i)
+    {
+        glm::vec2 topRight = glm::vec2((initialX + (i * frameWidth) + frameWidth) / spriteWidthF,
+            (initialY + frameHeight) / spriteHeightF);
 
-		m_Timer->Reset();
+        glm::vec2 botRight = glm::vec2((initialX + (i * frameWidth) + frameWidth) / spriteWidthF,
+            initialY / spriteHeightF);
 
-		if (m_CurrentFrame + 1 > m_FrameCount.x)
-		{
-			m_CurrentFrame = 0;
-		}
-	}
+        glm::vec2 botLeft = glm::vec2((initialX + i * frameWidth) / spriteWidthF,
+            initialY / spriteHeightF);
+
+        glm::vec2 topLeft = glm::vec2((initialX + i * frameWidth) / spriteWidthF,
+            ((initialY + frameHeight) / spriteHeightF));
+
+        Frame* aux = new Frame(topRight, botRight, botLeft, topLeft);
+        totalFrames.push_back(aux);
+    }
 }
 
-void Animation::LoadFrames(glm::ivec2 spriteSize, int row)
+void Animation::update()
 {
-	for (int i = 0; i < m_FrameCount.x; i++)
-	{
-		float u = (i * m_FrameSize.x) / spriteSize.x;
-		float v = (row * m_FrameSize.y) / spriteSize.y;
+    currentTime += Time::getDeltaTime();
 
-		float u_end = u + m_FrameSize.x / spriteSize.x;
-		float v_end = v + m_FrameSize.y / spriteSize.y;
+    while (currentTime > maxAnimationTime)
+    {
+        currentTime -= maxAnimationTime;
+    }
 
-		m_Frames[i].uv[0] = { u, v };
-		m_Frames[i].uv[1] = { u_end, v };
-		m_Frames[i].uv[2] = { u_end, v_end };
-		m_Frames[i].uv[3] = { u, v_end };
-	}
+    float frameLengh = (maxAnimationTime / maxFramesInAnimation);
+    currentFrameCounter = static_cast<int>(currentTime / frameLengh);
+    currentFrame = totalFrames[currentFrameCounter];
+
+    //  std::cout << "Current Time : " << currentTime << std::endl;
 }
 
 void Animation::GetFrame(float positions[])
 {
 	//Update();
 
-	if (m_CurrentFrame >= 0 && m_CurrentFrame < m_FrameCount.x)
+	if (currentFrameCounter >= 0 && currentFrameCounter < maxFramesInAnimation)
 	{
-		positions[2] = m_Frames[m_CurrentFrame].uv[0].u;
-		positions[3] = m_Frames[m_CurrentFrame].uv[0].v;
-		positions[6] = m_Frames[m_CurrentFrame].uv[1].u;
-		positions[7] = m_Frames[m_CurrentFrame].uv[1].v;
-		positions[10] = m_Frames[m_CurrentFrame].uv[2].u;
-		positions[11] = m_Frames[m_CurrentFrame].uv[2].v;
-		positions[14] = m_Frames[m_CurrentFrame].uv[3].u;
-		positions[15] = m_Frames[m_CurrentFrame].uv[3].v;
+        positions[2] = currentFrame->getUVCoord(2)[0];
+        positions[3] = currentFrame->getUVCoord(2)[1];
+
+        positions[6] = currentFrame->getUVCoord(1)[0];
+        positions[7] = currentFrame->getUVCoord(1)[1];
+
+        positions[10] = currentFrame->getUVCoord(0)[0];
+        positions[11] = currentFrame->getUVCoord(0)[1];
+
+        positions[14] = currentFrame->getUVCoord(3)[0];
+        positions[15] = currentFrame->getUVCoord(3)[1];
 	}
 }
 
 void Animation::SetCurrentFrame(int frame)
 {
-	m_CurrentFrame = frame;
+    currentFrame = totalFrames[frame];
 }
 
-float Animation::GetFrameWidth()
-{
-	return m_FrameSize.x;
-}
 
-float Animation::GetFrameHeight()
+bool Animation::operator==(const Animation& animation) const
 {
-	return m_FrameSize.y;
-}
+    return (id == animation.id);
 
-glm::vec2 Animation::GetFrameSize()
-{
-	return m_FrameSize;
-}
-
-glm::vec2 Animation::GetScaleFactor()
-{
-	return m_ScaleFactor;
-}
-
-void Animation::Unload()
-{
-	delete m_Timer;
-	delete[] m_Frames;
 }

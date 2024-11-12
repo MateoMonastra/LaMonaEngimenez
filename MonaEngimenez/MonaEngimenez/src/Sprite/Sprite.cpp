@@ -3,7 +3,6 @@
 #include "Debugger/Debugger.h"
 
 
-
 Sprite::Sprite(const std::string& path)
 	: m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
@@ -38,7 +37,7 @@ Sprite::Sprite(const std::string& path)
 	this->shader = Renderer::GetShader();
 
 	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer, id);
-	
+
 
 	scaleFactorX = m_Width;
 	scaleFactorY = m_Height;
@@ -46,31 +45,19 @@ Sprite::Sprite(const std::string& path)
 	vb.Unbind();
 	va.Unbind();
 	ib->Unbind();
+
+	animation = new Animation(0,0,1,0, m_Width, m_Height, m_Width, m_Height);
 }
 
-Sprite::Sprite(const std::string& path, glm::ivec2 frameCount)
+Sprite::Sprite()
 {
-	Sprite(path, frameCount, 0);
-}
-
-Sprite::Sprite(const std::string& path, glm::ivec2 frameCount, int row)
-	: Sprite(path)
-{
-	isAnimated = true;
-	animation = new Animation(frameCount, glm::ivec2(m_Width, m_Height), glm::ivec2(scaleFactorX, scaleFactorY), row);
-	scaleFactorX = m_Width / frameCount.x;
-	scaleFactorY = m_Height / frameCount.y;
 }
 
 Sprite::~Sprite()
 {
 	DebuggerCall(glDeleteTextures(1, &m_RendererID));
 
-	if (isAnimated)
-	{
-		animation->Unload();
-		delete animation;
-	}
+	delete animation;
 }
 
 void Sprite::Draw(float alpha)
@@ -87,6 +74,19 @@ void Sprite::Draw(float alpha)
 	Renderer::Draw(va, *ib, m_RendererID);
 }
 
+void Sprite::ChangeAnimation(Animation* animation)
+{
+	if (this->animation == animation)
+		return;
+
+	this->animation = animation;
+}
+
+void Sprite::SetAnimation(Animation* animation)
+{
+	this->animation = animation;
+}
+
 void Sprite::Draw()
 {
 	Draw(m_Alpha);
@@ -94,7 +94,7 @@ void Sprite::Draw()
 
 void Sprite::Animate()
 {
-	animation->Update();
+	animation->update();
 	animation->GetFrame(positions);
 	UpdateVertexBuffer();
 	shader->Bind();
@@ -111,7 +111,7 @@ void Sprite::UpdateVertexBuffer()
 	va.Bind();
 	va.AddBuffer(vb, layout);
 
-	glBufferData(GL_ARRAY_BUFFER, 4 *4 * sizeof(float), positions, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(float), positions, GL_DYNAMIC_DRAW);
 
 	vb.Unbind();
 	va.Unbind();

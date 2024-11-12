@@ -1,6 +1,6 @@
 #include "Entity2D.h"
 
-#include "Timer/Timer.h"
+#include "Timer/Time.h"
 
 unsigned int Entity2D::instanceCount = 0;
 

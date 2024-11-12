@@ -6,7 +6,7 @@
 #include "Debugger/Debugger.h"
 #include "Window/Window.h"
 #include "Transform/Transform.h"
-#include "Timer/Timer.h"
+#include "Timer/Time.h"
 #include "Renderer/Renderer.h"
 
 
@@ -34,7 +34,7 @@ BaseGame::BaseGame(float width, float height)
 	}
 
 	Transform::Init();
-	DeltaTime::Init();
+	Time::setTime();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -72,6 +72,6 @@ void BaseGame::GameLoop()
 
 		glfwPollEvents();
 
-		DeltaTime::Update();
+		Time::setTime();
 	}
 }

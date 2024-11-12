@@ -2,13 +2,15 @@
 
 #include "Exporter.h"
 
-struct MONA_ENGIMENEZ UV
-{
-	float u;
-	float v;
-};
+#include "glm.hpp"
 
-struct MONA_ENGIMENEZ Frame
+class MONA_ENGIMENEZ Frame
 {
-	UV uv[4];
+private:
+    const static int maxFrameSize = 4;
+    glm::vec2 uvCoord[maxFrameSize];
+public:
+    glm::vec2 getUVCoord(int id);
+    Frame(glm::vec2 firstUV, glm::vec2 secondUV, glm::vec2 thirdUV, glm::vec2 fourthUV);
+    Frame();
 };

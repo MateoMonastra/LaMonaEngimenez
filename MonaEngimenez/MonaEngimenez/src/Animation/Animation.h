@@ -1,36 +1,38 @@
 #pragma once
 
-#include "glm.hpp"
+#include <vector>
 
 #include "Exporter.h"
 #include "Frame/Frame.h"
-#include "Timer/Timer.h"
+
 
 class MONA_ENGIMENEZ Animation
 {
-private:
-
-	Frame* m_Frames;
-	Timer* m_Timer;
-	glm::vec2 m_FrameSize;
-	glm::ivec2 m_FrameCount;
-	glm::ivec2 m_ScaleFactor;
-	int m_CurrentFrame;
-
 public:
+    Animation(int initialX, int initialY, int maxFrames, float maxAnimationTime, int spriteWidth, int spriteHeight,int frameWidth, int frameHeight);
+    Animation();
+    bool hasFrames();
+    void addFrames();
+    void update();
+    void GetFrame(float positions[]);
+    void SetCurrentFrame(int frame);
+    bool operator==(const Animation& animation) const;
+    Frame* currentFrame;
+    std::vector<Frame*> totalFrames;
 
-	Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor, int row);
-	Animation(glm::ivec2 frameCount, glm::ivec2 spriteSize, glm::ivec2 scaleFactor);
-	~Animation();
+private:
+    std::vector<Frame> framesInAnimation;
+    int spriteWidth;
+    int spriteHeight;
+    int frameWidth;
+    int frameHeight;
+    int currentFrameCounter;
+    int maxFramesInAnimation;
+    float maxAnimationTime;
+    float currentTime;
+    int initialX;
+    int initialY;
+    int id;
 
-	void Update();
-	void LoadFrames(glm::ivec2 spriteSize, int row);
-	void GetFrame(float positions[]);
-	void SetCurrentFrame(int frame);
-	float GetFrameWidth();
-	float GetFrameHeight();
-	glm::vec2 GetFrameSize();
-	glm::vec2 GetScaleFactor();
-	void Unload();
 };
 
