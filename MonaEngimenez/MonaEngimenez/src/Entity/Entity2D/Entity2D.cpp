@@ -2,9 +2,18 @@
 
 #include "Timer/Timer.h"
 
+unsigned int Entity2D::instanceCount = 0;
+
 void Entity2D::UpdateMVP()
 {
 	mvp = Transform::TRStoMVP(traslation, rotation, scale);
+}
+
+Entity2D::Entity2D()
+{
+	id = instanceCount;
+	m_RendererID = instanceCount;
+	instanceCount++;
 }
 
 void Entity2D::Translate(float x, float y)
@@ -62,8 +71,6 @@ void Entity2D::UpdateAlpha(float alpha)
 	{
 		m_Alpha = 0.0f;
 	}	
-
-	shader->SetUniform1f("u_Alpha", m_Alpha);
 }
 
 float Entity2D::ToRadians(float degrees)

@@ -22,6 +22,7 @@ protected:
 	Shader* shader;
 	IndexBuffer* ib;
 	BufferLayout layout;
+	unsigned int m_RendererID;
 
 	int scaleFactorX = 1;
 	int scaleFactorY = 1;
@@ -35,10 +36,16 @@ protected:
 	float translationSpeed = 100.0f;
 	float rotationSpeed = 100.0f;
 	float scaleSpeed = 1.0f;
+	unsigned int id;
+
+
+	static unsigned int instanceCount;
 
 	void UpdateMVP();
 
 public:
+
+	Entity2D();
 
 	void Translate(float x, float y);
 	void SetTranslation(float x, float y);

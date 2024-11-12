@@ -2,10 +2,10 @@
 
 #include "Debugger/Debugger.h"
 
-unsigned int Sprite::instanceCount = 0;
+
 
 Sprite::Sprite(const std::string& path)
-	: m_RendererID(0), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
+	: m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
 {
 	unsigned int indices[]
@@ -14,8 +14,10 @@ Sprite::Sprite(const std::string& path)
 		2,3,0
 	};
 
-	id = instanceCount++;
-	m_RendererID = id;
+	//id = instanceCount++;
+	// = id;
+
+	//Renderer::EnableBlending();
 
 	SetFullTexture();
 
@@ -73,13 +75,13 @@ Sprite::~Sprite()
 
 void Sprite::Draw(float alpha)
 {
-
 	animation->SetCurrentFrame(0);
 	animation->GetFrame(positions);
 	UpdateVertexBuffer();
 	SetAlpha(alpha);
 	shader->Bind();
 	shader->SetUniformMath4f("u_MVP", mvp);
+	shader->SetUniform1f("u_Alpha", m_Alpha);
 
 	Renderer::BindTexture(m_RendererID, id);
 	Renderer::Draw(va, *ib, m_RendererID);
@@ -97,6 +99,7 @@ void Sprite::Animate()
 	UpdateVertexBuffer();
 	shader->Bind();
 	shader->SetUniformMath4f("u_MVP", mvp);
+	shader->SetUniform1f("u_Alpha", m_Alpha);
 
 	Renderer::BindTexture(m_RendererID, id);
 	Renderer::Draw(va, *ib, m_RendererID);

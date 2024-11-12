@@ -26,6 +26,7 @@ public:
 	static float width;
 	static float height;
 
+	static void LoadShader();
 	static void Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 	static void SwapBuffers(Window window);
 	static void Draw(const VertexArray& va, const IndexBuffer& ib, unsigned int& m_RendererID);

@@ -40,6 +40,7 @@ BaseGame::BaseGame(float width, float height)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
+	Renderer::LoadShader();
 	Renderer::EnableBlending();
 	
 

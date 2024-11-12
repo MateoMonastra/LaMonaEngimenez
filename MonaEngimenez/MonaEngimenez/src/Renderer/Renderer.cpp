@@ -7,6 +7,12 @@ float Renderer::width = 0;
 float Renderer::height = 0;
 Shader Renderer::shader;
 
+void Renderer::LoadShader()
+{
+	shader.SetShader("../Resources/Texture.shader");
+	shader.Bind();
+}
+
 void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
 	glClearColor(red, green, blue, alpha);
@@ -23,30 +29,33 @@ void Renderer::SwapBuffers(Window window)
 
 void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, unsigned int& m_RendererID)
 {
-	//shader.Bind();
+	EnableBlending();
 	va.Bind();
 	ib.Bind();
 
-	//DebuggerCall(glGenTextures(1, &m_RendererID));
-	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
-
 	DebuggerCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, 0));
 
-	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
 	shader.Unbind();
 }
 
 void Renderer::EnableBlending()
 {
-	shader.SetShader("../Resources/Texture.shader");
-	shader.Bind();
+	glEnable(GL_DEPTH);
+	glDepthFunc(GL_LESS);
 
-	DebuggerCall(glEnable(GL_BLEND));
-	DebuggerCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA))
+	glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+	glEnable(GL_SAMPLE_ALPHA_TO_ONE);
+	glFrontFace(GL_CCW);
+	glEnable(GL_BLEND); //Transparency
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_ALPHA);
+	glAlphaFunc(GL_GREATER, 0.1f);
 }
 
 void Renderer::CreateTexture(unsigned int& m_RendererID, int& m_Width, int& m_Height, unsigned char* m_LocalBuffer, unsigned int& id)
 {
+	EnableBlending();
 	DebuggerCall(glGenTextures(1, &m_RendererID));
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
@@ -73,7 +82,6 @@ void Renderer::CreateTexture(unsigned int& m_RendererID, int& m_Width, int& m_He
 
 void Renderer::BindTexture(unsigned int& m_RendererID, unsigned int& id)
 {
-	/*DebuggerCall(glActiveTexture(GL_TEXTURE0 + id));*/
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 }
 

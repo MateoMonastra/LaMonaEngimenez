@@ -8,15 +8,11 @@ class MONA_ENGIMENEZ Sprite : public Entity2D
 {
 private:
 	Animation* animation;
-	unsigned int m_RendererID;
 	std::string m_FilePath;
 	unsigned char* m_LocalBuffer;
 	int m_Width, m_Height, m_BPP;
 	float positions[16];
 	bool isAnimated = false;
-	unsigned int id;
-
-	static unsigned int instanceCount;
 
 public:
 	Sprite(const std::string& path);
