@@ -6,6 +6,7 @@
 #include "Sprite/Sprite.h"
 #include "Animation/Animation.h"
 #include "Timer/Time.h"
+#include "CollisionManager/CollisionManager.h"
 
 
 class Game : public BaseGame
@@ -16,8 +17,15 @@ private:
 	Animation* knucklesIdle;
 	Animation* knucklesWalking;
 	Animation* knucklesSpin;
+	Animation* knucklesPush;
+
+	Sprite* rock;
+	Animation* rockIdle;
+
 
 	bool isMoving = false;
+	bool isSpining = false;
+	bool isColliding = false;
 
 
 public:
@@ -31,4 +39,5 @@ public:
 
 	void GetInput();
 	void Draw();
+	void CheckCollisions();
 };

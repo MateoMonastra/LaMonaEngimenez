@@ -31,7 +31,8 @@ enum MONA_ENGIMENEZ KeyCode
 	n = GLFW_KEY_N,
 	m = GLFW_KEY_M,
 	subtract = GLFW_KEY_KP_SUBTRACT,
-	add = GLFW_KEY_KP_ADD
+	add = GLFW_KEY_KP_ADD,
+	space = GLFW_KEY_SPACE
 };
 
 enum MONA_ENGIMENEZ Action

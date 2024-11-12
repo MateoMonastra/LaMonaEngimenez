@@ -22,8 +22,7 @@ void Game::Init()
 
 
 	knuckles->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-	knuckles->SetTranslation(500.0f, 500.0f);
-	//knucklesIdle = new Animation(0, 0, 1, 0.1f, knuckles->GetWidth(), knuckles->GetHeight(), 34, 39);
+	knuckles->SetTranslation(50.0f, 50.0f);
 
 	///knuckles
 	// Idle
@@ -46,11 +45,51 @@ void Game::Init()
 	float walkingScaleY = 1.0f / knuckles->GetHeight() * walkingHeight;
 	intialY = knuckles->GetHeight() - 85;
 	knucklesWalking = new Animation(338, intialY, walkingTotalFrames, 0.4f, knuckles->GetWidth(), knuckles->GetHeight(), walkingWidth, walkingHeight);
+
+	int spinWidth = 33;
+	int spinHeight = 29;
+	int spinTotalFrames = 11;
+	float spinScaleX = 1.0f / knuckles->GetWidth() * spinWidth;
+	float spinScaleY = 1.0f / knuckles->GetHeight() * spinHeight;
+	intialY = knuckles->GetHeight() - 159;
+	knucklesSpin = new Animation(0, intialY, spinTotalFrames, 1.5f, knuckles->GetWidth(), knuckles->GetHeight(), spinWidth, spinHeight);
+	//knuckles->SetAnimation(knucklesSpin);
+
+	int deathWidth = 33;
+	int deathHeight = 35;
+	int deathTotalFrames = 4;
+	float deathScaleX = 1.0f / knuckles->GetWidth() * deathWidth;
+	float deathScaleY = 1.0f / knuckles->GetHeight() * deathHeight;
+	intialY = knuckles->GetHeight() - 131;
+	knucklesPush = new Animation(427, intialY, deathTotalFrames, 0.5f, knuckles->GetWidth(), knuckles->GetHeight(), deathWidth, deathHeight);
+	//knuckles->SetAnimation(knucklesDeath);
+
+
+
+
+	rock = new Sprite("../Assets/Rock.jfif");
+	rock->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
+	rock->SetTranslation(500.0f, 500.0f);
+
+	int rockWidth = 81;
+	int rockHeight = 56;
+	int rockTotalFrames = 1;
+	float rockScaleX = 1.0f / rock->GetWidth() * rockWidth;
+	float rockScaleY = 1.0f / rock->GetHeight() * rockHeight;
+	int initialX = 77;
+	intialY = rock->GetHeight() - 77;
+
+	rockIdle = new Animation(initialX, intialY, rockTotalFrames, 0.1f, rock->GetWidth(), rock->GetHeight(), rockWidth, rockHeight);
+	rock->SetAnimation(rockIdle);
+
+
 }
 
 void Game::Update()
 {
 	GetInput();
+
+	CheckCollisions();
 
 	Draw();
 }
@@ -61,7 +100,10 @@ void Game::Deinit()
 	delete knucklesIdle;
 	delete knucklesWalking;
 	delete knucklesSpin;
+	delete knucklesPush;
 
+	delete rock;
+	delete rockIdle;
 }
 
 void Game::GetInput()
@@ -71,6 +113,7 @@ void Game::GetInput()
 	glm::vec2 scale{ 0.0f, 0.0f };
 	float alpha = 0.0f;
 	isMoving = false;
+	isSpining = false;
 
 	if (inputManager->GetKey(w, Pressed))
 	{
@@ -123,11 +166,20 @@ void Game::GetInput()
 	{
 		alpha = -1.0f * Time::getDeltaTime();
 	}
+	if (inputManager->GetKey(space, Pressed))
+	{
+		isSpining = true;
+	}
 
 	knuckles->UpdateTransform(velocity, rotation, scale);
 	knuckles->UpdateAlpha(alpha);
 
-	if (isMoving)
+	if (isSpining)
+	{
+		knuckles->SetAnimation(knucklesSpin);
+		//knuckles->SetAnimation(knucklesPush);
+	}
+	else if (isMoving)
 	{
 		knuckles->SetAnimation(knucklesWalking);
 	}
@@ -139,11 +191,15 @@ void Game::GetInput()
 
 void Game::Draw()
 {
-	//burst->Animate();
-	//milhouse->Draw();
-	//triangle->Draw();
-
-
+	rock->Animate();
 	knuckles->Animate();
+}
 
+void Game::CheckCollisions()
+{
+	if (CollisionManager::CheckCollisionRecRec(knuckles, rock))
+	{
+		knuckles->SetAnimation(knucklesPush);
+		std::cout << "Colliding" << std::endl;	
+	}
 }
