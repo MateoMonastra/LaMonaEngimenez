@@ -19,7 +19,7 @@ class MONA_ENGIMENEZ Entity2D : public Entity
 protected:
 	VertexArray va;
 	VertexBuffer vb;
-	Shader shader;
+	Shader* shader;
 	IndexBuffer* ib;
 	BufferLayout layout;
 

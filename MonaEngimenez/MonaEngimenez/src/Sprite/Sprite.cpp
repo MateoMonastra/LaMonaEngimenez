@@ -2,10 +2,10 @@
 
 #include "Debugger/Debugger.h"
 
-unsigned int Sprite::instanceCount = 1;
+unsigned int Sprite::instanceCount = 0;
 
 Sprite::Sprite(const std::string& path)
-	: m_RendererID(0), m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
+	: m_RendererID(0), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
 
 {
 	unsigned int indices[]
@@ -23,10 +23,6 @@ Sprite::Sprite(const std::string& path)
 	SetRotation(0.0f);
 	SetTranslation(0.0f, 0.0f);
 
-
-	shader.SetShader("../Resources/Texture.shader");
-	//std::cout << "Shader u_Texture set to: " << id << std::endl;
-	
 	layout.Push<float>(2);
 	layout.Push<float>(2);
 
@@ -35,17 +31,17 @@ Sprite::Sprite(const std::string& path)
 	vb.SetVertexBuffer(positions, 4 * 4 * sizeof(float));
 	va.AddBuffer(vb, layout);
 
-
 	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer, id);
 
-	shader.SetUniform1i("u_Texture", id);
+	this->shader = Renderer::GetShader();
+	shader->SetUniform1i("u_Texture", id);
 
 	scaleFactorX = m_Width;
 	scaleFactorY = m_Height;
 
-	vb.Unbind();
-	va.Unbind();
-	ib->Unbind();
+	//vb.Unbind();
+	//va.Unbind();
+	//ib->Unbind();
 }
 
 Sprite::Sprite(const std::string& path, glm::ivec2 frameCount)
@@ -79,9 +75,10 @@ void Sprite::Draw(float alpha)
 	animation->GetFrame(positions);
 	UpdateVertexBuffer();
 	SetAlpha(alpha);
-	shader.SetUniformMath4f("u_MVP", mvp);
+	shader->Bind();
+	shader->SetUniformMath4f("u_MVP", mvp);
 	Renderer::BindTexture(m_RendererID, id);
-	Renderer::Draw(va, *ib, shader);
+	Renderer::Draw(va, *ib, m_RendererID);
 }
 
 void Sprite::Draw()
@@ -94,8 +91,9 @@ void Sprite::Animate()
 	animation->Update();
 	animation->GetFrame(positions);
 	UpdateVertexBuffer();
-	shader.SetUniformMath4f("u_MVP", mvp);
-	Renderer::Draw(va, *ib, shader);
+	shader->Bind();
+	shader->SetUniformMath4f("u_MVP", mvp);
+	Renderer::Draw(va, *ib, m_RendererID);
 }
 
 void Sprite::UpdateVertexBuffer()

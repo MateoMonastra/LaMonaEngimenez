@@ -22,7 +22,7 @@ Triangle::Triangle(float width, float height)
 
 	SetScale(glm::vec3(width, height, 0.0f));
 
-	shader.SetShader("../Resources/Shape.shader");
+	shader->SetShader("../Resources/Shape.shader");
 
 	vb.SetVertexBuffer(positions, 4 * 2 * sizeof(float));
 	va.AddBuffer(vb, layout);
@@ -34,5 +34,5 @@ Triangle::Triangle(float width, float height)
 
 Triangle::~Triangle()
 {
-	shader.Unbind();
+	shader->Unbind();
 }

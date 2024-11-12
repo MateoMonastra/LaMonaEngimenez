@@ -6,10 +6,10 @@
 
 void Shape::Bind(glm::mat4 mvp)
 {
-	shader.Bind();
-	shader.SetUniform4f("u_Color", color.x, color.y, color.z, color.w);
-	shader.SetUniformMath4f("u_MVP", mvp);
-	shader.Unbind();
+	shader->Bind();
+	shader->SetUniform4f("u_Color", color.x, color.y, color.z, color.w);
+	shader->SetUniformMath4f("u_MVP", mvp);
+	shader->Unbind();
 }
 
 Shape::Shape()
@@ -32,7 +32,7 @@ void Shape::Draw()
 {
 	glm::mat4 mvp = Transform::TRStoMVP(traslation, rotation, scale);
 	Bind(mvp);
-	Renderer::Draw(va, *ib, shader);
+	//Renderer::Draw(va, *ib, m_RendererID);
 }
 
 void Shape::SetColor(glm::vec4 color)

@@ -47,7 +47,7 @@ void Entity2D::SetScale(glm::vec3 scale)
 void Entity2D::SetAlpha(float alpha)
 {
 	m_Alpha = alpha;
-	shader.SetUniform1f("u_Alpha", m_Alpha);
+	shader->SetUniform1f("u_Alpha", m_Alpha);
 }
 
 void Entity2D::UpdateAlpha(float alpha)
@@ -63,7 +63,7 @@ void Entity2D::UpdateAlpha(float alpha)
 		m_Alpha = 0.0f;
 	}	
 
-	shader.SetUniform1f("u_Alpha", m_Alpha);
+	shader->SetUniform1f("u_Alpha", m_Alpha);
 }
 
 float Entity2D::ToRadians(float degrees)

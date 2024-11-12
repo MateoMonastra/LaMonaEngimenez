@@ -19,7 +19,7 @@ MONA_ENGIMENEZ static class Renderer
 {
 private:
 
-	
+	static Shader shader;
 
 public:
 
@@ -28,12 +28,13 @@ public:
 
 	static void Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 	static void SwapBuffers(Window window);
-	static void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader);
+	static void Draw(const VertexArray& va, const IndexBuffer& ib, unsigned int& m_RendererID);
 	static void EnableBlending();
 	static void CreateTexture(unsigned int& m_RendererID, int& m_Width, int& m_Height, unsigned char* m_LocalBuffer, unsigned int& id);
 	static void BindTexture(unsigned int& m_RendererID, unsigned int& id);
 	static void LoadImage(const std::string& path, unsigned int& m_RendererID, int& m_Width, int& m_Height, int& m_BPP, unsigned char* m_LocalBuffer, unsigned int& id);
 	static float GetWidth() { return width; }
 	static float GetHeight() { return height; }
+	static Shader* GetShader() { return &shader; }
 };
 

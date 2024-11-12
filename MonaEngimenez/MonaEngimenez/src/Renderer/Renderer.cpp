@@ -5,6 +5,7 @@
 
 float Renderer::width = 0;
 float Renderer::height = 0;
+Shader Renderer::shader;
 
 void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
@@ -20,25 +21,33 @@ void Renderer::SwapBuffers(Window window)
 	height = window.GetHeight();
 }
 
-void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader)
+void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, unsigned int& m_RendererID)
 {
-	shader.Bind();
+	//shader.Bind();
 	va.Bind();
 	ib.Bind();
 
+	//DebuggerCall(glGenTextures(1, &m_RendererID));
+	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
+
 	DebuggerCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+
+	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
+
+	shader.Unbind();
 }
 
 void Renderer::EnableBlending()
 {
+	shader.SetShader("../Resources/Texture.shader");
+	shader.Bind();
+
 	DebuggerCall(glEnable(GL_BLEND));
 	DebuggerCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA))
 }
 
 void Renderer::CreateTexture(unsigned int& m_RendererID, int& m_Width, int& m_Height, unsigned char* m_LocalBuffer, unsigned int& id)
 {
-	std::cout << "Creating Texture - RendererID: " << m_RendererID << ", Slot ID: " << id << std::endl;
-
 	DebuggerCall(glGenTextures(1, &m_RendererID));
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
@@ -53,7 +62,7 @@ void Renderer::CreateTexture(unsigned int& m_RendererID, int& m_Width, int& m_He
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	DebuggerCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer));
-	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
+	DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
 
 	if (m_LocalBuffer)
 		stbi_image_free(m_LocalBuffer);
@@ -67,9 +76,6 @@ void Renderer::BindTexture(unsigned int& m_RendererID, unsigned int& id)
 {
 	DebuggerCall(glActiveTexture(GL_TEXTURE0 + id));
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
-
-	//std::cout << "GL_TEXTURE: " << GL_TEXTURE0 << id << std::endl;
-	//std::cout << "Binding Texture - RendererID: " << m_RendererID << ", Slot ID: " << id << std::endl;
 }
 
 void Renderer::LoadImage(const std::string& path, unsigned int& m_RendererID, int& m_Width, int& m_Height, int& m_BPP, unsigned char* m_LocalBuffer, unsigned int& id)

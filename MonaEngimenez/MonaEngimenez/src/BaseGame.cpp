@@ -41,6 +41,7 @@ BaseGame::BaseGame(float width, float height)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	Renderer::EnableBlending();
+	
 
 	glfwSwapInterval(1);
 

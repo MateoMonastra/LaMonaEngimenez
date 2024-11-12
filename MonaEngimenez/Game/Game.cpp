@@ -18,9 +18,9 @@ Game::~Game()
 
 void Game::Init()
 {  
+   milhouse = new Sprite("../Assets/Milhouse.png", glm::ivec2(1, 1), 0);
    dynoBoy = new Sprite("../Assets/Player.png", glm::ivec2(3, 1), 0);
    //burst = new Sprite("../Assets/Burst.png", glm::ivec2(3, 1), 0);
-   milhouse = new Sprite("../Assets/Milhouse.png", glm::ivec2(1, 1), 0);
 
    dynoBoy->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
    dynoBoy->SetTranslation(500.0f, 500.0f);

@@ -23,7 +23,7 @@ Square::Square(float width, float height)
 
 	SetScale(glm::vec3(width, height, 0.0f));
 
-	shader.SetShader("../Resources/Shape.shader");
+	shader->SetShader("../Resources/Shape.shader");
 
 	vb.SetVertexBuffer(positions, 4 * 2 * sizeof(float));
 	va.AddBuffer(vb, layout);
@@ -35,5 +35,5 @@ Square::Square(float width, float height)
 
 Square::~Square()
 {
-	shader.Unbind();
+	shader->Unbind();
 }
