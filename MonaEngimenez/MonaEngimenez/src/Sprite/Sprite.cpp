@@ -31,17 +31,19 @@ Sprite::Sprite(const std::string& path)
 	vb.SetVertexBuffer(positions, 4 * 4 * sizeof(float));
 	va.AddBuffer(vb, layout);
 
-	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer, id);
+	m_FilePath = path;
 
 	this->shader = Renderer::GetShader();
-	shader->SetUniform1i("u_Texture", id);
+
+	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer, id);
+	
 
 	scaleFactorX = m_Width;
 	scaleFactorY = m_Height;
 
-	//vb.Unbind();
-	//va.Unbind();
-	//ib->Unbind();
+	vb.Unbind();
+	va.Unbind();
+	ib->Unbind();
 }
 
 Sprite::Sprite(const std::string& path, glm::ivec2 frameCount)
@@ -71,12 +73,14 @@ Sprite::~Sprite()
 
 void Sprite::Draw(float alpha)
 {
+
 	animation->SetCurrentFrame(0);
 	animation->GetFrame(positions);
 	UpdateVertexBuffer();
 	SetAlpha(alpha);
 	shader->Bind();
 	shader->SetUniformMath4f("u_MVP", mvp);
+
 	Renderer::BindTexture(m_RendererID, id);
 	Renderer::Draw(va, *ib, m_RendererID);
 }
@@ -93,6 +97,8 @@ void Sprite::Animate()
 	UpdateVertexBuffer();
 	shader->Bind();
 	shader->SetUniformMath4f("u_MVP", mvp);
+
+	Renderer::BindTexture(m_RendererID, id);
 	Renderer::Draw(va, *ib, m_RendererID);
 }
 

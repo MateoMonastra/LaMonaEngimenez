@@ -12,7 +12,7 @@ class Game : public BaseGame
 private:
 
 	Sprite* dynoBoy;
-	//Sprite* burst;
+	Triangle* triangle;
 	Sprite* milhouse;
 
 	bool isMoving = false;

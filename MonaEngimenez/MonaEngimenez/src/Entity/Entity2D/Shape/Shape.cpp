@@ -22,6 +22,8 @@ Shape::Shape()
 	scale = glm::vec3(1.0f);
 
 	color = glm::vec4(1.0f, 0.3f, 0.5f, 1.0f);
+
+	shader->SetShader("../Resources/Shape.shader");
 }
 
 Shape::~Shape()
@@ -32,7 +34,7 @@ void Shape::Draw()
 {
 	glm::mat4 mvp = Transform::TRStoMVP(traslation, rotation, scale);
 	Bind(mvp);
-	//Renderer::Draw(va, *ib, m_RendererID);
+	Renderer::Draw(va, *ib, m_RendererID);
 }
 
 void Shape::SetColor(glm::vec4 color)

@@ -20,6 +20,7 @@ void Game::Init()
 {  
    milhouse = new Sprite("../Assets/Milhouse.png", glm::ivec2(1, 1), 0);
    dynoBoy = new Sprite("../Assets/Player.png", glm::ivec2(3, 1), 0);
+   triangle = new Triangle(400.0f,400.0f);
    //burst = new Sprite("../Assets/Burst.png", glm::ivec2(3, 1), 0);
 
    dynoBoy->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
@@ -111,6 +112,7 @@ void Game::Draw()
 {
 	//burst->Animate();
 	milhouse->Draw();
+	triangle->Draw();
 
 	if (isMoving)
 	{

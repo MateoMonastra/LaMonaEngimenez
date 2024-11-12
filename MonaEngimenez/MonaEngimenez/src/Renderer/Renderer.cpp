@@ -30,10 +30,9 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, unsigned int& 
 	//DebuggerCall(glGenTextures(1, &m_RendererID));
 	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
-	DebuggerCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+	DebuggerCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, 0));
 
 	//DebuggerCall(glBindTexture(GL_TEXTURE_2D, 0));
-
 	shader.Unbind();
 }
 
@@ -74,7 +73,7 @@ void Renderer::CreateTexture(unsigned int& m_RendererID, int& m_Width, int& m_He
 
 void Renderer::BindTexture(unsigned int& m_RendererID, unsigned int& id)
 {
-	DebuggerCall(glActiveTexture(GL_TEXTURE0 + id));
+	/*DebuggerCall(glActiveTexture(GL_TEXTURE0 + id));*/
 	DebuggerCall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 }
 
