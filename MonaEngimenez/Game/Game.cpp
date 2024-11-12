@@ -18,21 +18,34 @@ Game::~Game()
 
 void Game::Init()
 {
-	milhouse = new Sprite("../Assets/Milhouse.png");
-	dynoBoy = new Sprite("../Assets/Player.png");
-	//triangle = new Triangle(400.0f,400.0f);
-	//burst = new Sprite("../Assets/Burst.png", glm::ivec2(3, 1), 0);
+	knuckles = new Sprite("../Assets/Knuckles.png");
 
-	dynoBoy->SetScale(glm::vec3(0.3f, 0.6f, 0.0f));
-	dynoBoy->SetTranslation(500.0f, 500.0f);
-	dynoBoyAnimation = new Animation(0, 0, 3, 5, 495, 131, 165, 131);
-	dynoBoy->SetAnimation(dynoBoyAnimation);
 
-	//burst->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
-	//burst->SetTranslation(500.0f, 500.0f);
+	knuckles->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
+	knuckles->SetTranslation(500.0f, 500.0f);
+	//knucklesIdle = new Animation(0, 0, 1, 0.1f, knuckles->GetWidth(), knuckles->GetHeight(), 34, 39);
 
-	milhouse->SetScale(glm::vec3(0.1f, 0.1f, 0.0f));
-	milhouse->SetTranslation(milhouse->GetWidth() / 2.0f, milhouse->GetHeight() / 2.0f);
+	///knuckles
+	// Idle
+	int idleWidth = 32;
+	int idleHeight = 39;
+	int idleTotalFrames = 1;
+	float idleScaleX = 1.0f / knuckles->GetWidth() * idleWidth;
+	float idleScaleY = 1.0f / knuckles->GetHeight() * idleHeight;
+	int intialY = knuckles->GetHeight() - idleHeight;
+
+	knuckles->SetScale(glm::vec3(idleScaleX * 2, idleScaleY * 2, 0.0f));
+
+	knucklesIdle = new Animation(0, intialY, idleTotalFrames, 0.1f, knuckles->GetWidth(), knuckles->GetHeight(), idleWidth, idleHeight);
+	knuckles->SetAnimation(knucklesIdle);
+
+	int walkingWidth = 38;
+	int walkingHeight = 40;
+	int walkingTotalFrames = 4;
+	float walkingScaleX = 1.0f / knuckles->GetWidth() * walkingWidth;
+	float walkingScaleY = 1.0f / knuckles->GetHeight() * walkingHeight;
+	intialY = knuckles->GetHeight() - 85;
+	knucklesWalking = new Animation(338, intialY, walkingTotalFrames, 0.4f, knuckles->GetWidth(), knuckles->GetHeight(), walkingWidth, walkingHeight);
 }
 
 void Game::Update()
@@ -44,10 +57,11 @@ void Game::Update()
 
 void Game::Deinit()
 {
-	delete dynoBoy;
-	delete dynoBoyAnimation;
-	delete milhouse;
-	//delete triangle;
+	delete knuckles;
+	delete knucklesIdle;
+	delete knucklesWalking;
+	delete knucklesSpin;
+
 }
 
 void Game::GetInput()
@@ -72,11 +86,14 @@ void Game::GetInput()
 	{
 		velocity.x = 1.0f * Time::getDeltaTime();
 		isMoving = true;
+		scale.x = abs(scale.x);
 	}
 	if (inputManager->GetKey(a, Pressed))
 	{
 		velocity.x = -1.0f * Time::getDeltaTime();
 		isMoving = true;
+		//scale.x = abs(scale.x * -1.0f);
+		scale.x = scale.x  * -1.0f;
 	}
 	if (inputManager->GetKey(q, Pressed))
 	{
@@ -107,18 +124,26 @@ void Game::GetInput()
 		alpha = -1.0f * Time::getDeltaTime();
 	}
 
-	dynoBoy->UpdateTransform(velocity, rotation, scale);
-	dynoBoy->UpdateAlpha(alpha);
+	knuckles->UpdateTransform(velocity, rotation, scale);
+	knuckles->UpdateAlpha(alpha);
+
+	if (isMoving)
+	{
+		knuckles->SetAnimation(knucklesWalking);
+	}
+	else
+	{
+		knuckles->SetAnimation(knucklesIdle);
+	}
 }
 
 void Game::Draw()
 {
 	//burst->Animate();
-	milhouse->Draw();
+	//milhouse->Draw();
 	//triangle->Draw();
 
 
-	dynoBoy->Animate();
+	knuckles->Animate();
 
 }
-

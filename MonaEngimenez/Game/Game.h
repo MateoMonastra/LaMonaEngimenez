@@ -12,10 +12,10 @@ class Game : public BaseGame
 {
 private:
 
-	Sprite* dynoBoy;
-	Triangle* triangle;
-	Sprite* milhouse;
-	Animation* dynoBoyAnimation;
+	Sprite* knuckles;
+	Animation* knucklesIdle;
+	Animation* knucklesWalking;
+	Animation* knucklesSpin;
 
 	bool isMoving = false;
 

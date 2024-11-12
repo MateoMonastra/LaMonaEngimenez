@@ -23,6 +23,8 @@ Animation::Animation(int initialX, int initialY, int maxFrames, float maxAnimati
     addFrames();
     currentTime = 0;
     currentFrame = totalFrames.front();
+
+
 }
 
 
@@ -47,6 +49,7 @@ void Animation::addFrames()
 {
     float spriteWidthF = spriteWidth;
     float spriteHeightF = spriteHeight;
+
     for (int i = 0; i < maxFramesInAnimation; ++i)
     {
         glm::vec2 topRight = glm::vec2((initialX + (i * frameWidth) + frameWidth) / spriteWidthF,
