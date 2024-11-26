@@ -27,8 +27,6 @@ Animation::Animation(int initialX, int initialY, int maxFrames, float maxAnimati
 
 }
 
-
-
 Animation::Animation()
 {
     while (!totalFrames.empty())
@@ -39,6 +37,19 @@ Animation::Animation()
     }
     maxFramesInAnimation = 0;
 }
+
+Animation::~Animation()
+{
+    while (!totalFrames.empty())
+    {
+        Frame* aux = totalFrames.back();
+        totalFrames.pop_back();
+        delete aux;
+		totalFrames.clear();
+    }
+}
+
+
 
 bool Animation::hasFrames()
 {
@@ -109,7 +120,6 @@ void Animation::SetCurrentFrame(int frame)
 {
     currentFrame = totalFrames[frame];
 }
-
 
 bool Animation::operator==(const Animation& animation) const
 {

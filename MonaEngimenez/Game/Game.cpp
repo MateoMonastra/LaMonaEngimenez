@@ -66,7 +66,6 @@ void Game::Init()
 
 
 
-
 	rock = new Sprite("../Assets/Rock.jfif");
 	rock->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
 	rock->SetTranslation(500.0f, 500.0f);
@@ -135,7 +134,6 @@ void Game::GetInput()
 	{
 		velocity.x = -1.0f * Time::getDeltaTime();
 		isMoving = true;
-		//scale.x = abs(scale.x * -1.0f);
 		scale.x = scale.x  * -1.0f;
 	}
 	if (inputManager->GetKey(q, Pressed))
@@ -177,7 +175,6 @@ void Game::GetInput()
 	if (isSpining)
 	{
 		knuckles->SetAnimation(knucklesSpin);
-		//knuckles->SetAnimation(knucklesPush);
 	}
 	else if (isMoving)
 	{

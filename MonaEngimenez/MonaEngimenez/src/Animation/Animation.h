@@ -11,6 +11,7 @@ class MONA_ENGIMENEZ Animation
 public:
     Animation(int initialX, int initialY, int maxFrames, float maxAnimationTime, int spriteWidth, int spriteHeight,int frameWidth, int frameHeight);
     Animation();
+	~Animation();
     bool hasFrames();
     void addFrames();
     void update();

@@ -57,7 +57,7 @@ Sprite::~Sprite()
 {
 	DebuggerCall(glDeleteTextures(1, &m_RendererID));
 
-	delete animation;
+	//delete animation;
 }
 
 void Sprite::Draw(float alpha)
