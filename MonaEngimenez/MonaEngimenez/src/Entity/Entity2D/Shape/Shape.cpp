@@ -9,7 +9,6 @@ void Shape::Bind(glm::mat4 mvp)
 	this->shader->Bind();
 	this->shader->SetUniform4f("u_Color", color.x, color.y, color.z, color.w);
 	this->shader->SetUniformMath4f("u_MVP", mvp);
-	this->shader->Unbind();
 }
 
 Shape::Shape()
