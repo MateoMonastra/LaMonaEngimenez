@@ -82,7 +82,10 @@ void Game::Init()
 	rock->SetAnimation(rockIdle);
 
 
-	triangle = new Triangle(150, 150);
+	square = new Square(1000, 1000);
+	square->SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
+	square->SetTranslation(0, 0);
+
 }
 
 void Game::Update()
@@ -90,6 +93,8 @@ void Game::Update()
 	GetInput();
 
 	CheckCollisions();
+
+	square->SetScale(glm::vec3(0.1f, 0.1f, 0.0f));
 
 	Draw();
 }
@@ -105,7 +110,7 @@ void Game::Deinit()
 	delete rock;
 	delete rockIdle;
 
-	delete triangle;
+	delete square;
 }
 
 void Game::GetInput()
@@ -191,9 +196,9 @@ void Game::GetInput()
 
 void Game::Draw()
 {
+	square->Draw();
 	rock->Animate();
 	knuckles->Animate();
-	triangle->Draw();
 }
 
 void Game::CheckCollisions()

@@ -6,10 +6,10 @@
 
 void Shape::Bind(glm::mat4 mvp)
 {
-	shader->Bind();
-	shader->SetUniform4f("u_Color", color.x, color.y, color.z, color.w);
-	shader->SetUniformMath4f("u_MVP", mvp);
-	shader->Unbind();
+	this->shader->Bind();
+	this->shader->SetUniform4f("u_Color", color.x, color.y, color.z, color.w);
+	this->shader->SetUniformMath4f("u_MVP", mvp);
+	this->shader->Unbind();
 }
 
 Shape::Shape()
@@ -23,7 +23,7 @@ Shape::Shape()
 
 	color = glm::vec4(1.0f, 0.3f, 0.5f, 1.0f);
 
-	shader = Renderer::GetShapeShader();
+	this->shader = Renderer::GetShapeShader();
 }
 
 Shape::~Shape()

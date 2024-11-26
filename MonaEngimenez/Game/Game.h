@@ -22,7 +22,7 @@ private:
 	Sprite* rock;
 	Animation* rockIdle;
 
-	Triangle* triangle;
+	Square* square;
 
 
 	bool isMoving = false;
