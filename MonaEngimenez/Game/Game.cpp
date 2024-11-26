@@ -82,6 +82,7 @@ void Game::Init()
 	rock->SetAnimation(rockIdle);
 
 
+	triangle = new Triangle(150, 150);
 }
 
 void Game::Update()
@@ -103,6 +104,8 @@ void Game::Deinit()
 
 	delete rock;
 	delete rockIdle;
+
+	delete triangle;
 }
 
 void Game::GetInput()
@@ -190,6 +193,7 @@ void Game::Draw()
 {
 	rock->Animate();
 	knuckles->Animate();
+	triangle->Draw();
 }
 
 void Game::CheckCollisions()

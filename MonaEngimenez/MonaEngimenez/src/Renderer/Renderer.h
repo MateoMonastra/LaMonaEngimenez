@@ -19,7 +19,8 @@ MONA_ENGIMENEZ static class Renderer
 {
 private:
 
-	static Shader shader;
+	static Shader textureShader;
+	static Shader shapeShader;
 
 public:
 
@@ -36,6 +37,7 @@ public:
 	static void LoadImage(const std::string& path, unsigned int& m_RendererID, int& m_Width, int& m_Height, int& m_BPP, unsigned char* m_LocalBuffer, unsigned int& id);
 	static float GetWidth() { return width; }
 	static float GetHeight() { return height; }
-	static Shader* GetShader() { return &shader; }
+	static Shader* GetTextureShader() { return &textureShader; }
+	static Shader* GetShapeShader() { return &shapeShader; }
 };
 

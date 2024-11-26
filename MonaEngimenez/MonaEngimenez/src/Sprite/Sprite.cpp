@@ -13,11 +13,6 @@ Sprite::Sprite(const std::string& path)
 		2,3,0
 	};
 
-	//id = instanceCount++;
-	// = id;
-
-	//Renderer::EnableBlending();
-
 	SetFullTexture();
 
 	SetScale(glm::vec3(1.0f, 1.0f, 0.0f));
@@ -34,7 +29,7 @@ Sprite::Sprite(const std::string& path)
 
 	m_FilePath = path;
 
-	this->shader = Renderer::GetShader();
+	shader = Renderer::GetTextureShader();
 
 	Renderer::LoadImage(path, m_RendererID, m_Width, m_Height, m_BPP, m_LocalBuffer, id);
 

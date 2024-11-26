@@ -5,12 +5,16 @@
 
 float Renderer::width = 0;
 float Renderer::height = 0;
-Shader Renderer::shader;
+Shader Renderer::textureShader;
+Shader Renderer::shapeShader;
 
 void Renderer::LoadShader()
 {
-	shader.SetShader("../Resources/Texture.shader");
-	shader.Bind();
+	textureShader.SetShader("../Resources/Texture.shader");
+	textureShader.Bind();
+
+	shapeShader.SetShader("../Resources/Shape.shader");
+	shapeShader.Bind();
 }
 
 void Renderer::Clear(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
@@ -35,7 +39,7 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, unsigned int& 
 
 	DebuggerCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, 0));
 
-	shader.Unbind();
+	textureShader.Unbind();
 }
 
 void Renderer::EnableBlending()
@@ -48,7 +52,6 @@ void Renderer::EnableBlending()
 	glFrontFace(GL_CCW);
 	glEnable(GL_BLEND); //Transparency
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_ALPHA);
 	glAlphaFunc(GL_GREATER, 0.1f);
 }

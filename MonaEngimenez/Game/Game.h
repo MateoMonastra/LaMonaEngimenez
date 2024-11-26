@@ -22,6 +22,8 @@ private:
 	Sprite* rock;
 	Animation* rockIdle;
 
+	Triangle* triangle;
+
 
 	bool isMoving = false;
 	bool isSpining = false;
